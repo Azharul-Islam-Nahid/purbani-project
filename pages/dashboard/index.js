@@ -40,7 +40,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div
-          className={`${styles.dashboardOptions} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center items-center`}
+          className={`${styles.dashboardOptions} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center items-center my-5`}
         >
           <div
             className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
@@ -83,12 +83,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        {/* <div>
-          <DashboardOptions />
-          <div className="text-white text-center pt-6 text-xl capitalize">
-            {`${state.user?.name}, Welcome to Purbani Document Mangement System`}
-          </div>
-        </div> */}
+       
       </DashboardLayout>
     </Layout>
   );

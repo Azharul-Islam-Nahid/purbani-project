@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../styles/Sidebar.module.css";
 import Image from "next/image";
-import logoPurbani from "../../public/assets/Logos/logo-purbani.png";
+import logoPurbani from "../../public/assets/Logos/Logo_Purbani 4.png";
 import profileImg from "../../public/assets/images/ruman2.jpg";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 
