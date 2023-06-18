@@ -1,0 +1,30 @@
+.sidebar {
+  width: 259px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarTop {
+  flex-basis: 8%;
+  background: linear-gradient(
+    to left,
+    rgba(224, 78, 203, 0.55),
+    rgba(187, 80, 251, 0.55)
+  );
+  backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebarBottom {
+  flex-basis: 92%;
+  background: linear-gradient(
+    to left,
+    rgba(224, 78, 203, 0.66),
+    rgba(187, 80, 251, 0.66)
+  );
+  backdrop-filter: blur(8px);
+}

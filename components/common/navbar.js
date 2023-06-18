@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { authContext } from "../../context/authContext";
 
 import Logo from "../../public/assets/Logo_Purbani.png";
-import NavLinks from "../../constants/navlinks.js";
 import { GET } from "../../api/api";
 
 const Navbar = () => {
@@ -14,9 +13,8 @@ const Navbar = () => {
   const [profileName, setProfileName] = useState("");
 
   const { state, dispatch } = useContext(authContext);
-
   const router = useRouter();
-
+  
   const handleLogout = () => {
     localStorage.clear();
     dispatch({ type: "LOGOUT" });
@@ -26,8 +24,6 @@ const Navbar = () => {
     router.push("/");
   };
 
-  console.log("Route", router.pathname);
-
   return (
     <div className="flex justify-center w-full relative z-20 ">
       <div
@@ -35,7 +31,11 @@ const Navbar = () => {
           router.pathname == "/" ? "justify-between" : "justify-center"
         } w-3/4  h-24 border-b border-gray-400`}
       >
-        <div className={`${router.pathname != "/" ? "w-1/2 ml-32" : ""} inline-flex justify-end `}>
+        <div
+          className={`${
+            router.pathname != "/" ? "w-1/2 ml-32" : ""
+          } inline-flex justify-end `}
+        >
           <Image
             src={Logo}
             width={184}
@@ -84,7 +84,11 @@ const Navbar = () => {
             </div>
           </div>
         )}
-        <div className={`${router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""} `}>
+        <div
+          className={`${
+            router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""
+          } `}
+        >
           {state.user ? (
             <div>
               {/* <div className="text-white text-2xl capitalize font-semibold font-sans">
