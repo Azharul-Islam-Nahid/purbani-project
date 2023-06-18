@@ -18,7 +18,7 @@ const DashboardLayout = ({ children }) => {
         <Sidebar />
         <div className="flex-1 pr-5">
           <DashboardHeader />
-          <div className="flex flex-col justify-center items-center pl-5">
+          <div className="h-full flex flex-col justify-center items-center pl-5">
             {children}
           </div>
         </div>
