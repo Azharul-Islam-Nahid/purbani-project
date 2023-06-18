@@ -17,15 +17,42 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid darkgray;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.18);
+}
+
+.sidebarBottom,
+.profileBtn {
+  background: linear-gradient(
+    to left,
+    rgba(224, 78, 203, 0.6),
+    rgba(187, 80, 251, 0.6)
+  );
+  backdrop-filter: blur(8px);
 }
 
 .sidebarBottom {
   flex-basis: 92%;
-  background: linear-gradient(
-    to left,
-    rgba(224, 78, 203, 0.66),
-    rgba(187, 80, 251, 0.66)
-  );
-  backdrop-filter: blur(8px);
+}
+
+.profileBtn {
+  border-radius: 10px 10px 0 0;
+}
+
+.dashboardHeader {
+  height: 83px;
+  /* border-bottom: 1px solid #a8b3cf33; */
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboardHeader > div {
+  align-items: center;
+  flex: 1;
+}
+
+.dashboardHeader > div:first-child,
+.dashboardHeader > div:last-child {
+  display: flex;
+  justify-content: flex-end;
 }
