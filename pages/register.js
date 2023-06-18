@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect, useMemo } from "react";
-import Navbar from "../components/navbar";
 import Image from "next/image";
 import Logo from "../public/assets/Logo_Purbani.png";
 import { useRouter } from "next/router";

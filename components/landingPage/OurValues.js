@@ -1,13 +1,15 @@
 import React from "react";
-import { AiFillBug } from "react-icons/ai";
 import Image from "next/image";
 import Creativitly from "../../public/assets/Logos/Creativity_Logo.png";
 import Centricity from "../../public/assets/Logos/Customer_Centricity_Logo.png";
 import Fairness from "../../public/assets/Logos/Fairness_Logo.png";
 import Responsibility from "../../public/assets/Logos/Responsibility_Logo.png";
 import Safety from "../../public/assets/Logos/Safety_Logo.png";
+import { useRouter } from "next/router";
 
 const OurValues = () => {
+  const router = useRouter();
+
   return (
     <div className="w-full flex items-center justify-center px-90 p-10 bg-vision">
       <div className="flex flex-col text-gray-50 rounded-xl w-[1100px] h-[480px] text-center">

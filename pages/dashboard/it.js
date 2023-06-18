@@ -5,7 +5,6 @@ import { FaDownload } from "react-icons/fa";
 
 import { ItLinks } from "../../constants/notice";
 import { authContext } from "../../context/authContext";
-import Navbar from "../../components/navbar";
 
 const IT = () => {
   const { state, dispatch } = useContext(authContext);

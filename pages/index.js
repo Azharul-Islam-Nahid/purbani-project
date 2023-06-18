@@ -15,7 +15,6 @@ export default function Home() {
       </Head>
 
       <main className="">
-        {/* <Navbar /> */}
         <DownloadCard />
         <GlanceCard />
         <MissionAndVision />
