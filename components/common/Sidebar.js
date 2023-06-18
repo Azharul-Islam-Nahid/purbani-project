@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "../../styles/Sidebar.module.css";
 import { HiOutlineBuildingOffice } from "react-icons/hi2";
 import { HiOutlineClipboardList } from "react-icons/hi";

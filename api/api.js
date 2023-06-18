@@ -3,7 +3,7 @@ import axios from "axios";
 const baseUrl =
   process.env.NODE_ENV === "production"
     ? "https://purbanidms.onrender.com/"
-    : "http://localhost:8080/api/v1";
+    : "https://purbanidms.onrender.com/api/v1";
 
 // const baseUrl = "https://purbanidms.onrender.com/api/v1";
 

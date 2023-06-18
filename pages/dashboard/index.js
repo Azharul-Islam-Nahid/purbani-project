@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import Layout from "../../components/common/Layout";
 import { authContext } from "../../context/authContext";
 import DashboardOptions from "../../components/lists/dashboardOptions";
-import Sidebar from "../../components/common/Sidebar";
 import DashboardLayout from "../../components/common/DashboardLayout";
 
 const Dashboard = () => {
