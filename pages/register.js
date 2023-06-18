@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useMemo } from "react";
 import Image from "next/image";
-import Logo from "../public/assets/Logo_Purbani.png";
+import purbaniLogo from "../public/assets/Logos/logo-purbani.png";
 import { useRouter } from "next/router";
 import { authContext } from "../context/authContext";
 import { POST } from "../api/api";
@@ -63,7 +63,7 @@ const Register = () => {
         <div className="w-full flex items-center justify-center pt-28">
           <div className="flex flex-col items-center bg-white rounded-lg w-[540px] h-full">
             <div className="pt-8 flex flex-col items-center">
-              <Image src={Logo} width={184} height={48} alt={"logo"} />
+              <Image src={purbaniLogo} width={184} height={48} alt={"logo"} />
               <div className="text-xl font-semibold">
                 Welcome to Purbani Group
               </div>

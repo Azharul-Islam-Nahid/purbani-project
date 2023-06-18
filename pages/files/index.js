@@ -5,7 +5,7 @@ import { authContext } from "../../context/authContext";
 
 import SideNavbar from "../../components/common/sideNavbar";
 import FileList from "../../components/lists/fileList";
-import Navbar from "../../components/common/Navbar";
+import Navbar from "../../components/common/navbar";
 
 const Files = () => {
   const { state, dispatch } = useContext(authContext);
