@@ -14,7 +14,7 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between overflow-hidden">
         <Sidebar />
         <div className="flex-1 pr-5">
           <DashboardHeader />
