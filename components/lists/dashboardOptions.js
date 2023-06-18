@@ -15,9 +15,9 @@ const DashboardOptions = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    !state.user && router.push("./");
-  }, [state.user, router]);
+  // useEffect(() => {
+  //   !state.user && router.push("./");
+  // }, [state.user, router]);
 
   return (
     <DisplayCard>

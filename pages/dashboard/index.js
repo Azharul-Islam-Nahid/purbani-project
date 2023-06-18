@@ -1,6 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
-
+import Layout from "../../components/common/Layout";
+import Navbar from "../../components/common/Navbar";
 import { authContext } from "../../context/authContext";
 import DashboardOptions from "../../components/lists/dashboardOptions";
 import SideNavbar from "../../components/common/sideNavbar";
@@ -10,22 +11,25 @@ const Dashboard = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    !state.user && router.push("./");
-  }, [state.user, router]);
+  // useEffect(() => {
+  //   !state.user && router.push("./");
+  // }, [state.user, router]);
 
   return (
-    <div className="flex flex-row justify-center items-center gap-6 ">
-      <SideNavbar />
+    <Layout title="Dashboard">
+      <Navbar />
+      <div className="flex flex-row justify-center items-center gap-6 ">
+        <SideNavbar />
 
-      <div>
-        <DashboardOptions />
+        <div>
+          <DashboardOptions />
 
-        <div className="text-white text-center pt-6 text-xl capitalize">
-          {`${state.user?.name}, Welcome to Purbani Document Mangement System`}
+          <div className="text-white text-center pt-6 text-xl capitalize">
+            {`${state.user?.name}, Welcome to Purbani Document Mangement System`}
+          </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
