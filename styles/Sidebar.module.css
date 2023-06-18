@@ -26,7 +26,7 @@
     rgba(224, 78, 203, 0.6),
     rgba(187, 80, 251, 0.6)
   );
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
 }
 
 .profileBtn {

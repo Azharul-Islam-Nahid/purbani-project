@@ -16,11 +16,9 @@ const DashboardLayout = ({ children }) => {
     <>
       <div className="flex justify-between text-white">
         <Sidebar />
-        <div className="h-screen flex-1 overflow-y-auto relative">
+        <div className="h-screen overflow-y-auto flex-1 relative">
           <DashboardHeader />
-          <div className="flex flex-col justify-center items-center p-5">
-            {children}
-          </div>
+          <div className="p-5 flex flex-col justify-center items-center">{children}</div>
         </div>
       </div>
     </>
