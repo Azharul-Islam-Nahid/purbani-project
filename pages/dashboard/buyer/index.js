@@ -2,7 +2,7 @@
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import DashboardLayout from "../../../components/common/DashboardLayout";
 import styles from '../../../styles/upload.module.css'
-import { MdPeople } from "react-icons/md";
+import { BsFillPersonFill } from "react-icons/bs";
 
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
                         <p className="text-justify font-extrabold">COMPANIES</p>
                     </div>
                     <div>
-                        <p className="text-8xl"><MdPeople />
+                        <p className="text-8xl"><BsFillPersonFill />
                         </p>
                         <p className="text-center font-extrabold">BUYER</p>
                     </div>
