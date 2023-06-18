@@ -14,11 +14,11 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between overflow-hidden">
         <Sidebar />
         <div className="flex-1 pr-5">
           <DashboardHeader />
-          <div className="flex flex-col justify-center items-center pl-5">
+          <div className="h-full flex flex-col justify-center items-center pl-5">
             {children}
           </div>
         </div>
@@ -26,5 +26,5 @@ const DashboardLayout = ({ children }) => {
     </>
   );
 };
-
+ 
 export default DashboardLayout;
