@@ -4,6 +4,7 @@ import Layout from "../../components/common/Layout";
 import { authContext } from "../../context/authContext";
 import DashboardOptions from "../../components/lists/dashboardOptions";
 import Sidebar from "../../components/common/Sidebar";
+import DashboardLayout from "../../components/common/DashboardLayout";
 
 const Dashboard = () => {
   const { state, dispatch } = useContext(authContext);
@@ -16,15 +17,14 @@ const Dashboard = () => {
 
   return (
     <Layout title="Dashboard">
-      <div className="flex flex-row justify-between items-center gap-6">
-        <Sidebar />
+      <DashboardLayout>
         <div>
           <DashboardOptions />
           <div className="text-white text-center pt-6 text-xl capitalize">
             {`${state.user?.name}, Welcome to Purbani Document Mangement System`}
           </div>
         </div>
-      </div>
+      </DashboardLayout>
     </Layout>
   );
 };
