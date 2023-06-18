@@ -1,0 +1,14 @@
+.dashboardWizard {
+  background: linear-gradient(to top, rgba(224, 78, 203, 0.6), rgba(187, 80, 251, 0.6));
+  backdrop-filter: blur(7px);
+  display: flex;
+  padding: 35px 30px;
+  border-radius: 20px;
+  margin-top: 40px;
+  color: white;
+  max-width: 1000px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-around;
+}
