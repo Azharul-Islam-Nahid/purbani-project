@@ -11,7 +11,7 @@ const OurValues = () => {
   const router = useRouter();
 
   return (
-    <div className="w-full flex items-center justify-center px-90 p-10 bg-vision">
+    <div className="w-full flex items-center justify-center px-90 p-10 bg-[url('https://i.ibb.co/jLCjNGH/vision.png')] bg-no-repeat bg-cover">
       <div className="flex flex-col text-gray-50 rounded-xl w-[1100px] h-[480px] text-center">
         <div className="text-left">
           <div className="pt-8 font-black text-3xl">Our Values</div>
@@ -116,26 +116,29 @@ const OurValues = () => {
             <tbody>
               <tr className="align-top">
                 <td className="w-40 pt-6 pr-4">
-                  Customers are always the focus of Purbani Group policy and strategy planning.
+                  Customers are always the focus of Purbani Group policy and
+                  strategy planning.
                 </td>
                 <td className="pt-6 pr-4">
-                  As a leading enterprise in Bangladesh in the field of garment and textile Purbani
-                  Group not only focuses on business goals but also actively affirms its leadership
-                  in improving living standards for employees and for the society.
+                  As a leading enterprise in Bangladesh in the field of garment
+                  and textile Purbani Group not only focuses on business goals
+                  but also actively affirms its leadership in improving living
+                  standards for employees and for the society.
                 </td>
                 <td className="pt-6 pr-4">
-                  The central factors of creativity are the ability to create the most suitable
-                  designs, choose materials, and improve equipment and production systems using the
-                  latest technology. Purbani Group always sets standards to meet or exceed market
+                  The central factors of creativity are the ability to create
+                  the most suitable designs, choose materials, and improve
+                  equipment and production systems using the latest technology.
+                  Purbani Group always sets standards to meet or exceed market
                   and consumer requirements
                 </td>
                 <td className="0 pt-6 pr-4">
-                  Purbani Group always creates a fair working environment and promote opportunities
-                  for all employees.
+                  Purbani Group always creates a fair working environment and
+                  promote opportunities for all employees.
                 </td>
                 <td className="pt-6 pr-4">
-                  The Corporation is always interested in ensuring the health and safety of all
-                  employees during the working process.
+                  The Corporation is always interested in ensuring the health
+                  and safety of all employees during the working process.
                 </td>
               </tr>
             </tbody>
