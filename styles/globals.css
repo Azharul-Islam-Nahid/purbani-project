@@ -16,7 +16,7 @@ body {
 }
 
 .bg-main-global {
-  background: url("../public/assets/images/bg_primary.png") no-repeat center
+  background: url("/public/assets/images/bg_primary.png") no-repeat center
     center/cover;
 }
 .bg-vision {
