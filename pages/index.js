@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Navbar from "../components/common/navbar";
 import DownloadCard from "../components/landingPage/DownloadCard";
 import GlanceCard from "../components/landingPage/GlanceCard";

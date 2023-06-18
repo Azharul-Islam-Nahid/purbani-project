@@ -1,12 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { FaDownload } from "react-icons/fa";
 
 import { SustainabilityLinks } from "../../constants/notice";
 import { authContext } from "../../context/authContext";
 import Layout from "../../components/common/Layout";
-import Navbar from "../../components/common/Navbar";
+import Navbar from "../../components/common/navbar";
 
 const Sustainability = () => {
   const { state, dispatch } = useContext(authContext);

@@ -5,7 +5,7 @@ import { GET } from "../../api/api";
 import SideNavbar from "../../components/common/sideNavbar";
 import UserList from "../../components/lists/userLists";
 import Layout from "../../components/common/Layout";
-import Navbar from "../../components/common/Navbar";
+import Navbar from "../../components/common/navbar";
 
 const Users = () => {
   const { state, dispatch } = useContext(authContext);

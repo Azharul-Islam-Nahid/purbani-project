@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import React, { useState, useEffect } from "react";
 
 // import UserEditModal from "../modal/userEditModal";

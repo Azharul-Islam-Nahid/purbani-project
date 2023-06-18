@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { Notices } from "../constants/notice";

@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import { authContext } from "../../context/authContext";
-
-import Logo from "../../public/assets/Logo_Purbani.png";
+import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import { GET } from "../../api/api";
 
 const Navbar = () => {
@@ -14,7 +13,7 @@ const Navbar = () => {
 
   const { state, dispatch } = useContext(authContext);
   const router = useRouter();
-  
+
   const handleLogout = () => {
     localStorage.clear();
     dispatch({ type: "LOGOUT" });
@@ -37,7 +36,7 @@ const Navbar = () => {
           } inline-flex justify-end `}
         >
           <Image
-            src={Logo}
+            src={purbaniLogo}
             width={184}
             height={48}
             alt={"logo"}
