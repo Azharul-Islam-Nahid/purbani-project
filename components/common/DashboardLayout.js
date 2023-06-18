@@ -13,10 +13,13 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <>
-      <div className="flex justify-between gap-x-6">
+      <div className="flex justify-between">
         <Sidebar />
-        <div className="flex-1 flex flex-col justify-center items-center">
-          {children}
+        <div className="flex-1">
+          <div>header</div>
+          <div className="flex flex-col justify-center items-center">
+            {children}
+          </div>
         </div>
       </div>
     </>

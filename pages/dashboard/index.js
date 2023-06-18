@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import Layout from "../../components/common/Layout";
 import { authContext } from "../../context/authContext";
-import DashboardOptions from "../../components/lists/dashboardOptions";
 import DashboardLayout from "../../components/common/DashboardLayout";
 
 const Dashboard = () => {
@@ -17,12 +16,12 @@ const Dashboard = () => {
   return (
     <Layout title="Dashboard">
       <DashboardLayout>
-        <div>
+        {/* <div>
           <DashboardOptions />
           <div className="text-white text-center pt-6 text-xl capitalize">
             {`${state.user?.name}, Welcome to Purbani Document Mangement System`}
           </div>
-        </div>
+        </div> */}
       </DashboardLayout>
     </Layout>
   );

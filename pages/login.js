@@ -30,7 +30,6 @@ const Login = () => {
 
   // Login API
   const handleLogin = () => {
-    console.log('handleLogin')
     setLoading(true);
     POST(`/user/login`, body).then(({ data, status }) => {
       if (status !== 200) {
