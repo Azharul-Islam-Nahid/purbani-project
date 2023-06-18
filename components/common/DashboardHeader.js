@@ -8,7 +8,7 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 const DashboardHeader = () => {
   return (
     <div className={`${styles.dashboardHeader}`}>
-      <div className="">
+      <div>
         <Image
           className="rounded-full"
           src={logoPurbani}

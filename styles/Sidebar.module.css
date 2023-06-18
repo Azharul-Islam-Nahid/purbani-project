@@ -43,6 +43,8 @@
 }
 
 .dashboardHeader {
+  /* max-width: 1430px;
+  width: 100%; */
   height: 83px;
   /* border-bottom: 1px solid #a8b3cf33; */
   border-bottom: 1.5px solid rgba(255, 255, 255, 0.18);

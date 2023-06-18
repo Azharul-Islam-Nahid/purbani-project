@@ -19,6 +19,7 @@ module.exports = {
       color_white: "#F9FAFF",
       color_dark_gray: "#272727",
       color_green: "#0A8200",
+      color_pink: "rgba(163, 35, 141, 1)",
       inherit: colors.inherit,
       current: colors.current,
       transparent: colors.transparent,

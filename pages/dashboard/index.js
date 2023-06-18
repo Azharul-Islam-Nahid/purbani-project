@@ -39,6 +39,50 @@ const Dashboard = () => {
             <div>Total Knowledge</div>
           </div>
         </div>
+        <div
+          className={`${styles.dashboardOptions} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center items-center`}
+        >
+          <div
+            className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
+          >
+            <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
+              1
+            </div>
+            <div className="text-xl font-semibold h-full flex justify-center items-center">
+              Department
+            </div>
+          </div>
+          <div
+            className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
+          >
+            <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
+              2
+            </div>
+            <div className="text-xl font-semibold h-full flex justify-center items-center">
+              Notices
+            </div>
+          </div>
+          <div
+            className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
+          >
+            <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
+              3
+            </div>
+            <div className="text-xl font-semibold h-full flex justify-center items-center">
+              Policies
+            </div>
+          </div>
+          <div
+            className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
+          >
+            <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
+              4
+            </div>
+            <div className="text-xl font-semibold h-full flex justify-center items-center">
+              Knowledge
+            </div>
+          </div>
+        </div>
         {/* <div>
           <DashboardOptions />
           <div className="text-white text-center pt-6 text-xl capitalize">
