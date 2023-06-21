@@ -78,7 +78,7 @@ const Navbar = () => {
                   Notices
                 </a>
               </Link>
-              <Link href={"/dashboard"}>
+              <Link href={"/department"}>
                 <a className="text-color_white hover:text-color_brand transition-all duration-500">
                   Policies
                 </a>
@@ -88,7 +88,7 @@ const Navbar = () => {
                   Knowledge
                 </a>
               </Link>
-            </div>
+            </div> 
           </div>
         )}
         <div

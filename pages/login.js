@@ -7,7 +7,6 @@ import Router, { useRouter } from "next/router";
 import { authContext } from "../context/authContext";
 import { POST, getLoggedInUser } from "../api/api";
 import Cookies from "js-cookie";
-
 const Login = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(authContext);
