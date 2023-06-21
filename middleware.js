@@ -10,17 +10,17 @@ export default async function middleware(request) {
   let jwt = request.cookies.get("token");
 
   if (!jwt) {
-    // if (url.pathname.startsWith("/dashboard")) {
-    //   return NextResponse.redirect(new URL("/login", request.url));
-    // }
-    // if (url.pathname.startsWith("/notice")) {
-    //   return NextResponse.redirect(new URL("/login", request.url));
-    // }
+    if (url.pathname.startsWith("/dashboard")) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+    if (url.pathname.startsWith("/notice")) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
     return NextResponse.redirect(new URL("/login", request.url));
   } else {
     try {
       const { payload } = await jose.jwtVerify(jwt, secret);
-    } catch (error) {}
+    } catch (error) { }
     if (url.pathname.includes("/dashboard")) {
       if (payload?.role !== "admin" && payload?.role !== "super_admin") {
         return NextResponse.redirect(new URL("/login", request.url));
