@@ -5,14 +5,40 @@ import { authContext } from "../../context/authContext";
 import DashboardLayout from "../../components/common/DashboardLayout";
 import styles from "../../styles/DashboardIndex.module.css";
 
+import * as jose from "jose";
+import { baseUrl, getHeaders, getLoggedInUser } from "../../api/api";
+import axios from "axios";
+const secret = new TextEncoder().encode(
+  "90e75046363c4d6c60f520210d9cf211301cf0af11491efe39cf6f4dc7cb089ecd6df8bd3cfcbcc95f2e6371ed7d2831b70decadb168f45ab4682664687ab5ec"
+);
+
 const Dashboard = () => {
   const { state, dispatch } = useContext(authContext);
-
   const router = useRouter();
 
-  // useEffect(() => {
-  //   !state.user && router.push("./");
-  // }, [state.user, router]);
+  useEffect(() => {
+    const callApi = async () => {
+      try {
+        const { data } = await axios.get(
+          `${baseUrl}/users/get-logged-in-user`,
+          {
+            withCredentials: true,
+            credentials: "include",
+            headers: getHeaders(),
+          }
+        );
+
+        const { role } = data?.data;
+
+        if (role !== "admin" && role !== "super_admin") {
+          router.push("/login");
+        }
+      } catch (error) {
+        router.push("/login");
+      }
+    };
+    callApi();
+  }, []);
 
   return (
     <Layout title="Dashboard">

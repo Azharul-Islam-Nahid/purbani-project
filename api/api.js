@@ -1,20 +1,34 @@
 import axios from "axios";
 
-const baseUrl =
+export const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://purbanidms.onrender.com/"
-    : "https://purbanidms.onrender.com/api/v1";
+    ? "https://purbani-dms-backend.vercel.app/api/v1"
+    : "https://purbani-dms-backend.vercel.app/api/v1";
 
-// const baseUrl = "https://purbanidms.onrender.com/api/v1";
+    // https://purbani-dms-backend.vercel.app/
 
-const getHeaders = () => ({
+export const getHeaders = () => ({
   "Content-Type": "application/json",
-  Authorization: `Bearer ${localStorage.getItem("token")}`,
+  "x-auth-token": `${localStorage.getItem("token")}`,
 });
+
+export const getLoggedInUser = async () => {
+  try {
+    const data = await axios.get(baseUrl + "/users/get-logged-in-user", {
+      withCredentials: true,
+      credentials: "include",
+      headers: getHeaders(),
+    });
+    return data;
+  } catch (error) {
+    console.log(error)
+    return handleError(error);
+  }
+};
 
 const getHeadersMultiPart = () => ({
   "Content-Type": "multipart/form-data",
-  Authorization: `Bearer ${localStorage.getItem("token")}`,
+  "x-auth-token": `${localStorage.getItem("token")}`,
 });
 
 const getQueryString = (query = {}) => {
@@ -51,6 +65,7 @@ export const GET = async (route = "", query = {}) => {
 export const POST = async (route = "", body = {}) => {
   try {
     const apiRoute = `${baseUrl}${route}`;
+
     const { data, status } = await axios.post(apiRoute, body, {
       credentials: "include",
       withCredentials: true,

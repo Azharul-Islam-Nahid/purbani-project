@@ -7,6 +7,7 @@ import Footer from "../components/landingPage/Footer";
 import Layout from "../components/common/Layout";
 
 export default function Home() {
+
   return (
     <Layout title="Home">
       <Navbar />

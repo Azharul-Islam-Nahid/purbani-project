@@ -1,7 +1,8 @@
+import axios from "axios";
 import { useEffect, useReducer, createContext } from "react";
 
 // Initial State
-const initialState = { user: null };
+const initialState = { userData: null };
 
 // Create Context
 const authContext = createContext();
@@ -10,9 +11,9 @@ const authContext = createContext();
 const rootReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      return { ...state, user: action.payload };
+      return { ...state, userData: action.payload };
     case "LOGOUT":
-      return { ...state, user: null };
+      return { ...state, userData: null };
     default:
       return state;
   }
@@ -23,15 +24,21 @@ const rootReducer = (state, action) => {
 
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(rootReducer, initialState);
-
+  
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
     dispatch({
       type: "LOGIN",
-      payload: JSON.parse(localStorage.getItem("user")),
+      payload: { token, user },
     });
   }, []);
 
-  return <authContext.Provider value={{ state, dispatch }}>{children}</authContext.Provider>;
+  return (
+    <authContext.Provider value={{ state, dispatch }}>
+      {children}
+    </authContext.Provider>
+  );
 };
 
 export { authContext, AuthProvider };

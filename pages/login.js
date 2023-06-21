@@ -3,12 +3,12 @@ import Layout from "../components/common/Layout";
 import Navbar from "../components/common/navbar";
 import Image from "next/image";
 import purbaniPurbani from "../public/assets/Logos/logo-purbani.png";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { authContext } from "../context/authContext";
-import { POST } from "../api/api";
+import { POST, getLoggedInUser } from "../api/api";
 
 const Login = () => {
-  //authContext  State
+  const router = useRouter();
   const { state, dispatch } = useContext(authContext);
 
   const [employeeId, setEmployeeId] = useState("");
@@ -18,38 +18,41 @@ const Login = () => {
 
   const body = {
     employeeId: employeeId,
-
     password: password,
   };
 
-  const router = useRouter();
-
-  useEffect(() => {
-    state.user && router.push("./dashboard");
-  }, [state.user, router]);
+  // useEffect(() => {
+  //   state.token && router.push("./dashboard");
+  // }, [state.token, router]);
 
   // Login API
   const handleLogin = () => {
     setLoading(true);
-    POST(`/user/login`, body).then(({ data, status }) => {
+    POST(`/auth/login`, body).then(({ data, status }) => {
       if (status !== 200) {
-        console.log(data);
-        console.log(status);
         setIncorrectCredentials(true);
         setLoading(false);
       } else if (status === 200) {
-        console.log("Login success");
-        console.log(data);
-        dispatch({
-          type: "LOGIN",
-          payload: data.user,
-        });
-        localStorage.setItem("user", JSON.stringify(data?.user));
-        localStorage.setItem("token", data?.token);
+        localStorage.setItem("token", data?.data?.token);
+        localStorage.setItem("user", JSON.stringify(data?.data?.user));
         setIncorrectCredentials(false);
         setLoading(false);
-        router.push(`/dashboard`);
-        console.log({ state: state, token: localStorage.getItem("token") });
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            token: data?.data?.token,
+            user: data?.data?.user,
+          },
+        });
+
+        if (
+          data?.data?.user?.role === "admin" ||
+          data?.data?.user?.role === "super_admin"
+        ) {
+          router.push("/dashboard");
+        } else {
+          router.push("/");
+        }
       }
     });
   };
@@ -61,7 +64,12 @@ const Login = () => {
         <div className="w-full flex items-center justify-center pt-28">
           <div className="flex flex-col items-center bg-white rounded-lg w-[440px] h-full">
             <div className="pt-8 flex flex-col items-center">
-              <Image src={purbaniPurbani} width={184} height={48} alt={"logo"} />
+              <Image
+                src={purbaniPurbani}
+                width={184}
+                height={48}
+                alt={"logo"}
+              />
               <div className="text-xl font-semibold">
                 Welcome to Purbani Group
               </div>
@@ -123,7 +131,7 @@ const Login = () => {
                 </div>
               </form>
             </div>
-            <div className="flex gap-2 py-4">
+            {/* <div className="flex gap-2 py-4">
               <div>{`Don't have any account?`}</div>
               <button
                 className="text-color_brand font-semibold"
@@ -133,7 +141,7 @@ const Login = () => {
               >
                 Sign Up
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import DashboardHeader from "./DashboardHeader";
 
 const DashboardLayout = ({ children }) => {
-  const { state, dispatch } = useContext(authContext);
+  // const { state, dispatch } = useContext(authContext);
   const router = useRouter();
 
   // useEffect(() => {

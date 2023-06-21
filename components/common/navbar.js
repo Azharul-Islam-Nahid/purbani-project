@@ -10,17 +10,25 @@ const Navbar = () => {
   const [searchText, setSearchText] = useState("");
   const [profileImage, setProfileImage] = useState("");
   const [profileName, setProfileName] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
   const { state, dispatch } = useContext(authContext);
   const router = useRouter();
 
   const handleLogout = () => {
-    localStorage.clear();
-    dispatch({ type: "LOGOUT" });
-    GET("/user/logout").then(({ data, status }) => {
-      console.log(data);
-    });
-    router.push("/");
+    // localStorage.clear();
+    // dispatch({ type: "LOGOUT" });
+    // GET("/user/logout").then(({ data, status }) => {
+    //   console.log(data);
+    // });
+    // router.push("/");
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (!state.token) {
+      return alert("log");
+    }
   };
 
   return (
@@ -88,7 +96,7 @@ const Navbar = () => {
             router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""
           } `}
         >
-          {state.user ? (
+          {state?.user ? (
             <div>
               {/* <div className="text-white text-2xl capitalize font-semibold font-sans">
                 {state.user?.name}
