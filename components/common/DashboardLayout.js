@@ -2,31 +2,31 @@ import { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import { useRouter } from "next/router";
 import DashboardHeader from "./DashboardHeader";
-import { base64url } from "jose";
-import { getHeaders } from "../../api/api";
+import { baseUrl, getHeaders } from "../../api/api";
+import axios from "axios";
 
 const DashboardLayout = ({ children }) => {
   const router = useRouter();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("hello");
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const callApi = async () => {
       try {
         const { data } = await axios.get(
-          `${base64url}/users/get-logged-in-user`,
+          `${baseUrl}/users/get-logged-in-user`,
           {
             withCredentials: true,
             credentials: "include",
             headers: getHeaders(),
           }
         );
-        // const { role } = data?.data;
         setLoading(false);
         setUser(data.data);
       } catch (error) {
-        setLoading(false);
-        router.push("/login");
+        setError()
+        // router.push("/login");
       }
     };
     callApi();
@@ -34,15 +34,19 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <>
-      <div className="flex justify-between text-white">
-        <Sidebar />
-        <div className="h-screen overflow-y-auto flex-1 relative">
-          <DashboardHeader />
-          <div className="p-5 flex flex-col justify-center items-center">
-            {children}
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="flex justify-between text-white">
+          <Sidebar />
+          <div className="h-screen overflow-y-auto flex-1 relative">
+            <DashboardHeader />
+            <div className="p-5 flex flex-col justify-center items-center">
+              {children}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

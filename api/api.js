@@ -9,7 +9,7 @@ export const baseUrl =
 
 export const getHeaders = () => ({
   "Content-Type": "application/json",
-  "x-auth-token": `${localStorage.getItem("token")}`,
+  "x-auth-token": `${localStorage?.getItem("token")}`,
 });
 
 export const getLoggedInUser = async () => {

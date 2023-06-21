@@ -16,8 +16,6 @@ const Navbar = () => {
   const [user, setUser] = useState(null);
   const router = useRouter();
 
-  console.log(user?.role);
-
   useEffect(() => {
     const callApi = async () => {
       try {
@@ -29,10 +27,10 @@ const Navbar = () => {
             headers: getHeaders(),
           }
         );
-        // const { role } = data?.data;
+
         setUser(data.data);
       } catch (error) {
-        router.push("/login");
+        // router.push("/login");
       }
     };
     callApi();
@@ -41,6 +39,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.clear();
     Cookies.remove("token");
+    router.reload();
     router.push("/");
   };
 
