@@ -19,19 +19,19 @@ const department = () => {
                     <div
                         className={`bg-white py-16 px-20 drop-shadow-lg rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-32`}
                     >
-                        <Link href={`/department/it`}>
+                        <Link href={`/department/sustainability`}>
                             <Image src={Image01} alt="img" width={100} height={100} />
                         </Link>
                         <Link href={`/department/it`}>
                             <Image src={Image02} alt="img" width={100} height={100} />
                         </Link>
-                        <Link href={`/department/it`}>
+                        <Link href={`/department/hr`}>
                             <Image src={Image03} alt="img" width={100} height={100} />
                         </Link>
-                        <Link href={`/department/it`}>
+                        <Link href={`/department/accounce`}>
                             <Image src={Image04} alt="img" width={100} height={100} />
                         </Link>
-                        <Link href={`/department/it`}>
+                        <Link href={`/department/procurement`}>
                             <Image src={Image05} alt="img" width={100} height={100} />
                         </Link>
                     </div>
