@@ -1,34 +1,47 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { authContext } from "../../context/authContext";
 import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
-import { GET } from "../../api/api";
+import { GET, baseUrl, getHeaders, getLoggedInUser } from "../../api/api";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
   const [searchText, setSearchText] = useState("");
   const [profileImage, setProfileImage] = useState("");
   const [profileName, setProfileName] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-
-  const { state, dispatch } = useContext(authContext);
+  const [user, setUser] = useState(null);
   const router = useRouter();
 
-  const handleLogout = () => {
-    // localStorage.clear();
-    // dispatch({ type: "LOGOUT" });
-    // GET("/user/logout").then(({ data, status }) => {
-    //   console.log(data);
-    // });
-    // router.push("/");
-  };
+  console.log(user?.role);
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    if (!state.token) {
-      return alert("log");
-    }
+  useEffect(() => {
+    const callApi = async () => {
+      try {
+        const { data } = await axios.get(
+          `${baseUrl}/users/get-logged-in-user`,
+          {
+            withCredentials: true,
+            credentials: "include",
+            headers: getHeaders(),
+          }
+        );
+        // const { role } = data?.data;
+        setUser(data.data);
+      } catch (error) {
+        router.push("/login");
+      }
+    };
+    callApi();
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    Cookies.remove("token");
+    router.push("/");
   };
 
   return (
@@ -78,7 +91,7 @@ const Navbar = () => {
                   Notices
                 </a>
               </Link>
-              <Link href={"/dashboard"}>
+              <Link href={"/"}>
                 <a className="text-color_white hover:text-color_brand transition-all duration-500">
                   Policies
                 </a>
@@ -88,6 +101,20 @@ const Navbar = () => {
                   Knowledge
                 </a>
               </Link>
+              {user?.role === "admin" && (
+                <Link href={"/dashboard"}>
+                  <a className="text-color_white hover:text-color_brand transition-all duration-500">
+                    Dashboard
+                  </a>
+                </Link>
+              )}
+              {user?.role === "super_admin" && (
+                <Link href={"/dashboard"}>
+                  <a className="text-color_white hover:text-color_brand transition-all duration-500">
+                    Dashboard
+                  </a>
+                </Link>
+              )}
             </div>
           </div>
         )}
@@ -96,16 +123,13 @@ const Navbar = () => {
             router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""
           } `}
         >
-          {state?.user ? (
-            <div>
-              {/* <div className="text-white text-2xl capitalize font-semibold font-sans">
-                {state.user?.name}
-              </div> */}
-              <div
-                className="w-20 h-10 inline-flex justify-center items-center text-white px-2 capitalize font-semibold font-sans cursor-pointer  rounded-xl bg-color_brand hover:bg-color_white hover:text-color_brand transition-all duration-500"
-                onClick={handleLogout}
-              >{`Logout`}</div>
-            </div>
+          {user ? (
+            <button
+              className="w-20 h-10 inline-flex justify-center items-center text-white px-2 capitalize font-semibold font-sans cursor-pointer  rounded-xl bg-color_brand hover:bg-color_white hover:text-color_brand transition-all duration-500"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           ) : (
             <div>
               {router.pathname == "/" && (

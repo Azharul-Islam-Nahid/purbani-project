@@ -2,8 +2,8 @@ import axios from "axios";
 
 export const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://purbani-dms-backend.vercel.app/api/v1"
-    : "https://purbani-dms-backend.vercel.app/api/v1";
+    ? "http://localhost:5000/api/v1"
+    : "http://localhost:5000/api/v1";
 
     // https://purbani-dms-backend.vercel.app/
 
@@ -21,7 +21,6 @@ export const getLoggedInUser = async () => {
     });
     return data;
   } catch (error) {
-    console.log(error)
     return handleError(error);
   }
 };

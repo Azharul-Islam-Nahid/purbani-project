@@ -10,7 +10,7 @@ import Cookies from "js-cookie";
 
 const Login = () => {
   const router = useRouter();
-  const { state, dispatch } = useContext(authContext);
+  const { dispatch } = useContext(authContext);
 
   const [employeeId, setEmployeeId] = useState("");
   const [loading, setLoading] = useState(false);
