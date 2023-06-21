@@ -25,14 +25,14 @@ const rootReducer = (state, action) => {
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(rootReducer, initialState);
   
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user"));
-    dispatch({
-      type: "LOGIN",
-      payload: { token, user },
-    });
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   const user = JSON.parse(localStorage.getItem("user"));
+  //   dispatch({
+  //     type: "LOGIN",
+  //     payload: { token, user },
+  //   });
+  // }, []);
 
   return (
     <authContext.Provider value={{ state, dispatch }}>

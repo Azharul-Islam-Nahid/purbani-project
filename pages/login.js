@@ -6,6 +6,7 @@ import purbaniPurbani from "../public/assets/Logos/logo-purbani.png";
 import Router, { useRouter } from "next/router";
 import { authContext } from "../context/authContext";
 import { POST, getLoggedInUser } from "../api/api";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const router = useRouter();
@@ -22,7 +23,7 @@ const Login = () => {
   };
 
   // useEffect(() => {
-  //   state.token && router.push("./dashboard");
+  //   state.token && router.push("/");
   // }, [state.token, router]);
 
   // Login API
@@ -37,6 +38,7 @@ const Login = () => {
         localStorage.setItem("user", JSON.stringify(data?.data?.user));
         setIncorrectCredentials(false);
         setLoading(false);
+        Cookies.set("token", data?.data?.token);
         dispatch({
           type: "LOGIN",
           payload: {

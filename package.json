@@ -13,6 +13,7 @@
     "axios": "^1.4.0",
     "glider-js": "^1.7.7",
     "jose": "^4.14.4",
+    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.0",
     "next": "12.3.0",
     "react": "18.2.0",
