@@ -1,5 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useRouter } from "next/router";
+import React, { useContext } from "react";
 import { FaDownload } from "react-icons/fa";
 
 import { SustainabilityLinks } from "../../constants/notice";
@@ -8,17 +7,11 @@ import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
 
 const Sustainability = () => {
-  const { state, dispatch } = useContext(authContext);
-
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   !state.user && router.push("./");
-  // }, [state.user, router]);
+  const { state } = useContext(authContext);
 
   return (
     <Layout title="Sustainability">
-      <Navbar/>
+      <Navbar />
       <div>
         <div className="w-full flex items-center justify-center pt-28">
           <div className="grid  grid-cols-1 bg-white rounded-lg w-[800px] py-20 px-10 h-full">

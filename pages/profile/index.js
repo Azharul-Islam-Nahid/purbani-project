@@ -1,21 +1,12 @@
-import React, { useContext, useEffect } from "react";
-import { useRouter } from "next/router";
-
+import React, { useContext } from "react";
 import { authContext } from "../../context/authContext";
-import { GET } from "../../api/api";
-
 import SideNavbar from "../../components/common/sideNavbar";
 import YourProfile from "../../components/lists/profileList";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
 
 const Files = () => {
-  const { state, dispatch } = useContext(authContext);
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   !state.user && router.push("./");
-  // }, [state.user, router]);
+  const { state } = useContext(authContext);
 
   return (
     <Layout title="Profile">

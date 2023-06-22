@@ -1,46 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
-import { authContext } from "../../context/authContext";
 import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
-import { GET, baseUrl, getHeaders, getLoggedInUser } from "../../api/api";
-import axios from "axios";
-import Cookies from "js-cookie";
+import { signOut, useSession } from "next-auth/react";
+import dynamic from "next/dynamic";
 
 const Navbar = () => {
-  const [searchText, setSearchText] = useState("");
-  const [profileImage, setProfileImage] = useState("");
-  const [profileName, setProfileName] = useState("");
-  const [showPopup, setShowPopup] = useState(false);
-  const [user, setUser] = useState(null);
   const router = useRouter();
-
-  useEffect(() => {
-    const callApi = async () => {
-      try {
-        const { data } = await axios.get(
-          `${baseUrl}/users/get-logged-in-user`,
-          {
-            withCredentials: true,
-            credentials: "include",
-            headers: getHeaders(),
-          }
-        );
-
-        setUser(data.data);
-      } catch (error) {
-        // router.push("/login");
-      }
-    };
-    callApi();
-  }, []);
+  const { data: session } = useSession();
 
   const handleLogout = () => {
-    localStorage.clear();
-    Cookies.remove("token");
-    router.reload();
-    router.push("/");
+    signOut({ callbackUrl: "/login" });
   };
 
   return (
@@ -85,7 +55,7 @@ const Navbar = () => {
                   Values
                 </a>
               </Link>
-              <Link href={"/notice"}>
+              <Link href="/login?redirect=/notice">
                 <a className="text-color_white hover:text-color_brand transition-all duration-500">
                   Notices
                 </a>
@@ -100,15 +70,8 @@ const Navbar = () => {
                   Knowledge
                 </a>
               </Link>
-              {user?.role === "admin" && (
-                <Link href={"/dashboard"}>
-                  <a className="text-color_white hover:text-color_brand transition-all duration-500">
-                    Dashboard
-                  </a>
-                </Link>
-              )}
-              {user?.role === "super_admin" && (
-                <Link href={"/dashboard"}>
+              {session?.user?.isAdmin && (
+                <Link href="/login?redirect=/dashboard">
                   <a className="text-color_white hover:text-color_brand transition-all duration-500">
                     Dashboard
                   </a>
@@ -122,7 +85,7 @@ const Navbar = () => {
             router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""
           } `}
         >
-          {user ? (
+          {session?.user ? (
             <button
               className="w-20 h-10 inline-flex justify-center items-center text-white px-2 capitalize font-semibold font-sans cursor-pointer  rounded-xl bg-color_brand hover:bg-color_white hover:text-color_brand transition-all duration-500"
               onClick={handleLogout}
@@ -154,4 +117,5 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+
+export default dynamic(() => Promise.resolve(Navbar), { ssr: false });

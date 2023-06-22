@@ -6,6 +6,7 @@ import { authContext } from "../context/authContext";
 import { POST } from "../api/api";
 import Layout from "../components/common/Layout";
 import Navbar from "../components/common/navbar";
+import dynamic from "next/dynamic";
 
 const Register = () => {
   //authContext  State
@@ -173,4 +174,5 @@ const Register = () => {
   );
 };
 
-export default Register;
+
+export default dynamic(() => Promise.resolve(Register), { ssr: false });

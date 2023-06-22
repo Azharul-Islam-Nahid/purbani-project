@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { sideNavLinks } from "../../constants/navlinks";
+import dynamic from "next/dynamic";
 
 const SideNavbar = () => {
   const router = useRouter();
@@ -36,4 +37,4 @@ const SideNavbar = () => {
   );
 };
 
-export default SideNavbar;
+export default dynamic(() => Promise.resolve(SideNavbar), { ssr: false });

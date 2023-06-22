@@ -3,6 +3,7 @@ import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { authContext } from "../../context/authContext";
+import dynamic from "next/dynamic";
 
 const DownloadCard = () => {
   const router = useRouter();
@@ -35,4 +36,4 @@ const DownloadCard = () => {
   );
 };
 
-export default DownloadCard;
+export default dynamic(() => Promise.resolve(DownloadCard), { ssr: false });
