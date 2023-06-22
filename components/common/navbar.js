@@ -21,7 +21,7 @@ const Navbar = () => {
         text: "Do you want to continue",
         icon: "error",
         confirmButtonText: "Cool",
-        footer: `<Link href=${link}>Click here to login</Link>`,
+        footer: `<a href=${link}>Click here to login</a>`,
       });
     }
   };
