@@ -5,7 +5,7 @@ import styles from '../../../styles/upload.module.css'
 import { BsFillPersonFill } from "react-icons/bs";
 
 
-export default function Home() {
+const  Home = () => {
     return (
         <DashboardLayout title="buyer">
             <div className={`${styles.uploadCon} h-2/4 w-2/4`}>
@@ -26,3 +26,9 @@ export default function Home() {
         </DashboardLayout >
     );
 }
+
+Home.auth = {
+    adminOnly: true
+}
+
+export default Home

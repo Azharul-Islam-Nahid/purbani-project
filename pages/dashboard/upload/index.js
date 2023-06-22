@@ -33,4 +33,7 @@ const Upload = () => {
     );
 };
 
+Upload.auth = {
+    adminOnly: true
+}
 export default Upload;

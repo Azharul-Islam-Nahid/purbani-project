@@ -83,5 +83,5 @@ const Dashboard = () => {
 
 Dashboard.auth = {
   adminOnly: true,
-};
+}; 
 export default Dashboard;
