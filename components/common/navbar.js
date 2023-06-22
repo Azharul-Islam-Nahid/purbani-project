@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import { signOut, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const router = useRouter();
@@ -11,6 +12,18 @@ const Navbar = () => {
 
   const handleLogout = () => {
     signOut({ callbackUrl: "/login" });
+  };
+
+  const handleLinkClick = (link) => {
+    if (!session?.user) {
+      Swal.fire({
+        title: "Error!",
+        text: "Do you want to continue",
+        icon: "error",
+        confirmButtonText: "Cool",
+        footer: `<Link href=${link}>Click here to login</Link>`,
+      });
+    }
   };
 
   return (
@@ -55,11 +68,14 @@ const Navbar = () => {
                   Values
                 </a>
               </Link>
-              <Link href="/login?redirect=/notice">
-                <a className="text-color_white hover:text-color_brand transition-all duration-500">
-                  Notices
-                </a>
-              </Link>
+              {/* <Link href="/login?redirect=/notice"> */}
+              <button
+                onClick={() => handleLinkClick("/login?redirect=/notice")}
+                className="text-color_white hover:text-color_brand transition-all duration-500"
+              >
+                Notices
+              </button>
+              {/* </Link> */}
               <Link href={"/"}>
                 <a className="text-color_white hover:text-color_brand transition-all duration-500">
                   Policies
@@ -116,6 +132,5 @@ const Navbar = () => {
     </div>
   );
 };
-
 
 export default dynamic(() => Promise.resolve(Navbar), { ssr: false });
