@@ -35,6 +35,7 @@ const Department = () => {
   );
 };
 
-
-
+Department.auth = {
+  adminOnly: true
+}
 export default Department;
