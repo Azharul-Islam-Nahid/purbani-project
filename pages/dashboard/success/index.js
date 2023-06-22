@@ -24,4 +24,8 @@ const Success = () => {
     );
 };
 
+Success.auth = {
+  adminOnly: true
+}
+
 export default Success;

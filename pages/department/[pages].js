@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { FaDownload } from "react-icons/fa";
-import { AiFillEye } from "react-icons/ai";
+import { BsEye } from "react-icons/bs";
 import { ItLinks } from "../../constants/notice";
 import { authContext } from "../../context/authContext";
 import Layout from "../../components/common/Layout";
@@ -26,9 +26,9 @@ const pageDetails = () => {
                         {ItLinks.map((item, idx) => {
                             return (
                                 <div key={idx} className="flex flex-row">
-                                    <a className="text-2xl text-color_brand hover:text-black transition-all duration-200"><AiFillEye /></a>
                                     <div className="text-lg font-bold px-4">{` ${idx + 1}.  ${item.name
                                         }`}</div>
+                                    <a className="mr-5text-2xl text-color_brand hover:text-black transition-all duration-200"><BsEye /></a>
                                     <a
                                         className="text-2xl text-color_brand hover:text-black transition-all duration-200"
                                         href={item.link}
@@ -47,5 +47,5 @@ const pageDetails = () => {
         </Layout>
     );
 };
-
+pageDetails.auth = true
 export default pageDetails;

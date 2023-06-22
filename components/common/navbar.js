@@ -5,24 +5,39 @@ import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import { signOut, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Swal from "sweetalert2";
-
+import popupImg from "../../public/assets/images/popup.png";
+import PopUp from "./PopUp";
+import { useState } from "react";
 const Navbar = () => {
   const router = useRouter();
+  const [url, setUrl] = useState(true);
   const { data: session } = useSession();
 
   const handleLogout = () => {
     signOut({ callbackUrl: "/login" });
   };
 
+  // const handleLinkClick = (link) => {
+  //   console.log(link);
+  //   if (!session?.user) {
+  //     Swal.fire({
+  //       imageUrl: purbaniLogo,
+  //       imageWidth: 400,
+  //       imageHeight: 200,
+  //       imageAlt: "Custom image",
+  //       html: `<a href="${link}">Login</a>`,
+  //     });
+  //   } else {
+  //     router.push(link);
+  //   }
+  // };
+
   const handleLinkClick = (link) => {
     if (!session?.user) {
-      Swal.fire({
-        title: "Error!",
-        text: "Do you want to continue",
-        icon: "error",
-        confirmButtonText: "Cool",
-        footer: `<a href=${link}>Click here to login</a>`,
-      });
+      window.my_modal_3.showModal();
+      setUrl(link);
+    } else {
+      router.push(link);
     }
   };
 
@@ -69,27 +84,32 @@ const Navbar = () => {
               {/* <Link href="/login?redirect=/notice"> */}
               <button
                 onClick={() => handleLinkClick("/login?redirect=/notice")}
+                // onClick={() => handleLinkClick("/login?redirect=/notice")}
                 className="text-color_white hover:text-color_brand transition-all duration-500"
               >
                 Notices
               </button>
+              <button
+                onClick={() => handleLinkClick("/login?redirect=/department")}
+                // onClick={() => handleLinkClick("/login?redirect=/department")}
+                className="text-color_white hover:text-color_brand transition-all duration-500"
+              >
+                Policies
+              </button>
               {/* </Link> */}
-              <Link href={"/"}>
-                <a className="text-color_white hover:text-color_brand transition-all duration-500">
-                  Policies
-                </a>
-              </Link>
-              <Link href={"/"}>
-                <a className="text-color_white hover:text-color_brand transition-all duration-500">
-                  Knowledge
-                </a>
-              </Link>
+              <button
+                onClick={() => handleLinkClick("/login?redirect=/knowledge")}
+                className="text-color_white hover:text-color_brand transition-all duration-500"
+              >
+                Knowledge
+              </button>
               {session?.user?.isAdmin && (
-                <Link href="/login?redirect=/dashboard">
-                  <a className="text-color_white hover:text-color_brand transition-all duration-500">
-                    Dashboard
-                  </a>
-                </Link>
+                <button
+                  onClick={() => handleLinkClick("/login?redirect=/dashboard")}
+                  className="text-color_white hover:text-color_brand transition-all duration-500"
+                >
+                  Dashboard
+                </button>
               )}
             </div>
           </div>
@@ -126,6 +146,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
+      <PopUp route={{ url, setUrl }} />
     </div>
   );
 };
