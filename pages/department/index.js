@@ -11,34 +11,35 @@ import Image05 from "../../public/assets/images/Group-26.png";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
 const department = () => {
-  return (
-    <Layout>
-      <Navbar />
-      <div className="w-full h-full flex justify-center items-center mt-40">
-        <div className="w-1/2">
-          <div
-            className={`bg-white py-16 px-20 drop-shadow-lg rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-32 h-[55vh]`}
-          >
-            <Link href={`/department/it`}>
-              <Image src={Image01} alt="img" width={120} height={120} />
-            </Link>
-            <Link href={`/department/it`}>
-              <Image src={Image02} alt="img" width={120} height={120} />
-            </Link>
-            <Link href={`/department/it`}>
-              <Image src={Image03} alt="img" width={120} height={120} />
-            </Link>
-            <Link href={`/department/it`}>
-              <Image src={Image04} alt="img" width={120} height={120} />
-            </Link>
-            <Link href={`/department/it`}>
-              <Image src={Image05} alt="img" width={120} height={120} />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </Layout>
-  );
+    return (
+        <Layout>
+            <Navbar />
+            <div className='w-[100vw] h-[90vh] flex justify-center items-center'>
+                <div className='w-1/2'>
+                    <div
+                        className={`bg-white py-16 px-20 drop-shadow-lg rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-32`}
+                    >
+                        <Link href={`/department/sustainability`}>
+                            <Image src={Image01} alt="img" width={100} height={100} />
+                        </Link>
+                        <Link href={`/department/it`}>
+                            <Image src={Image02} alt="img" width={100} height={100} />
+                        </Link>
+                        <Link href={`/department/hr`}>
+                            <Image src={Image03} alt="img" width={100} height={100} />
+                        </Link>
+                        <Link href={`/department/accounce`}>
+                            <Image src={Image04} alt="img" width={100} height={100} />
+                        </Link>
+                        <Link href={`/department/procurement`}>
+                            <Image src={Image05} alt="img" width={100} height={100} />
+                        </Link>
+                    </div>
+                </div>
+            </div>
+
+        </Layout>
+    );
 };
 department.auth = true;
 

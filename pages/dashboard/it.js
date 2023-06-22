@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { FaDownload } from "react-icons/fa";
-
 import { ItLinks } from "../../constants/notice";
 import { authContext } from "../../context/authContext";
 import Layout from "../../components/common/Layout";
@@ -18,9 +17,9 @@ const IT = () => {
             {ItLinks.map((item, idx) => {
               return (
                 <div key={idx} className="flex flex-row">
-                  <div className="text-lg font-bold px-4">{` ${idx + 1}.  ${
-                    item.name
-                  }`}</div>
+
+                  <div className="text-lg font-bold px-4">{` ${idx + 1}.  ${item.name
+                    }`}</div>
                   <a
                     className="text-2xl text-color_brand hover:text-white transition-all duration-200"
                     href={item.link}
