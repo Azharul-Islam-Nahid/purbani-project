@@ -1,62 +1,63 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/common/Layout";
 import Navbar from "../components/common/navbar";
 import Image from "next/image";
 import purbaniPurbani from "../public/assets/Logos/logo-purbani.png";
-import Router, { useRouter } from "next/router";
-import { authContext } from "../context/authContext";
-import { POST, getLoggedInUser } from "../api/api";
-import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+import { signIn, useSession } from "next-auth/react";
+import dynamic from "next/dynamic";
+
 const Login = () => {
   const router = useRouter();
-  const { state, dispatch } = useContext(authContext);
-
+  const { redirect } = router.query;
+  const { status, data: session } = useSession();
   const [employeeId, setEmployeeId] = useState("");
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [incorrectCredentials, setIncorrectCredentials] = useState(false);
 
-  const body = {
-    employeeId: employeeId,
-    password: password,
-  };
-
-  // useEffect(() => {
-  //   state.token && router.push("/");
-  // }, [state.token, router]);
+  useEffect(() => {
+    if (!localStorage.getItem("token") && session?.user?.accessToken) {
+      localStorage.setItem("token", session?.user?.accessToken);
+    }
+    if (session?.user) {
+      router.push(redirect || "/");
+    }
+  }, [redirect, router, session?.user]);
 
   // Login API
-  const handleLogin = () => {
-    setLoading(true);
-    POST(`/auth/login`, body).then(({ data, status }) => {
-      if (status !== 200) {
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      const result = await signIn("credentials", {
+        redirect: false,
+        employeeId: employeeId,
+        password: password,
+      });
+
+      setLoading(false);
+      setIncorrectCredentials(false);
+      if (result.error) {
         setIncorrectCredentials(true);
         setLoading(false);
-      } else if (status === 200) {
-        localStorage.setItem("token", data?.data?.token);
-        localStorage.setItem("user", JSON.stringify(data?.data?.user));
-        setIncorrectCredentials(false);
-        setLoading(false);
-        Cookies.set("token", data?.data?.token);
-        dispatch({
-          type: "LOGIN",
-          payload: {
-            token: data?.data?.token,
-            user: data?.data?.user,
-          },
-        });
-
-        if (
-          data?.data?.user?.role === "admin" ||
-          data?.data?.user?.role === "super_admin"
-        ) {
-          router.push("/dashboard");
-        } else {
-          router.push("/");
-        }
       }
-    });
+    } catch (error) {
+      setIncorrectCredentials(true);
+      setLoading(false);
+    }
   };
+
+  if (status === "authenticated") {
+    return (
+      <Layout title="Loading">
+        <div className="w-full h-screen flex flex-col justify-center items-center">
+          <div className="flex justify-center relative">
+            <div className="custom-loader"></div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout title="Login">
@@ -105,22 +106,21 @@ const Login = () => {
                 </div>
                 <div className="text-center py-2 text-rose-500 font-medium h-10">
                   <span
-                    className={`${
-                      incorrectCredentials === false ? "invisible" : "visible"
-                    } transition-all duration-300`}
+                    className={`${incorrectCredentials === false ? "invisible" : "visible"
+                      } transition-all duration-300`}
                   >
                     Your employee ID or password is incorrect
                   </span>
                 </div>
                 {loading == true && (
-                  <div className="flex justify-center relative">
-                    <div className=" custom-loader absolute -top-8"></div>
+                  <div className="flex justify-center relative mb-[20px]">
+                    <div className="custom-loader"></div>
                   </div>
                 )}
-                <div className="pt-6 w-full flex justify-center">
+                <div className="w-full flex justify-center">
                   <button
                     type="button"
-                    className={` rounded-xl border bg-color_brand px-4 py-2 font-medium text-gray-100 hover:bg-white hover:text-black transition-all duration-100`}
+                    className={`rounded-xl border bg-color_brand px-4 py-2 font-medium text-gray-100 hover:bg-white hover:text-black transition-all duration-100 mb-[20px] cursor-pointer`}
                     disabled={!employeeId && !password}
                     onClick={(e) => {
                       e.preventDefault();
@@ -132,17 +132,6 @@ const Login = () => {
                 </div>
               </form>
             </div>
-            {/* <div className="flex gap-2 py-4">
-              <div>{`Don't have any account?`}</div>
-              <button
-                className="text-color_brand font-semibold"
-                onClick={() => {
-                  router.push("./register");
-                }}
-              >
-                Sign Up
-              </button>
-            </div> */}
           </div>
         </div>
       </div>
@@ -150,4 +139,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default dynamic(() => Promise.resolve(Login), { ssr: false });

@@ -1,24 +1,19 @@
-import { useState, useEffect, useContext } from "react";
 import Sidebar from "./Sidebar";
-import { authContext } from "../../context/authContext";
-import { useRouter } from "next/router";
 import DashboardHeader from "./DashboardHeader";
+import { useSession } from "next-auth/react";
 
 const DashboardLayout = ({ children }) => {
-  // const { state, dispatch } = useContext(authContext);
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   !state.user && router.push("./");
-  // }, [state.user, router]);
+  const { data: session } = useSession();
 
   return (
     <>
       <div className="flex justify-between text-white">
-        <Sidebar />
+        <Sidebar session={session} />
         <div className="h-screen overflow-y-auto flex-1 relative">
-          <DashboardHeader />
-          <div className="p-5 flex flex-col justify-center items-center">{children}</div>
+          <DashboardHeader session={session} />
+          <div className="p-5 flex flex-col justify-center items-center">
+            {children}
+          </div>
         </div>
       </div>
     </>

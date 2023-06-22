@@ -1,20 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Layout from "../../components/common/Layout";
-import { useRouter } from "next/router";
 import { authContext } from "../../context/authContext";
-
 import SideNavbar from "../../components/common/sideNavbar";
 import FileList from "../../components/lists/fileList";
 import Navbar from "../../components/common/navbar";
 
 const Files = () => {
-  const { state, dispatch } = useContext(authContext);
-
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   !state.user && router.push("./");
-  // }, [state.user, router]);
+  const { state } = useContext(authContext);
 
   return (
     <Layout title="Files">

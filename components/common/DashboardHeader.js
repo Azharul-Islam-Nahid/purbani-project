@@ -5,7 +5,8 @@ import logoPurbani from "../../public/assets/Logos/logo-purbani.png";
 import profileImg from "../../public/assets/images/ruman2.jpg";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 
-const DashboardHeader = () => {
+const DashboardHeader = ({ session }) => {
+
   return (
     <div className={`${styles.dashboardHeader}`}>
       <div>
@@ -30,7 +31,7 @@ const DashboardHeader = () => {
               alt=""
             />
           </div>
-          <span>Admin 1</span>
+          <span>{session?.user?.name}</span>
           <button>
             <IoIosArrowDropdownCircle className="text-2xl" />
           </button>

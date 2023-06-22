@@ -1,47 +1,40 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useContext } from "react";
 import { useRouter } from "next/router";
-import { authContext } from "../../context/authContext";
 import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
-import { GET } from "../../api/api";
+import { signOut, useSession } from "next-auth/react";
+import dynamic from "next/dynamic";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const [searchText, setSearchText] = useState("");
-  const [profileImage, setProfileImage] = useState("");
-  const [profileName, setProfileName] = useState("");
-  const [showPopup, setShowPopup] = useState(false);
-
-  const { state, dispatch } = useContext(authContext);
   const router = useRouter();
+  const { data: session } = useSession();
 
   const handleLogout = () => {
-    // localStorage.clear();
-    // dispatch({ type: "LOGOUT" });
-    // GET("/user/logout").then(({ data, status }) => {
-    //   console.log(data);
-    // });
-    // router.push("/");
+    signOut({ callbackUrl: "/login" });
   };
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    if (!state.token) {
-      return alert("log");
+  const handleLinkClick = (link) => {
+    if (!session?.user) {
+      Swal.fire({
+        title: "Error!",
+        text: "Do you want to continue",
+        icon: "error",
+        confirmButtonText: "Cool",
+        footer: `<a href=${link}>Click here to login</a>`,
+      });
     }
   };
 
   return (
     <div className="flex justify-center w-full relative z-20 ">
       <div
-        className={`flex items-center ${
-          router.pathname == "/" ? "justify-between" : "justify-center"
-        } w-3/4  h-24 border-b border-gray-400`}
+        className={`flex items-center ${router.pathname == "/" ? "justify-between" : "justify-center"
+          } w-3/4  h-24 border-b border-gray-400`}
       >
         <div
-          className={`${
-            router.pathname != "/" ? "w-1/2 ml-32" : ""
-          } inline-flex justify-end `}
+          className={`${router.pathname != "/" ? "w-1/2 ml-32" : ""
+            } inline-flex justify-end `}
         >
           <Image
             src={purbaniLogo}
@@ -73,12 +66,15 @@ const Navbar = () => {
                   Values
                 </a>
               </Link>
-              <Link href={"/notice"}>
-                <a className="text-color_white hover:text-color_brand transition-all duration-500">
-                  Notices
-                </a>
-              </Link>
-              <Link href={"/department"}>
+              {/* <Link href="/login?redirect=/notice"> */}
+              <button
+                onClick={() => handleLinkClick("/login?redirect=/notice")}
+                className="text-color_white hover:text-color_brand transition-all duration-500"
+              >
+                Notices
+              </button>
+              {/* </Link> */}
+              <Link href={"/"}>
                 <a className="text-color_white hover:text-color_brand transition-all duration-500">
                   Policies
                 </a>
@@ -88,24 +84,27 @@ const Navbar = () => {
                   Knowledge
                 </a>
               </Link>
-            </div> 
+              {session?.user?.isAdmin && (
+                <Link href="/login?redirect=/dashboard">
+                  <a className="text-color_white hover:text-color_brand transition-all duration-500">
+                    Dashboard
+                  </a>
+                </Link>
+              )}
+            </div>
           </div>
         )}
         <div
-          className={`${
-            router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""
-          } `}
+          className={`${router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""
+            } `}
         >
-          {state?.user ? (
-            <div>
-              {/* <div className="text-white text-2xl capitalize font-semibold font-sans">
-                {state.user?.name}
-              </div> */}
-              <div
-                className="w-20 h-10 inline-flex justify-center items-center text-white px-2 capitalize font-semibold font-sans cursor-pointer  rounded-xl bg-color_brand hover:bg-color_white hover:text-color_brand transition-all duration-500"
-                onClick={handleLogout}
-              >{`Logout`}</div>
-            </div>
+          {session?.user ? (
+            <button
+              className="w-20 h-10 inline-flex justify-center items-center text-white px-2 capitalize font-semibold font-sans cursor-pointer  rounded-xl bg-color_brand hover:bg-color_white hover:text-color_brand transition-all duration-500"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           ) : (
             <div>
               {router.pathname == "/" && (
@@ -131,4 +130,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default dynamic(() => Promise.resolve(Navbar), { ssr: false });

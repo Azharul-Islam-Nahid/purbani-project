@@ -1,43 +1,9 @@
-import React, { useContext, useEffect } from "react";
-import { useRouter } from "next/router";
+
 import Layout from "../../components/common/Layout";
-// import { authContext } from "../../context/authContext";
 import DashboardLayout from "../../components/common/DashboardLayout";
 import styles from "../../styles/DashboardIndex.module.css";
-// import { baseUrl, getHeaders } from "../../api/api";
-// import axios from "axios";
 
 const Dashboard = () => {
-  // const { state, dispatch } = useContext(authContext);
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   !state.token && router.push("/");
-  // }, [state.token, router]);
-
-  // useEffect(() => {
-  //   const callApi = async () => {
-  //     try {
-  //       const { data } = await axios.get(
-  //         `${baseUrl}/users/get-logged-in-user`,
-  //         {
-  //           withCredentials: true,
-  //           credentials: "include",
-  //           headers: getHeaders(),
-  //         }
-  //       );
-
-  //       const { role } = data?.data;
-
-  //       if (role !== "admin" && role !== "super_admin") {
-  //         router.push("/");
-  //       }
-  //     } catch (error) {
-  //       router.push("/login");
-  //     }
-  //   };
-  //   callApi();
-  // }, []);
 
   return (
     <Layout title="Dashboard">
@@ -115,4 +81,7 @@ const Dashboard = () => {
   );
 };
 
+Dashboard.auth = {
+  adminOnly: true,
+};
 export default Dashboard;

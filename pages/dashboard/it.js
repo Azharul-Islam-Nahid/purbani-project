@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-import { useRouter } from "next/router";
+import React, { useContext } from "react";
 import { FaDownload } from "react-icons/fa";
 import { ItLinks } from "../../constants/notice";
 import { authContext } from "../../context/authContext";
@@ -7,13 +6,7 @@ import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
 
 const IT = () => {
-  const { state, dispatch } = useContext(authContext);
-
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   !state.user && router.push("./");
-  // }, [state.user, router]);
+  const { state } = useContext(authContext);
 
   return (
     <Layout title="IT">
