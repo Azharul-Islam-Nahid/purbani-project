@@ -6,6 +6,7 @@ import Fairness from "../../public/assets/Logos/Fairness_Logo.png";
 import Responsibility from "../../public/assets/Logos/Responsibility_Logo.png";
 import Safety from "../../public/assets/Logos/Safety_Logo.png";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
 const OurValues = () => {
   const router = useRouter();
@@ -149,4 +150,5 @@ const OurValues = () => {
   );
 };
 
-export default OurValues;
+
+export default dynamic(() => Promise.resolve(OurValues), { ssr: false });

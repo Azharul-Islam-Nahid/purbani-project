@@ -1,21 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useRouter } from "next/router";
 
 import { Notices } from "../constants/notice";
-import { authContext } from "../context/authContext";
 import { FaDownload } from "react-icons/fa";
 import Layout from "../components/common/Layout";
 import Navbar from "../components/common/navbar";
+import { useSession } from "next-auth/react";
 
-const Dashboard = () => {
-  const { state, dispatch } = useContext(authContext);
-
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   !state.user && router.push("./");
-  // }, [state.user, router]);
-
+const Notice = () => {
+  const { data: session } = useSession();
+  console.log(session)
   return (
     <Layout title="Notice">
       <Navbar />
@@ -48,11 +40,12 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="text-white text-center pt-6 text-xl capitalize">
-          {`${state.user?.name}, Welcome to Purbani Document Mangement System`}
+          {`${session?.user?.name}, Welcome to Purbani Document Mangement System`}
         </div>
       </div>
     </Layout>
   );
 };
 
-export default Dashboard;
+Notice.auth = true;
+export default Notice;

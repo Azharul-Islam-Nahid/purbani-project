@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { useRouter } from "next/router";
 import { authContext } from "../../context/authContext";
 import { GET } from "../../api/api";
 import SideNavbar from "../../components/common/sideNavbar";
@@ -8,19 +7,13 @@ import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
 
 const Users = () => {
-  const { state, dispatch } = useContext(authContext);
-
-  const router = useRouter();
+  const { state } = useContext(authContext);
 
   useEffect(() => {
     GET("/users").then(({ data, status }) => {
       console.log(data);
     });
   }, []);
-
-  // useEffect(() => {
-  //   !state.user && router.push("./");
-  // }, [state.user, router]);
 
   return (
     <Layout title="Users">

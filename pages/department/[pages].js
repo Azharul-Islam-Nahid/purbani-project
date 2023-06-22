@@ -7,5 +7,5 @@ const pageDetails = () => {
         </div>
     );
 };
-
+pageDetails.auth = true
 export default pageDetails;

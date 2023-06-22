@@ -41,5 +41,6 @@ const department = () => {
         </Layout>
     );
 };
+department.auth = true;
 
 export default department;
