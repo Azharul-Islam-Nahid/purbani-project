@@ -5,7 +5,7 @@ import popImg from '../../public/assets/images/popup.png'
 import Image from 'next/image';
 const PopUp = ({ route }) => {
     const { url, setUrl } = route
-    console.log("this is my url", url)
+
     return (
         <div>
 

@@ -5,12 +5,12 @@ import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import { signOut, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Swal from "sweetalert2";
-import popupImg from '../../public/assets/images/popup.png'
+import popupImg from "../../public/assets/images/popup.png";
 import PopUp from "./PopUp";
 import { useState } from "react";
 const Navbar = () => {
   const router = useRouter();
-  const [url, setUrl] = useState('/login')
+  const [url, setUrl] = useState(true);
   const { data: session } = useSession();
 
   const handleLogout = () => {
@@ -18,27 +18,40 @@ const Navbar = () => {
   };
 
   // const handleLinkClick = (link) => {
-  //   console.log(link)
+  //   console.log(link);
   //   if (!session?.user) {
   //     Swal.fire({
   //       imageUrl: purbaniLogo,
   //       imageWidth: 400,
   //       imageHeight: 200,
-  //       imageAlt: 'Custom image',
-  //       html: `<a href="${link}">Login</a>`
+  //       imageAlt: "Custom image",
+  //       html: `<a href="${link}">Login</a>`,
   //     });
+  //   } else {
+  //     router.push(link);
   //   }
   // };
+
+  const handleLinkClick = (link) => {
+    if (!session?.user) {
+      window.my_modal_3.showModal();
+      setUrl(link);
+    } else {
+      router.push(link);
+    }
+  };
 
   return (
     <div className="flex justify-center w-full relative z-20 ">
       <div
-        className={`flex items-center ${router.pathname == "/" ? "justify-between" : "justify-center"
-          } w-3/4  h-24 border-b border-gray-400`}
+        className={`flex items-center ${
+          router.pathname == "/" ? "justify-between" : "justify-center"
+        } w-3/4  h-24 border-b border-gray-400`}
       >
         <div
-          className={`${router.pathname != "/" ? "w-1/2 ml-32" : ""
-            } inline-flex justify-end `}
+          className={`${
+            router.pathname != "/" ? "w-1/2 ml-32" : ""
+          } inline-flex justify-end `}
         >
           <Image
             src={purbaniLogo}
@@ -72,44 +85,41 @@ const Navbar = () => {
               </Link>
               {/* <Link href="/login?redirect=/notice"> */}
               <button
-              onClick={() => {
-                window.my_modal_3.showModal()
-                setUrl("/login?redirect=/notice")
-              }}
+                onClick={() => handleLinkClick("/login?redirect=/notice")}
                 // onClick={() => handleLinkClick("/login?redirect=/notice")}
                 className="text-color_white hover:text-color_brand transition-all duration-500"
               >
                 Notices
               </button>
               <button
-                onClick={() => {
-                  window.my_modal_3.showModal()
-                  setUrl("/login?redirect=/department")
-                }}
+                onClick={() => handleLinkClick("/login?redirect=/department")}
                 // onClick={() => handleLinkClick("/login?redirect=/department")}
                 className="text-color_white hover:text-color_brand transition-all duration-500"
               >
                 Policies
               </button>
               {/* </Link> */}
-              <Link href={"/"}>
-                <a className="text-color_white hover:text-color_brand transition-all duration-500">
-                  Knowledge
-                </a>
-              </Link>
+              <button
+                onClick={() => handleLinkClick("/login?redirect=/knowledge")}
+                className="text-color_white hover:text-color_brand transition-all duration-500"
+              >
+                Knowledge
+              </button>
               {session?.user?.isAdmin && (
-                <Link href="/login?redirect=/dashboard">
-                  <a className="text-color_white hover:text-color_brand transition-all duration-500">
-                    Dashboard
-                  </a>
-                </Link>
+                <button
+                  onClick={() => handleLinkClick("/login?redirect=/dashboard")}
+                  className="text-color_white hover:text-color_brand transition-all duration-500"
+                >
+                  Dashboard
+                </button>
               )}
             </div>
           </div>
         )}
         <div
-          className={`${router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""
-            } `}
+          className={`${
+            router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""
+          } `}
         >
           {session?.user ? (
             <button
@@ -139,8 +149,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      <button className="btn" onClick={() => window.my_modal_3.showModal()}>open modal</button>
-      <PopUp route = {{url, setUrl}}/>
+      <PopUp route={{ url, setUrl }} />
     </div>
   );
 };
