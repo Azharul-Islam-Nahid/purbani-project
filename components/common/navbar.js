@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import { signOut, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
-import Swal from "sweetalert2";
-import popupImg from "../../public/assets/images/popup.png";
+// import Swal from "sweetalert2";
+// import popupImg from "../../public/assets/images/popup.png";
 import PopUp from "./PopUp";
 import { useState } from "react";
 const Navbar = () => {
@@ -83,7 +83,6 @@ const Navbar = () => {
                   Values
                 </a>
               </Link>
-              {/* <Link href="/login?redirect=/notice"> */}
               <button
                 onClick={() => handleLinkClick("/login?redirect=/notice")}
                 // onClick={() => handleLinkClick("/login?redirect=/notice")}
@@ -98,9 +97,8 @@ const Navbar = () => {
               >
                 Policies
               </button>
-              {/* </Link> */}
               <button
-                onClick={() => handleLinkClick("/login?redirect=/knowledge")}
+                // onClick={() => handleLinkClick("/login?redirect=/knowledge")}
                 className="text-color_white hover:text-color_brand transition-all duration-500"
               >
                 Knowledge
