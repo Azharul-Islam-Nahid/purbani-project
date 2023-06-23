@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import SingUpPopup from "../components/common/SingUpPopup";
 
 const Login = () => {
   const router = useRouter();
@@ -135,13 +136,16 @@ const Login = () => {
               </form>
               <p className="text-center pb-5">
                 {`Don't have account? `}{" "}
-                <Link href="/register">
+                <button
+                  onClick={() => window.SignUPModal.showModal()}
+                >
                   <a className="text-color_pink">Sign Up</a>
-                </Link>
+                </button>
               </p>
             </div>
           </div>
         </div>
+        <SingUpPopup />
       </div>
     </Layout>
   );
