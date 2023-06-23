@@ -1,21 +1,10 @@
-import React, { useContext, useEffect } from "react";
-import { useRouter } from "next/router";
 import { FaDownload } from "react-icons/fa";
 import { BsEye } from "react-icons/bs";
 import { ItLinks } from "../../constants/notice";
-import { authContext } from "../../context/authContext";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
 
 const pageDetails = () => {
-
-    // const { state, dispatch } = useContext(authContext);
-
-    // const router = useRouter();
-
-    // useEffect(() => {
-    //   !state.user && router.push("./");
-    // }, [state.user, router]);
 
     return (
         <Layout title="IT">
@@ -25,16 +14,20 @@ const pageDetails = () => {
                     <div className="grid  grid-cols-1 bg-white rounded-lg w-[800px] py-20 px-10 h-full">
                         {ItLinks.map((item, idx) => {
                             return (
-                                <div key={idx} className="flex flex-row">
+                                <div key={idx} className="flex justify-between flex-row">
                                     <div className="text-lg font-bold px-4">{` ${idx + 1}.  ${item.name
                                         }`}</div>
-                                    <a className="mr-5 text-2xl text-color_brand hover:text-black transition-all duration-200"><BsEye /></a>
-                                    <a
-                                        className="text-2xl text-color_brand hover:text-black transition-all duration-200"
-                                        href={item.link}
-                                    >
-                                        <FaDownload />
-                                    </a>
+                                    <div className="flex gap-x-5">
+                                        <a className="cursor-pointer text-2xl text-color_brand hover:text-black transition-all duration-200">
+                                            <BsEye />
+                                        </a>
+                                        <a
+                                            className="text-2xl text-color_brand hover:text-black transition-all duration-200"
+                                            href={item.link}
+                                        >
+                                            <FaDownload />
+                                        </a>
+                                    </div>
                                 </div>
                             );
                         })}
@@ -47,5 +40,5 @@ const pageDetails = () => {
         </Layout>
     );
 };
-pageDetails.auth = true
+pageDetails.auth = true;
 export default pageDetails;

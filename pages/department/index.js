@@ -10,6 +10,7 @@ import Image04 from "../../public/assets/images/Group-25.png";
 import Image05 from "../../public/assets/images/Group-26.png";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
+
 const department = () => {
   return (
     <Layout>
