@@ -4,19 +4,23 @@ import Image from "next/image";
 import logoPurbani from "../../public/assets/Logos/logo-purbani.png";
 import profileImg from "../../public/assets/images/ruman2.jpg";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
+import { useRouter } from "next/router";
 
 const DashboardHeader = ({ session }) => {
+  const router = useRouter();
 
   return (
     <div className={`${styles.dashboardHeader}`}>
       <div>
-        <Image
-          className="rounded-full"
-          src={logoPurbani}
-          width={200}
-          height={50}
-          alt=""
-        />
+        <button onClick={() => router.push("/")}>
+          <Image
+            className="rounded-full"
+            src={logoPurbani}
+            width={200}
+            height={50}
+            alt=""
+          />
+        </button>
       </div>
       <div className="text-white">
         <div
@@ -31,7 +35,7 @@ const DashboardHeader = ({ session }) => {
               alt=""
             />
           </div>
-          <span>{session?.user?.name}</span>
+          <span className="uppercase">{session?.user?.role}</span>
           <button>
             <IoIosArrowDropdownCircle className="text-2xl" />
           </button>

@@ -9,9 +9,7 @@ export default function MyApp({
   pageProps: { session, ...pageProps },
 }) {
   return (
-    <SessionProvider
-      session={session}
-    >
+    <SessionProvider session={session}>
       <AuthProvider>
         <div className="bg-[url('https://i.ibb.co/8Ycnyqx/bg-primary.png')] bg-no-repeat bg-cover h-screen">
           {Component.auth ? (
@@ -29,7 +27,7 @@ export default function MyApp({
 
 function Auth({ children, adminOnly }) {
   const router = useRouter();
-  const { data: session } = useSession({
+  const { status, data: session } = useSession({
     required: true,
     onUnauthenticated() {
       if (typeof window !== "undefined") {
@@ -37,6 +35,10 @@ function Auth({ children, adminOnly }) {
       }
     },
   });
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
 
   if (adminOnly && !session?.user?.isAdmin) {
     if (typeof window !== "undefined") {

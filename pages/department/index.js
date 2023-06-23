@@ -19,20 +19,39 @@ const department = () => {
           <div
             className={`bg-white py-16 px-20 drop-shadow-lg rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-32 h-[55vh]`}
           >
-            <Link href={`/department/sustainability`}>
-              <Image src={Image01} alt="img" width={120} height={120} />
+            <Link
+              className="hover:cursor-pointer"
+              href={`/department/sustainability`}
+            >
+              <button>
+                <Image src={Image01} alt="img" width={120} height={120} />
+              </button>
             </Link>
-            <Link href={`/department/it`}>
-              <Image src={Image02} alt="img" width={120} height={120} />
+            <Link className="hover:cursor-pointer" href={`/department/it`}>
+              <button>
+                <Image src={Image02} alt="img" width={120} height={120} />
+              </button>
             </Link>
-            <Link href={`/department/hr`}>
-              <Image src={Image03} alt="img" width={120} height={120} />
+            <Link className="hover:cursor-pointer" href={`/department/hr`}>
+              <button>
+                <Image src={Image03} alt="img" width={120} height={120} />
+              </button>
             </Link>
-            <Link href={`/department/accounts`}>
-              <Image src={Image04} alt="img" width={120} height={120} />
+            <Link
+              className="hover:cursor-pointer"
+              href={`/department/accounts`}
+            >
+              <button>
+                <Image src={Image04} alt="img" width={120} height={120} />
+              </button>
             </Link>
-            <Link href={`/department/procurement`}>
-              <Image src={Image05} alt="img" width={120} height={120} />
+            <Link
+              className="hover:cursor-pointer"
+              href={`/department/procurement`}
+            >
+              <button>
+                <Image src={Image05} alt="img" width={120} height={120} />
+              </button>
             </Link>
           </div>
         </div>

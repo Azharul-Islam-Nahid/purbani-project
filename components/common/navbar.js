@@ -4,8 +4,10 @@ import { useRouter } from "next/router";
 import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import { signOut, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
-import Swal from "sweetalert2";
-import popupImg from "../../public/assets/images/popup.png";
+// import Swal from "sweetalert2";
+// import popupImg from "../../public/assets/images/popup.png";
+
+import {BsFillPersonFill} from 'react-icons/bs'
 import PopUp from "./PopUp";
 import { useState } from "react";
 const Navbar = () => {
@@ -81,7 +83,6 @@ const Navbar = () => {
                   Values
                 </a>
               </Link>
-              {/* <Link href="/login?redirect=/notice"> */}
               <button
                 onClick={() => handleLinkClick("/login?redirect=/notice")}
                 // onClick={() => handleLinkClick("/login?redirect=/notice")}
@@ -96,9 +97,8 @@ const Navbar = () => {
               >
                 Policies
               </button>
-              {/* </Link> */}
               <button
-                onClick={() => handleLinkClick("/login?redirect=/knowledge")}
+                // onClick={() => handleLinkClick("/login?redirect=/knowledge")}
                 className="text-color_white hover:text-color_brand transition-all duration-500"
               >
                 Knowledge
@@ -119,12 +119,16 @@ const Navbar = () => {
             } `}
         >
           {session?.user ? (
+            <div className="flex items-center gap-x-3">
+            <BsFillPersonFill size={34} className="text-white"/> 
             <button
               className="w-20 h-10 inline-flex justify-center items-center text-white px-2 capitalize font-semibold font-sans cursor-pointer  rounded-xl bg-color_brand hover:bg-color_white hover:text-color_brand transition-all duration-500"
               onClick={handleLogout}
             >
+              
               Logout
             </button>
+            </div>
           ) : (
             <div>
               {router.pathname == "/" && (

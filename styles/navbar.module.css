@@ -1,0 +1,26 @@
+.responsiveNav{
+    /* max-height: 0px;
+    overflow: hidden;
+    transition: all ease-in-out 0.2s; */
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    width: 100%;
+}
+/* .activeNavbar{
+    max-height: 1000px;
+   
+}
+.responsiveNav a, .responsiveNav button{
+    padding:0.5rem;
+}
+.responsiveNav ul li ul{
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    transition: all ease-in-out 0.2s;
+    margin-left: 1rem;
+}
+.activeNested{
+    max-height: 500px !important;
+} */
