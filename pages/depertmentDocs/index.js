@@ -60,6 +60,7 @@ const depertmentDocs = () => {
         </Layout>
     );
 };
+
 depertmentDocs.auth = true;
 
 export default depertmentDocs;
