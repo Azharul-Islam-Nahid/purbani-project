@@ -1,9 +1,10 @@
-
 import Layout from "../../components/common/Layout";
 import DashboardLayout from "../../components/common/DashboardLayout";
 import styles from "../../styles/DashboardIndex.module.css";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
+  const router = useRouter();
 
   return (
     <Layout title="Dashboard">
@@ -35,6 +36,7 @@ const Dashboard = () => {
             className={`${styles.dashboardOptions} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center items-center my-5 mx-auto`}
           >
             <div
+              onClick={() => router.push("/dashboard/department")}
               className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
             >
               <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
@@ -45,6 +47,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div
+              onClick={() => router.push("/dashboard/upload")}
               className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
             >
               <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
@@ -55,6 +58,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div
+              onClick={() => router.push("/dashboard/department")}
               className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
             >
               <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
@@ -83,5 +87,5 @@ const Dashboard = () => {
 
 Dashboard.auth = {
   adminOnly: true,
-}; 
+};
 export default Dashboard;

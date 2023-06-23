@@ -6,6 +6,7 @@ import purbaniPurbani from "../public/assets/Logos/logo-purbani.png";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const Login = () => {
   const router = useRouter();
@@ -22,7 +23,7 @@ const Login = () => {
     }
     if (session?.user) {
       console.log(session?.user);
-      router.push(redirect || session?.user?.isAdmin ? "/dashboard" : "/");
+      router.push(redirect || "/");
     }
   }, [redirect, router, session?.user]);
 
@@ -133,6 +134,12 @@ const Login = () => {
                   </button>
                 </div>
               </form>
+              <p className="text-center pb-5">
+                {`Don't have account? `}{" "}
+                <Link href="/register">
+                  <a className="text-color_pink">Sign Up</a>
+                </Link>
+              </p>
             </div>
           </div>
         </div>
