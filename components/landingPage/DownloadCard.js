@@ -1,26 +1,12 @@
-import React, { useState } from "react";
 import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import PopUp from "../common/PopUp";
-import { useSession } from "next-auth/react";
 
 const DownloadCard = () => {
 
-  const [url, setUrl] = useState(true);
-  const { data: session } = useSession();
-  const router = useRouter();
 
-  const handleLinkClick = (link) => {
-    if (!session?.user) {
-      window.my_modal_3.showModal();
-      setUrl(link);
-    } else {
-      router.push(link);
-    }
-  };
+
 
   return (
     <div className="flex w-full justify-center my-24 font-extrabold px-60 p-10">
@@ -32,9 +18,9 @@ const DownloadCard = () => {
           OUR PURPOSE IS TO BUILD BETTER FUTURE TOGETHER
         </div>
         <div>
+
           <Link href={'/depertmentDocs'}>
             <button
-              onClick={() => handleLinkClick("/login?redirect=/depertmentDocs")}
               className="w-72 h-12 rounded-xl bg-color_brand text-color_white hover:bg-color_white hover:text-color_brand transition-all duration-500"
 
             >
@@ -43,7 +29,7 @@ const DownloadCard = () => {
           </Link>
         </div>
       </div>
-      <PopUp route={{ url, setUrl }} />
+      <downloadPopUp />
     </div>
   );
 };
