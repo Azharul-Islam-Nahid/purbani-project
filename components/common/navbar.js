@@ -46,14 +46,12 @@ const Navbar = () => {
   return (
     <div className="flex justify-center w-full relative z-20 ">
       <div
-        className={`flex items-center ${
-          router.pathname == "/" ? "justify-between" : "justify-center"
-        } w-3/4  h-24 border-b border-gray-400`}
+        className={`flex items-center ${router.pathname == "/" ? "justify-between" : "justify-center"
+          } w-3/4  h-24 border-b border-gray-400`}
       >
         <div
-          className={`${
-            router.pathname != "/" ? "w-1/2 ml-32" : ""
-          } inline-flex justify-end `}
+          className={`${router.pathname != "/" ? "w-1/2 ml-32" : ""
+            } inline-flex justify-end `}
         >
           <Image
             src={purbaniLogo}
@@ -117,9 +115,8 @@ const Navbar = () => {
           </div>
         )}
         <div
-          className={`${
-            router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""
-          } `}
+          className={`${router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""
+            } `}
         >
           {session?.user ? (
             <div className="flex items-center gap-x-3">

@@ -108,9 +108,8 @@ const Login = () => {
                 </div>
                 <div className="text-center py-2 text-rose-500 font-medium h-10">
                   <span
-                    className={`${
-                      incorrectCredentials === false ? "invisible" : "visible"
-                    } transition-all duration-300`}
+                    className={`${incorrectCredentials === false ? "invisible" : "visible"
+                      } transition-all duration-300`}
                   >
                     Your employee ID or password is incorrect
                   </span>
