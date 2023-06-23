@@ -6,7 +6,6 @@ import purbaniPurbani from "../public/assets/Logos/logo-purbani.png";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import SingUpPopup from "../components/common/SingUpPopup";
 
 const Login = () => {
