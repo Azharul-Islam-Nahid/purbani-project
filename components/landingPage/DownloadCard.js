@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { authContext } from "../../context/authContext";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const DownloadCard = () => {
   const router = useRouter();
@@ -24,12 +25,14 @@ const DownloadCard = () => {
           OUR PURPOSE IS TO BUILD BETTER FUTURE TOGETHER
         </div>
         <div>
-          <button
-            className="w-72 h-12 rounded-xl bg-color_brand text-color_white hover:bg-color_white hover:text-color_brand transition-all duration-500"
-            onClick={handleChange}
-          >
-            Download Documents
-          </button>
+          <Link href={'/depertmentDocs'}>
+            <button
+              className="w-72 h-12 rounded-xl bg-color_brand text-color_white hover:bg-color_white hover:text-color_brand transition-all duration-500"
+
+            >
+              Download Documents
+            </button>
+          </Link>
         </div>
       </div>
     </div>

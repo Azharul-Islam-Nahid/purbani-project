@@ -1,13 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 import { FaDownload } from "react-icons/fa";
 import { BsEye } from "react-icons/bs";
 import { ItLinks } from "../../constants/notice";
-import { authContext } from "../../context/authContext";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
 
-const pageDetails = () => {
+const fileDetails = () => {
 
     // const { state, dispatch } = useContext(authContext);
 
@@ -18,7 +16,7 @@ const pageDetails = () => {
     // }, [state.user, router]);
 
     return (
-        <Layout title="IT">
+        <Layout title="Download">
             <Navbar />
             <div>
                 <div className="w-full flex items-center justify-center pt-28">
@@ -47,5 +45,5 @@ const pageDetails = () => {
         </Layout>
     );
 };
-pageDetails.auth = true
-export default pageDetails;
+fileDetails.auth = true
+export default fileDetails;
