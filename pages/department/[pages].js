@@ -28,7 +28,7 @@ const pageDetails = () => {
                                 <div key={idx} className="flex flex-row">
                                     <div className="text-lg font-bold px-4">{` ${idx + 1}.  ${item.name
                                         }`}</div>
-                                    <a className="mr-5text-2xl text-color_brand hover:text-black transition-all duration-200"><BsEye /></a>
+                                    <a className="mr-5 text-2xl text-color_brand hover:text-black transition-all duration-200"><BsEye /></a>
                                     <a
                                         className="text-2xl text-color_brand hover:text-black transition-all duration-200"
                                         href={item.link}
