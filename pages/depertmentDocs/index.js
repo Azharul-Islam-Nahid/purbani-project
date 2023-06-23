@@ -11,7 +11,7 @@ import Image05 from "../../public/assets/images/Group-26.png";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
 
-const departmentDocs = () => {
+const depertmentDocs = () => {
     return (
         <Layout>
             <Navbar />
@@ -60,6 +60,6 @@ const departmentDocs = () => {
         </Layout>
     );
 };
-departmentDocs.auth = true;
+depertmentDocs.auth = true;
 
-export default departmentDocs;
+export default depertmentDocs;
