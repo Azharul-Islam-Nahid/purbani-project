@@ -5,10 +5,6 @@ import Link from "next/link";
 
 const DownloadCard = () => {
 
-
-
-
-
   return (
     <div className="flex w-full justify-center my-24 font-extrabold px-60 p-10">
       <div className="flex flex-col justify-between py-6 h-[379px] w-[681px] backdrop-blur-md bg-gray-100/10 rounded-3xl items-center">
@@ -27,9 +23,10 @@ const DownloadCard = () => {
             >
               Download Documents
             </button>
+          </Link>
         </div>
       </div>
-      <PopUp route={{ url, setUrl }} />
+
     </div>
   );
 };
