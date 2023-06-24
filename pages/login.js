@@ -49,7 +49,7 @@ const Login = () => {
     }
   };
 
-  if (status === "authenticated") {
+  if (status === "authenticated" || status === "loading") {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">

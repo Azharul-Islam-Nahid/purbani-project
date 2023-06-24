@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 // import Swal from "sweetalert2";
 // import popupImg from "../../public/assets/images/popup.png";
 
-import {BsFillPersonFill} from 'react-icons/bs'
+import { BsFillPersonFill } from "react-icons/bs";
 import PopUp from "./PopUp";
 import { useState } from "react";
 const Navbar = () => {
@@ -16,6 +16,7 @@ const Navbar = () => {
   const { data: session } = useSession();
 
   const handleLogout = () => {
+    localStorage.clear("token");
     signOut({ callbackUrl: "/login" });
   };
 
@@ -123,14 +124,13 @@ const Navbar = () => {
         >
           {session?.user ? (
             <div className="flex items-center gap-x-3">
-            <BsFillPersonFill size={34} className="text-white"/> 
-            <button
-              className="w-20 h-10 inline-flex justify-center items-center text-white px-2 capitalize font-semibold font-sans cursor-pointer  rounded-xl bg-color_brand hover:bg-color_white hover:text-color_brand transition-all duration-500"
-              onClick={handleLogout}
-            >
-              
-              Logout
-            </button>
+              <BsFillPersonFill size={34} className="text-white" />
+              <button
+                className="w-20 h-10 inline-flex justify-center items-center text-white px-2 capitalize font-semibold font-sans cursor-pointer  rounded-xl bg-color_brand hover:bg-color_white hover:text-color_brand transition-all duration-500"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
             </div>
           ) : (
             <div>

@@ -1,4 +1,3 @@
-
 import { Notices } from "../constants/notice";
 import { FaDownload } from "react-icons/fa";
 import Layout from "../components/common/Layout";
@@ -7,7 +6,7 @@ import { useSession } from "next-auth/react";
 
 const Notice = () => {
   const { data: session } = useSession();
-  console.log(session)
+
   return (
     <Layout title="Notice">
       <Navbar />
@@ -28,7 +27,7 @@ const Notice = () => {
                   </div>
                   <div className="w-full inline-flex justify-end py-6">
                     <a
-                      href={`${item.link}`}
+                      href={`https://res.cloudinary.com/dqlxcdlce/image/upload/fl_attachment/v1687607785/jy5t5twxa0zxegonmn03.pdf`}
                       className="text-2xl text-color_brand hover:text-white transition-all duration-200"
                     >
                       <FaDownload />
