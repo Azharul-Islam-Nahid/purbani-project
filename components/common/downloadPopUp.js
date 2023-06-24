@@ -3,7 +3,7 @@ import React from 'react';
 import styles from '../../styles/popup.module.css'
 import popImg from '../../public/assets/images/popup.png'
 import Image from 'next/image';
-const downloadPopUp = ({ route }) => {
+const DownloadPopUp = ({ route }) => {
     const { url, setUrl } = route
 
     return (
@@ -23,4 +23,4 @@ const downloadPopUp = ({ route }) => {
     );
 };
 
-export default downloadPopUp;
+export default DownloadPopUp;
