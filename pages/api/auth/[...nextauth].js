@@ -49,7 +49,6 @@ export default NextAuth({
   },
   callbacks: {
     async jwt({ token, user }) {
-      console.log(token, user);
       if (user?._id) token._id = user._id;
       if (user?.isAdmin) token.isAdmin = user.isAdmin;
       return { ...token, ...user };
