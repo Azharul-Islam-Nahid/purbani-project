@@ -7,7 +7,7 @@ import Navbar from "../../components/common/navbar";
 const pageDetails = () => {
 
     return (
-        <Layout title="IT">
+        <Layout title="Download">
             <Navbar />
             <div>
                 <div className="w-full flex items-center justify-center pt-28">

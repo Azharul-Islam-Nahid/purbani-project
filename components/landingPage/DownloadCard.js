@@ -1,19 +1,24 @@
-import React, { useContext } from "react";
 import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { authContext } from "../../context/authContext";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import DownloadPopUp from "../common/downloadPopUp";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const DownloadCard = () => {
-  const router = useRouter();
-  const { state, dispatch } = useContext(authContext);
-
-  const handleChange = () => {
-    !state.user && router.push("/login");
-    state.user && router.push("/dashboard");
+  const [url, setUrl] = useState(true);
+  const { data: session } = useSession()
+  const router = useRouter()
+  const handleLinkClick = (link) => {
+    if (!session?.user) {
+      window.DownloadModal.showModal();
+      setUrl(link);
+    } else {
+      router.push(link);
+    }
   };
-
   return (
     <div className="flex w-full justify-center my-24 font-extrabold px-60 p-10">
       <div className="flex flex-col justify-between py-6 h-[379px] w-[681px] backdrop-blur-md bg-gray-100/10 rounded-3xl items-center">
@@ -25,15 +30,17 @@ const DownloadCard = () => {
         </div>
         <div>
           <button
+            onClick={() => handleLinkClick("/login?redirect=/department")}
             className="w-72 h-12 rounded-xl bg-color_brand text-color_white hover:bg-color_white hover:text-color_brand transition-all duration-500"
-            onClick={handleChange}
           >
             Download Documents
           </button>
         </div>
       </div>
+      <DownloadPopUp route={{ url, setUrl }} />
     </div>
   );
 };
 
-export default dynamic(() => Promise.resolve(DownloadCard), { ssr: false });
+export default DownloadCard
+// export default dynamic(() => Promise.resolve(DownloadCard), { ssr: false });

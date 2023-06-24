@@ -6,7 +6,7 @@ import purbaniPurbani from "../public/assets/Logos/logo-purbani.png";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
+import SingUpPopup from "../components/common/SingUpPopup";
 
 const Login = () => {
   const router = useRouter();
@@ -108,9 +108,8 @@ const Login = () => {
                 </div>
                 <div className="text-center py-2 text-rose-500 font-medium h-10">
                   <span
-                    className={`${
-                      incorrectCredentials === false ? "invisible" : "visible"
-                    } transition-all duration-300`}
+                    className={`${incorrectCredentials === false ? "invisible" : "visible"
+                      } transition-all duration-300`}
                   >
                     Your employee ID or password is incorrect
                   </span>
@@ -136,13 +135,16 @@ const Login = () => {
               </form>
               <p className="text-center pb-5">
                 {`Don't have account? `}{" "}
-                <Link href="/register">
+                <button
+                  onClick={() => window.SignUPModal.showModal()}
+                >
                   <a className="text-color_pink">Sign Up</a>
-                </Link>
+                </button>
               </p>
             </div>
           </div>
         </div>
+        <SingUpPopup />
       </div>
     </Layout>
   );

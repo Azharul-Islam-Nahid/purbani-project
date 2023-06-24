@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 
 const Notice = () => {
   const { data: session } = useSession();
-
+  
   return (
     <Layout title="Notice">
       <Navbar />
