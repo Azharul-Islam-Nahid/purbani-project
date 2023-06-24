@@ -26,6 +26,7 @@ const Upload = () => {
       setPreviewUrl(fileReader.result);
     };
     fileReader.readAsDataURL(file);
+    console.log("🚀 ~ file: index.js:29 ~ handleFileChange ~ file:", file)
   };
 
   const handleSubmit = async (e) => {
@@ -35,13 +36,22 @@ const Upload = () => {
     form.append("pdf", formData.pdfFile);
     // Append other form fields to the FormData object
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/common/upload-notice-pdf`, {
+
+      fetch(`http://localhost:5000/api/v1/common/upload-notice-pdf`, {
         method: 'POST',
-        headers: getHeaders(),
-        body: form,
-      });
-      // Handle the response from the backend
-    } catch (error) {
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+        .then(res => res.json())
+        .then(result => {
+          console.log(result);
+
+        })
+    }
+
+    catch (error) {
       // Handle error
     }
   };
