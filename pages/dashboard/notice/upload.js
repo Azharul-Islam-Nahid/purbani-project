@@ -17,6 +17,7 @@ const Upload = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
 
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       pdfFile: file,
@@ -45,6 +46,8 @@ const Upload = () => {
       if (data.statusCode === 201) {
         router.push("/dashboard/success");
       }
+
+
     } catch (error) {
       setLoading(false);
     }
