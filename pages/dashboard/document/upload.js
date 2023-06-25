@@ -5,13 +5,14 @@ import styles from "../../../styles/upload.module.css";
 import axios from "axios";
 import upImg from "../../../public/assets/images/upload.png";
 import Image from "next/image";
-import { baseUrl, getHeaders, getHeadersMultiPart } from "../../../api/api";
+import { baseUrl } from "../../../api/api";
 
 const Upload = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
     // initialize form fields
   });
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -24,13 +25,14 @@ const Upload = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const form = new FormData();
     form.append("pdfFile", formData.pdfFile);
 
     try {
-      const response = await axios.post(
-        `${baseUrl}/common/upload-notice-pdf`,
+      const { data: data } = await axios.post(
+        `${baseUrl}/common/upload-document-pdf?department=${router?.query?.department}`,
         form,
         {
           headers: {
@@ -38,9 +40,13 @@ const Upload = () => {
           },
         }
       );
+
+      setLoading(false);
+      if (data.statusCode === 201) {
+        router.push("/dashboard/success");
+      }
     } catch (error) {
-      console.log("from error");
-      console.log(error);
+      setLoading(false);
     }
   };
 
@@ -77,9 +83,16 @@ const Upload = () => {
             onChange={handleFileChange}
           />
         </div>
-        <div>
-          <button type="submit">Upload</button>
-        </div>
+
+        {loading ? (
+          <div className="flex justify-center relative mt-[20px]">
+            <div className="custom-loader"></div>
+          </div>
+        ) : (
+          <div>
+            <button type="submit">Upload</button>
+          </div>
+        )}
       </form>
     </DashboardLayout>
   );

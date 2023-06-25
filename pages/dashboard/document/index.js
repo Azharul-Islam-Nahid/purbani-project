@@ -20,17 +20,31 @@ const Department = () => {
             <Image src={Image01} alt="img" width={120} height={120} />
           </button>
           <button
-            onClick={() => router.push(`/dashboard/upload`)}
+            onClick={() =>
+              router.push(`/dashboard/document/upload?department=it`)
+            }
           >
             <Image src={Image02} alt="img" width={120} height={120} />
           </button>
-          <button onClick={() => router.push("/dashboard/upload")}>
+          <button
+            onClick={() =>
+              router.push("/dashboard/document/upload?department=hr")
+            }
+          >
             <Image src={Image03} alt="img" width={120} height={120} />
           </button>
-          <button onClick={() => router.push("/dashboard/upload")}>
+          <button
+            onClick={() =>
+              router.push("/dashboard/document/upload?department=accounce")
+            }
+          >
             <Image src={Image04} alt="img" width={120} height={120} />
           </button>
-          <button onClick={() => router.push("/dashboard/upload")}>
+          <button
+            onClick={() =>
+              router.push("/dashboard/document/upload?department=procurement")
+            }
+          >
             <Image src={Image05} alt="img" width={120} height={120} />
           </button>
         </div>

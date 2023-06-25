@@ -11,7 +11,7 @@ import Image05 from "../../public/assets/images/Group-26.png";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
 
-const department = () => {
+const Document = () => {
   return (
     <Layout>
       <Navbar />
@@ -20,35 +20,27 @@ const department = () => {
           <div
             className={`bg-white py-16 px-20 drop-shadow-lg rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-32 h-[55vh]`}
           >
-            <Link
-              className="hover:cursor-pointer"
-              href={`/department/sustainability`}
-            >
-              <button>
-                <Image src={Image01} alt="img" width={120} height={120} />
-              </button>
-            </Link>
-            <Link className="hover:cursor-pointer" href={`/department/it`}>
+            <button>
+              <Image src={Image01} alt="img" width={120} height={120} />
+            </button>
+            <Link className="hover:cursor-pointer" href={`/document/it`}>
               <button>
                 <Image src={Image02} alt="img" width={120} height={120} />
               </button>
             </Link>
-            <Link className="hover:cursor-pointer" href={`/department/hr`}>
+            <Link className="hover:cursor-pointer" href={`/document/hr`}>
               <button>
                 <Image src={Image03} alt="img" width={120} height={120} />
               </button>
             </Link>
-            <Link
-              className="hover:cursor-pointer"
-              href={`/department/accounts`}
-            >
+            <Link className="hover:cursor-pointer" href={`/document/accounts`}>
               <button>
                 <Image src={Image04} alt="img" width={120} height={120} />
               </button>
             </Link>
             <Link
               className="hover:cursor-pointer"
-              href={`/department/procurement`}
+              href={`/document/procurement`}
             >
               <button>
                 <Image src={Image05} alt="img" width={120} height={120} />
@@ -60,6 +52,7 @@ const department = () => {
     </Layout>
   );
 };
-department.auth = true;
 
-export default department;
+Document.auth = true;
+
+export default Document;

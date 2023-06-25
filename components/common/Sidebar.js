@@ -9,7 +9,6 @@ import { signOut } from "next-auth/react";
 
 const Sidebar = () => {
   const router = useRouter();
- 
 
   const handleLogout = () => {
     signOut({ callbackUrl: "/login" });
@@ -25,14 +24,14 @@ const Sidebar = () => {
           className={`${styles.sidebarBottom} text-color_white py-10 px-4 text-2xl flex flex-col gap-y-4`}
         >
           <button
-            onClick={() => router.push("/dashboard/department")}
+            onClick={() => router.push("/dashboard/document")}
             className="flex items-center gap-x-2 w-fit"
           >
             <HiOutlineBuildingOffice />
             <h2>Department</h2>
           </button>
           <button
-            onClick={() => router.push("/dashboard/upload")}
+            onClick={() => router.push("/dashboard/notice/upload")}
             className="flex items-center gap-x-2 w-fit"
           >
             <HiOutlineClipboardList />
@@ -42,7 +41,10 @@ const Sidebar = () => {
             <SiKnowledgebase />
             <h2>Knowledge</h2>
           </button>
-          <button className="flex items-center gap-x-2 w-fit">
+          <button
+            onClick={() => router.push("/dashboard/policy")}
+            className="flex items-center gap-x-2 w-fit"
+          >
             <MdOutlinePolicy />
             <h2>Polices</h2>
           </button>

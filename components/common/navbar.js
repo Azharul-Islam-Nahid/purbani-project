@@ -92,7 +92,7 @@ const Navbar = () => {
                 Notices
               </button>
               <button
-                onClick={() => handleLinkClick("/login?redirect=/department")}
+                onClick={() => handleLinkClick("/login?redirect=/policy")}
                 // onClick={() => handleLinkClick("/login?redirect=/department")}
                 className="text-color_white hover:text-color_brand transition-all duration-500"
               >

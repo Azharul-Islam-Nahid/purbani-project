@@ -9,8 +9,8 @@ import { useRouter } from "next/router";
 
 const DownloadCard = () => {
   const [url, setUrl] = useState(true);
-  const { data: session } = useSession()
-  const router = useRouter()
+  const { data: session } = useSession();
+  const router = useRouter();
   const handleLinkClick = (link) => {
     if (!session?.user) {
       window.DownloadModal.showModal();
@@ -30,7 +30,7 @@ const DownloadCard = () => {
         </div>
         <div>
           <button
-            onClick={() => handleLinkClick("/login?redirect=/department")}
+            onClick={() => handleLinkClick("/login?redirect=/document")}
             className="w-72 h-12 rounded-xl bg-color_brand text-color_white hover:bg-color_white hover:text-color_brand transition-all duration-500"
           >
             Download Documents
@@ -42,5 +42,5 @@ const DownloadCard = () => {
   );
 };
 
-export default DownloadCard
+export default DownloadCard;
 // export default dynamic(() => Promise.resolve(DownloadCard), { ssr: false });

@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect, useMemo } from "react";
 import Image from "next/image";
-import purbaniLogo from "../public/assets/Logos/logo-purbani.png";
+import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import { useRouter } from "next/router";
-import { authContext } from "../context/authContext";
-import { POST } from "../api/api";
-import Layout from "../components/common/Layout";
-import Navbar from "../components/common/navbar";
+import { authContext } from "../../context/authContext";
+import { POST } from "../../api/api";
+import Layout from "../../components/common/Layout";
+import Navbar from "../../components/common/navbar";
 import dynamic from "next/dynamic";
 
 const Register = () => {
@@ -174,5 +174,8 @@ const Register = () => {
   );
 };
 
+Register.auth = {
+  adminOnly: true,
+};
 
-export default dynamic(() => Promise.resolve(Register), { ssr: false });
+export default Register;
