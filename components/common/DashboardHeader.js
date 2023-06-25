@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../../styles/Sidebar.module.css";
 import Image from "next/image";
 import logoPurbani from "../../public/assets/Logos/logo-purbani.png";
-import profileImg from "../../public/assets/images/ruman2.jpg";
+import profileImg from "../../public/assets/images/profile.webp";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { useRouter } from "next/router";
 

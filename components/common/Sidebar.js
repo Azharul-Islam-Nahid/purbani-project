@@ -49,6 +49,13 @@ const Sidebar = () => {
             <h2>Polices</h2>
           </button>
           <button
+            onClick={() => router.push("/dashboard/register")}
+            className="flex items-center gap-x-2 w-fit"
+          >
+            <MdOutlinePolicy />
+            <h2>Create User</h2>
+          </button>
+          <button
             onClick={handleLogout}
             className="flex items-center gap-x-2 w-fit"
           >
