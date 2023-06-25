@@ -1,19 +1,52 @@
-import { Notices } from "../constants/notice";
 import { FaDownload } from "react-icons/fa";
 import Layout from "../components/common/Layout";
 import Navbar from "../components/common/navbar";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { baseUrl, getHeaders } from "../api/api";
+import axios from "axios";
 
 const Notice = () => {
   const { data: session } = useSession();
-  
+  const [notice, setNotice] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data: data } = await axios.get(
+          `${baseUrl}/notice/get-all-notice`,
+          { headers: getHeaders() }
+        );
+        setLoading(false);
+        console.log(data.data);
+        setNotice(data.data);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
+      }
+    })();
+  }, []);
+
+  if (loading) {
+    return (
+      <Layout title="Loading">
+        <div className="w-full h-screen flex flex-col justify-center items-center">
+          <div className="flex justify-center relative">
+            <div className="custom-loader"></div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
   return (
     <Layout title="Notice">
-      <Navbar />
-      <div>
-        <div className="w-full flex items-center justify-center pt-28">
+      <div className="flex flex-col justify-between items-center h-screen overflow-y-auto">
+        <Navbar />
+        <div className="w-full flex items-center justify-center mt-10">
           <div className="grid grid-cols-3 gap-20">
-            {Notices.map((item, idx) => {
+            {notice.map((item, idx) => {
               return (
                 <div
                   key={idx}
@@ -23,11 +56,11 @@ const Notice = () => {
                     {idx + 1}
                   </div>
                   <div className="text-white text-xl font-bold pt-4 min-h-[130px]">
-                    {item.notice}
+                    {item.title}
                   </div>
                   <div className="w-full inline-flex justify-end py-6">
                     <a
-                      href={`https://res.cloudinary.com/dqlxcdlce/image/upload/fl_attachment/v1687607785/jy5t5twxa0zxegonmn03.pdf`}
+                      href={item?.downloadableLink}
                       className="text-2xl text-color_brand hover:text-white transition-all duration-200"
                     >
                       <FaDownload />

@@ -22,7 +22,6 @@ const Login = () => {
       localStorage.setItem("token", session?.user?.accessToken);
     }
     if (session?.user) {
-      console.log(session?.user);
       router.push(redirect || "/");
     }
   }, [redirect, router, session?.user]);

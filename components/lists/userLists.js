@@ -1,8 +1,5 @@
 
 import React, { useState, useEffect } from "react";
-
-// import UserEditModal from "../modal/userEditModal";
-// import Loader from "../common/loader";
 import { GET } from "../../api/api";
 import DisplayCard from "../common/displayCard";
 

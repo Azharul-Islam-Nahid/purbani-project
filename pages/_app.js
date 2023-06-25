@@ -3,6 +3,7 @@ import "tailwindcss/tailwind.css";
 import { AuthProvider } from "../context/authContext.js";
 import { SessionProvider, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import Layout from "../components/common/Layout";
 
 export default function MyApp({
   Component,
@@ -37,7 +38,15 @@ function Auth({ children, adminOnly }) {
   });
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <Layout title="Loading">
+        <div className="w-full h-screen flex flex-col justify-center items-center">
+          <div className="flex justify-center relative">
+            <div className="custom-loader"></div>
+          </div>
+        </div>
+      </Layout>
+    );
   }
 
   if (adminOnly && !session?.user?.isAdmin) {

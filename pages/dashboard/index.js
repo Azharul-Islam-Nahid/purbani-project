@@ -36,7 +36,7 @@ const Dashboard = () => {
             className={`${styles.dashboardOptions} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center items-center my-5 mx-auto`}
           >
             <div
-              onClick={() => router.push("/dashboard/department")}
+              onClick={() => router.push("/dashboard/document")}
               className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
             >
               <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
@@ -47,7 +47,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div
-              onClick={() => router.push("/dashboard/upload")}
+              onClick={() => router.push("/dashboard/notice/upload")}
               className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
             >
               <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
@@ -58,7 +58,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div
-              onClick={() => router.push("/dashboard/department")}
+              onClick={() => router.push("/dashboard/policy")}
               className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
             >
               <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
