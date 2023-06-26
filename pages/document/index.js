@@ -1,54 +1,71 @@
-import React from "react";
+import { useRouter } from "next/router";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
-import { MdLaptopMac, MdAccountBalance, MdSavings } from "react-icons/md";
-import { ImEarth } from "react-icons/im";
+import {
+  MdLaptopMac,
+  MdAccountBalance,
+  MdLocalFlorist,
+  MdOutlineAttachMoney,
+  MdLocalPolice,
+  MdOutlineAdminPanelSettings,
+} from "react-icons/md";
 import { RiAdminFill } from "react-icons/ri";
-import { useRouter } from "next/router";
+import { TbPackageExport, TbPigMoney } from "react-icons/tb";
+import { SiHelpscout, SiUblockorigin } from "react-icons/si";
+import { AiOutlineAudit } from "react-icons/ai";
+import { FaMoneyCheckAlt, FaPaperPlane } from "react-icons/fa";
+import { GiLargeDress } from "react-icons/gi";
 
 const departments = [
   {
     name: "sustainability",
     url: "/document/sustainabilityMenu",
-    logo: <ImEarth />,
+    logo: <MdLocalFlorist />,
   },
   { name: "it", url: "/document/it", logo: <MdLaptopMac /> },
   { name: "hr", url: "/document/hr", logo: <RiAdminFill /> },
   { name: "accounts", url: "/document/accounts", logo: <MdAccountBalance /> },
-  { name: "procurement", url: "/document/procurement", logo: <MdSavings /> },
-  { name: "export", url: "/document/export", logo: <ImEarth /> },
-  { name: "legal", url: "/document/legal", logo: <RiAdminFill /> },
+  { name: "procurement", url: "/document/procurement", logo: <TbPigMoney /> },
+  { name: "export", url: "/document/export", logo: <TbPackageExport /> },
+  { name: "legal", url: "/document/legal", logo: <SiUblockorigin /> },
   {
     name: "internal audit",
     url: "/document/internal audit",
-    logo: <RiAdminFill />,
+    logo: <AiOutlineAudit />,
   },
   {
     name: "yarn sales",
     url: "/document/yarn sales",
-    logo: <MdAccountBalance />,
+    logo: <MdOutlineAttachMoney />,
   },
   {
     name: "co-ordination",
     url: "/document/co-ordination",
-    logo: <RiAdminFill />,
+    logo: <SiHelpscout />,
   },
-  { name: "foreign", url: "/document/foreign", logo: <RiAdminFill /> },
-  { name: "local", url: "/document/local", logo: <RiAdminFill /> },
-  { name: "apparel", url: "/document/apparel", logo: <RiAdminFill /> },
-  { name: "admin", url: "/document/admin", logo: <RiAdminFill /> },
-  { name: "finance", url: "/document/finance", logo: <MdAccountBalance /> },
-  { name: "foreign", url: "/document/foreign", logo: <RiAdminFill /> },
+  { name: "foreign", url: "/document/foreign", logo: <FaPaperPlane /> },
+  { name: "local", url: "/document/local", logo: <MdLocalPolice /> },
+  { name: "apparel", url: "/document/apparel", logo: <GiLargeDress /> },
+  {
+    name: "admin",
+    url: "/document/admin",
+    logo: <MdOutlineAdminPanelSettings />,
+  },
+  { name: "finance", url: "/document/finance", logo: <FaMoneyCheckAlt /> },
 ];
 
 const Document = () => {
   const router = useRouter();
 
+  const handleClick = (url) => {
+    router.push(url);
+  };
+
   return (
     <Layout>
       <Navbar />
       <div className="max-w-[800px] h-[80vh] w-full mx-auto flex flex-col justify-center">
-        <div className="p-6 backdrop-blur-md bg-gray-100/10 rounded-3xl">
+        <div className="p-6 backdrop-blur-md rounded-3xl border-l-2 border-r-2 border-color_secondary">
           <div className="text-3xl text-color_pink text-center mb-5 font-semibold">
             Documents
           </div>
@@ -57,13 +74,17 @@ const Document = () => {
               return (
                 <button
                   key={index}
-                  onClick={() => router.push(item.url)}
-                  className="flex gap-x-5 items-center justify-between text-black shadow-lg py-2 px-5 border bg-white mb-2 rounded-md"
+                  onClick={() => handleClick(item.url)}
+                  className={`flex gap-x-5 items-center justify-between shadow-lg py-2 px-5 group hover:bg-color_brand duration-300  rounded mb-2 bg-white`}
                 >
-                  <div className="font-bold text-xl capitalize text-color_secondary">
+                  <div
+                    className={`font-bold text-xl capitalize group-hover:text-color_white duration-300 text-color_secondary`}
+                  >
                     {item.name}
                   </div>
-                  <div className="text-3xl text-color_secondary">
+                  <div
+                    className={`text-3xl ext-color_pink group-hover:text-color_white duration-300 text-color_secondary`}
+                  >
                     {item.logo}
                   </div>
                 </button>

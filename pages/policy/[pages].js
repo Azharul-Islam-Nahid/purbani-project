@@ -1,4 +1,5 @@
 import { FaDownload } from "react-icons/fa";
+import { AiFillFilePdf } from "react-icons/ai";
 import { BsEye } from "react-icons/bs";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
@@ -63,10 +64,11 @@ const PageDetails = () => {
             <div className="grid  grid-cols-1 bg-white rounded-lg w-[800px] py-20 px-10 h-full">
               {policy?.map((item, idx) => {
                 return (
-                  <div key={idx} className="flex justify-between flex-row mb-4">
-                    <div className="text-lg font-bold px-4">{` ${idx + 1}.  ${
-                      item.title
-                    }`}</div>
+                  <div key={idx} className="flex justify-between flex-row mb-2">
+                    <div className="text-lg font-bold px-4 flex gap-x-1 items-center">
+                      {idx + 1}. {item.title}
+                      <AiFillFilePdf className="text-color_brand" />
+                    </div>
                     <div className="flex gap-x-5">
                       <a
                         target="_blank"

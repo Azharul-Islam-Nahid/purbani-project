@@ -14,7 +14,6 @@ const UploadForm = ({
   loading,
   setLoading,
 }) => {
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
 
@@ -66,7 +65,7 @@ const UploadForm = ({
   };
 
   return (
-    <div className="max-w-[500px] w-full flex flex-col items-center bg-white rounded-lg shadow-lg py-10 border">
+    <div className="max-w-[500px] w-full flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
       <div className="text-xl flex justify-start border-b w-full px-10 font-semibold text-color_pink uppercase text-left pb-1">
         {department}
       </div>

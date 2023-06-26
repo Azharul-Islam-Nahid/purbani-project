@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { baseUrl } from "../../api/api";
-import DashboardLayout from "../../components/common/DashboardLayout";
-import axios from "axios";
+import { baseUrl } from "../../../api/api";
+import DashboardLayout from "../../../components/common/DashboardLayout";
 import { useRouter } from "next/router";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const departments = [
   "Export",
@@ -24,6 +25,7 @@ const departments = [
 const roles = ["Admin", "User"];
 
 const Register = () => {
+  const [status, setStatus] = useState("loading");
   const router = useRouter();
   const [registrationFailed, setRegistrationFailed] = useState(false);
   const [formData, setFormData] = useState({});
@@ -46,6 +48,10 @@ const Register = () => {
 
   useEffect(() => {
     setRegistrationFailed(false);
+    // Simulating an asynchronous process
+    setTimeout(() => {
+      setStatus("authenticated");
+    }, 500);
   }, []);
 
   // Registration API
@@ -73,24 +79,47 @@ const Register = () => {
         if (data?.statusCode === 201) {
           setLoading(false);
           setRegistrationFailed(true);
-          router.push("/dashboard/success");
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Account created successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       })
       .catch((error) => {
         setLoading(false);
         setRegistrationFailed(false);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       });
   };
 
+  if (status !== "authenticated") {
+    return (
+      <DashboardLayout title="Document">
+        <div className="w-full h-[80vh] flex flex-col justify-center items-center">
+          <div className="flex justify-center relative">
+            <div className="custom-loader"></div>
+          </div>
+        </div>
+      </DashboardLayout>
+    );
+  }
+
   return (
     <DashboardLayout>
-      <div>
-        <div className="w-full flex items-center justify-center pt-28">
+      <div className="p-10 max-w-[1250px] w-full h-full backdrop-blur-md border-l-3 border-r-3 border-color_pink rounded-md mt-[100px]">
+        <div className="text-color_pink font-semibold text-3xl mb-3">
+          Create Account
+        </div>
+        <div className="w-full flex items-center justify-start">
           <div className="flex flex-col items-center bg-white rounded-lg w-[540px] h-full">
-            <div className="pt-8 flex flex-col items-center">
-              <h1 className="text-3xl text-color_secondary">Create Account</h1>
-            </div>
-            <div className="px-10 w-full ">
+            <div className="p-10 w-full border-b-3 border-t-3 bg-white border-color_pink rounded-md">
               <form onSubmit={handleRegistration}>
                 <div className="w-full ">
                   <div className="w-full mt-2 flex gap-8">
