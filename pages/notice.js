@@ -10,20 +10,18 @@ const Notice = () => {
   const { data: session } = useSession();
   const [notice, setNotice] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  console.log(notice);
   useEffect(() => {
     (async () => {
       try {
         const { data: data } = await axios.get(
-          `${baseUrl}/notice/get-all-notice`,
+          `${baseUrl}/notice/get-all-notice?sortOrder=asc`,
           { headers: getHeaders() }
         );
         setLoading(false);
-        console.log(data.data);
         setNotice(data.data);
       } catch (error) {
         setLoading(false);
-        console.log(error);
       }
     })();
   }, []);
@@ -46,29 +44,32 @@ const Notice = () => {
         <Navbar />
         <div className="w-full flex items-center justify-center mt-10">
           <div className="grid grid-cols-3 gap-20">
-            {notice.map((item, idx) => {
-              return (
-                <div
-                  key={idx}
-                  className="flex flex-col bg-black/50 rounded-lg w-[280px] pt-2 px-10 h-full"
-                >
-                  <div className="text-color_brand text-5xl font-bold py-2 ">
-                    {idx + 1}
+            {notice
+              ?.reverse()
+              ?.slice(0, 6)
+              ?.map((item, idx) => {
+                return (
+                  <div
+                    key={idx}
+                    className="flex flex-col bg-black/50 rounded-lg w-[280px] pt-2 px-10 h-full"
+                  >
+                    <div className="text-color_brand text-5xl font-bold py-2 ">
+                      {idx + 1}
+                    </div>
+                    <div className="text-white text-xl font-bold pt-4 min-h-[130px]">
+                      {item.title}
+                    </div>
+                    <div className="w-full inline-flex justify-end py-6">
+                      <a
+                        href={item?.downloadableLink}
+                        className="text-2xl text-color_brand hover:text-white transition-all duration-200"
+                      >
+                        <FaDownload />
+                      </a>
+                    </div>
                   </div>
-                  <div className="text-white text-xl font-bold pt-4 min-h-[130px]">
-                    {item.title}
-                  </div>
-                  <div className="w-full inline-flex justify-end py-6">
-                    <a
-                      href={item?.downloadableLink}
-                      className="text-2xl text-color_brand hover:text-white transition-all duration-200"
-                    >
-                      <FaDownload />
-                    </a>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
         <div className="text-white text-center pt-6 text-xl capitalize">

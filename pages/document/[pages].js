@@ -15,20 +15,31 @@ const PageDetails = () => {
   const [document, setDocument] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  let url = `/document/get-all-document?department`;
+  if (
+    pages === "certification" ||
+    pages === "buyer" ||
+    pages === "forms" ||
+    pages === "agreements"
+  ) {
+    url = `/document/get-all-document?subDepartment`;
+  } else if (pages === "law") {
+    url = `/document/get-all-document?searchTerm`;
+  }
+
   useEffect(() => {
     (async () => {
       try {
-        const { data: data } = await axios.get(
-          `${baseUrl}/document/get-all-document?department=${pages}`,
-          { headers: getHeaders() }
-        );
+        const { data: data } = await axios.get(`${baseUrl}${url}=${pages}`, {
+          headers: getHeaders(),
+        });
         setLoading(false);
         setDocument(data?.data?.data);
       } catch (error) {
         setLoading(false);
       }
     })();
-  }, [pages]);
+  }, [pages, url]);
 
   if (loading) {
     return (
@@ -51,7 +62,7 @@ const PageDetails = () => {
             <div className="grid  grid-cols-1 bg-white rounded-lg w-[800px] py-20 px-10 h-full">
               {document?.map((item, idx) => {
                 return (
-                  <div key={idx} className="flex justify-between flex-row">
+                  <div key={idx} className="flex justify-between flex-row mb-4">
                     <div className="text-lg font-bold px-4">{` ${idx + 1}.  ${
                       item.title
                     }`}</div>

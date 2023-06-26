@@ -1,52 +1,65 @@
 import DashboardLayout from "../../../components/common/DashboardLayout";
-import Image from "next/image";
-import Image01 from "../../../public/assets/images/Group-22.png";
-import Image02 from "../../../public/assets/images/Group-23.png";
-import Image03 from "../../../public/assets/images/Group-24.png";
-import Image04 from "../../../public/assets/images/Group-25.png";
-import Image05 from "../../../public/assets/images/Group-26.png";
+import DepartmentList from "../../../components/common/DepartmentList";
+import UploadForm from "../../../components/common/UploadForm";
+import { useState } from "react";
 import { useRouter } from "next/router";
+import { MdLaptopMac, MdAccountBalance, MdSavings } from "react-icons/md";
+import { ImEarth } from "react-icons/im";
+import { RiAdminFill } from "react-icons/ri";
+
+const departments = [
+  { name: "sustainability", logo: <ImEarth /> },
+  { name: "it", logo: <MdLaptopMac /> },
+  { name: "hr", logo: <RiAdminFill /> },
+  { name: "accounts", logo: <MdAccountBalance /> },
+  { name: "procurement", logo: <MdSavings /> },
+  { name: "export", logo: <ImEarth /> },
+  { name: "legal", logo: <RiAdminFill /> },
+  { name: "internal audit", logo: <RiAdminFill /> },
+  { name: "yarn sales", logo: <MdAccountBalance /> },
+  { name: "co-ordination", logo: <RiAdminFill /> },
+  { name: "foreign", logo: <RiAdminFill /> },
+  { name: "local", logo: <RiAdminFill /> },
+  { name: "apparel", logo: <RiAdminFill /> },
+  { name: "admin", logo: <RiAdminFill /> },
+  { name: "finance", logo: <MdAccountBalance /> },
+  { name: "foreign", logo: <RiAdminFill /> },
+];
 
 const Department = () => {
   const router = useRouter();
+  const [formData, setFormData] = useState({
+    // initialize form fields
+  });
+  const [department, setDepartment] = useState("sustainability");
+  const [title, setTitle] = useState("");
+  const [subDepartment, setSubDepartment] = useState("");
+  const [loading, setLoading] = useState(false);
 
   return (
     <DashboardLayout>
-      <div>
-        <div
-          className={`bg-white py-16 px-20 drop-shadow-lg rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-32 mt-20 lg:mt-44`}
-        >
-          <button>
-            <Image src={Image01} alt="img" width={120} height={120} />
-          </button>
-          <button
-            onClick={() =>
-              router.push(`/dashboard/document/upload?department=it`)
-            }
-          >
-            <Image src={Image02} alt="img" width={120} height={120} />
-          </button>
-          <button
-            onClick={() =>
-              router.push("/dashboard/document/upload?department=hr")
-            }
-          >
-            <Image src={Image03} alt="img" width={120} height={120} />
-          </button>
-          <button
-            onClick={() =>
-              router.push("/dashboard/document/upload?department=accounce")
-            }
-          >
-            <Image src={Image04} alt="img" width={120} height={120} />
-          </button>
-          <button
-            onClick={() =>
-              router.push("/dashboard/document/upload?department=procurement")
-            }
-          >
-            <Image src={Image05} alt="img" width={120} height={120} />
-          </button>
+      <div className="p-10 max-w-[1250px] w-full h-full backdrop-blur-md bg-gray-100/10 rounded-md">
+        <div className="text-color_pink font-semibold text-3xl mb-3">
+          Department
+        </div>
+        <div className="flex flex-col h-full justify-around">
+          <DepartmentList
+            departments={departments}
+            setDepartment={setDepartment}
+          />
+          <UploadForm
+            url="/document/upload-document-pdf"
+            formData={formData}
+            setFormData={setFormData}
+            department={department}
+            setDepartment={setDepartment}
+            title={title}
+            setTitle={setTitle}
+            subDepartment={subDepartment}
+            setSubDepartment={setSubDepartment}
+            loading={loading}
+            setLoading={setLoading}
+          />
         </div>
       </div>
     </DashboardLayout>

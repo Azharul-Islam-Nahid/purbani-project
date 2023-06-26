@@ -1,189 +1,97 @@
-import React, { useState, useContext, useEffect, useMemo } from "react";
-import Image from "next/image";
-import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
-import { useRouter } from "next/router";
-import { authContext } from "../../context/authContext";
-import { POST } from "../../api/api";
-import Layout from "../../components/common/Layout";
-import Navbar from "../../components/common/navbar";
-import dynamic from "next/dynamic";
+import React, { useState, useEffect } from "react";
+import { baseUrl } from "../../api/api";
 import DashboardLayout from "../../components/common/DashboardLayout";
+import axios from "axios";
+import { useRouter } from "next/router";
+
+const departments = [
+  "Export",
+  "Legal",
+  "Accounts",
+  "IT",
+  "HR",
+  "Internal Audit",
+  "Yarn Sales",
+  "Co-Ordination",
+  "Foreign",
+  "Local",
+  "Apparel",
+  "Admin",
+  "Finance",
+  "Sustainability",
+];
+
+const roles = ["Admin", "User"];
 
 const Register = () => {
-  //authContext  State
-  const { state } = useContext(authContext);
-
-  const [name, setName] = useState("");
-  const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const [registrationFailed, setRegistrationFailed] = useState(false);
+  const [formData, setFormData] = useState({});
+  const [name, setName] = useState("");
   const [employeeId, setEmployeeId] = useState("");
+  const [role, setRole] = useState("");
+  const [department, setDepartment] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const body = useMemo(() => {
-    return {
-      name: name,
-      email: email,
-      employeeId: employeeId,
-      password: password,
-    };
-  }, [name, email, employeeId, password]);
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
 
-  const router = useRouter();
-
-  useEffect(() => {
-    state.user && router.push("./dashboard");
-  }, [state.user, router]);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      image: file,
+    }));
+  };
 
   useEffect(() => {
     setRegistrationFailed(false);
-  }, [body]);
+  }, []);
 
   // Registration API
-  const handleRegistration = () => {
-    if (registrationFailed) return;
+  const handleRegistration = (e) => {
+    e.preventDefault();
     setLoading(true);
-    POST("/user/register", body).then(({ data, status }) => {
-      if (status !== 200) {
-        console.log(data);
-        console.log(status);
-        setRegistrationFailed(true);
+    setRegistrationFailed(false);
+    const form = new FormData();
+    form.append("file", formData.image);
+    form.append("name", name);
+    form.append("employeeId", employeeId);
+    form.append("role", role);
+    form.append("department", department);
+    form.append("email", email);
+    form.append("password", password);
+
+    axios
+      .post(`${baseUrl}/users/create-user`, form, {
+        headers: {
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        const { data } = response;
+        if (data?.statusCode === 201) {
+          setLoading(false);
+          setRegistrationFailed(true);
+          router.push("/dashboard/success");
+        }
+      })
+      .catch((error) => {
         setLoading(false);
-      } else if (status === 200) {
-        console.log("Registration successful");
-        console.log(data);
-        setLoading(false);
-        router.push("/dashboard");
-      }
-    });
+        setRegistrationFailed(false);
+      });
   };
 
   return (
-    // <Layout title="Register">
-    //   <Navbar />
-    //   <div>
-    //     <div className="w-full flex items-center justify-center pt-28">
-    //       <div className="flex flex-col items-center bg-white rounded-lg w-[540px] h-full">
-    //         <div className="pt-8 flex flex-col items-center">
-    //           <Image src={purbaniLogo} width={184} height={48} alt={"logo"} />
-    //           <div className="text-xl font-semibold">
-    //             Welcome to Purbani Group
-    //           </div>
-    //         </div>
-    //         <div className="pt-8 px-10 w-full ">
-    //           <form>
-    //             <div className="w-full ">
-    //               <div className="w-full mt-2 flex gap-8">
-    //                 <div className="w-1/2">
-    //                   <div className="font-semibold">Name</div>
-    //                   <input
-    //                     className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md "
-    //                     placeholder="Name"
-    //                     type="text"
-    //                     onChange={(e) => {
-    //                       setName(e.target.value);
-    //                     }}
-    //                   />
-    //                 </div>
-    //                 <div className="w-1/2">
-    //                   <div className="font-semibold">Employee ID</div>
-    //                   <input
-    //                     className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md "
-    //                     placeholder="Employee ID"
-    //                     type="text"
-    //                     onChange={(e) => {
-    //                       setEmployeeId(e.target.value);
-    //                     }}
-    //                   />
-    //                 </div>
-    //               </div>
-    //             </div>
-    //             <div>
-    //               <div className="font-semibold pt-5">Email</div>
-    //               <div className="mt-2">
-    //                 <input
-    //                   className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md"
-    //                   placeholder="Email ID"
-    //                   type="email"
-    //                   value={email}
-    //                   onChange={(e) => {
-    //                     setEmail(e.target.value);
-    //                   }}
-    //                 />
-    //               </div>
-    //             </div>
-    //             <div>
-    //               <div className="font-semibold pt-5">Password</div>
-    //               <div>
-    //                 <input
-    //                   className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md mr-2"
-    //                   placeholder="Password"
-    //                   type="password"
-    //                   onChange={(e) => {
-    //                     setPassword(e.target.value);
-    //                   }}
-    //                 />
-    //               </div>
-    //             </div>
-    //             {loading == true && (
-    //               <div className="flex justify-center relative">
-    //                 <div className=" custom-loader absolute top-2"></div>
-    //               </div>
-    //             )}
-    //             {registrationFailed == true && (
-    //               <div className="flex justify-center relative">
-    //                 <div className="absolute top-1 text-rose-500 text-center">
-    //                   Account registration failed.<br></br> Check your
-    //                   credentials and try again.
-    //                 </div>
-    //               </div>
-    //             )}
-    //             <div className="pt-16 w-full flex justify-center">
-    //               <button
-    //                 type="button"
-    //                 className={` rounded-xl border bg-color_brand px-4 py-2 font-medium text-gray-100 ${
-    //                   (!employeeId && !password) || registrationFailed
-    //                     ? ""
-    //                     : " hover:bg-white hover:text-black"
-    //                 } transition-all duration-100`}
-    //                 disabled={(!employeeId && !password) || registrationFailed}
-    //                 onClick={(e) => {
-    //                   e.preventDefault();
-    //                   handleRegistration();
-    //                 }}
-    //               >
-    //                 Create Account
-    //               </button>
-    //             </div>
-    //           </form>
-    //         </div>
-    //         <div className="flex gap-2 py-4">
-    //           <div>{`Already Registered?`}</div>
-    //           <button
-    //             className="text-color_brand font-semibold"
-    //             onClick={() => {
-    //               router.push("./login");
-    //             }}
-    //           >
-    //             Sign In
-    //           </button>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </Layout>
     <DashboardLayout>
       <div>
         <div className="w-full flex items-center justify-center pt-28">
           <div className="flex flex-col items-center bg-white rounded-lg w-[540px] h-full">
             <div className="pt-8 flex flex-col items-center">
-              <Image src={purbaniLogo} width={184} height={48} alt={"logo"} />
-              <div className="text-xl font-semibold">
-                Welcome to Purbani Group
-              </div>
+              <h1 className="text-3xl text-color_secondary">Create Account</h1>
             </div>
-            <div className="pt-8 px-10 w-full ">
-              <form>
+            <div className="px-10 w-full ">
+              <form onSubmit={handleRegistration}>
                 <div className="w-full ">
                   <div className="w-full mt-2 flex gap-8">
                     <div className="w-1/2">
@@ -210,38 +118,121 @@ const Register = () => {
                     </div>
                   </div>
                 </div>
-                <div>
-                  <div className="font-semibold pt-5">Email</div>
-                  <div className="mt-2">
-                    <input
-                      className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md"
-                      placeholder="Email ID"
-                      type="email"
-                      value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                      }}
-                    />
+
+                <div className="relative flex justify-between gap-8 mt-6">
+                  <div className="w-full">
+                    <select
+                      className="appearance-none outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md bg-white cursor-pointer"
+                      defaultValue={"Role"}
+                      onChange={(e) => setRole(e.target.value)}
+                    >
+                      <option defaultValue="Role" disabled hidden>
+                        Role
+                      </option>
+                      {roles.map((department) => (
+                        <option key={department} value={department}>
+                          {department}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="absolute top-1 left-[180px] flex items-center justify-center w-8 h-full pointer-events-none">
+                      <svg
+                        className="w-4 h-4 text-gray-400"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7 7L10 10L13 7"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="w-full">
+                    <select
+                      className="appearance-none outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md bg-white cursor-pointer"
+                      defaultValue={"Department"}
+                      onChange={(e) => setDepartment(e.target.value)}
+                    >
+                      <option defaultValue="Department" disabled hidden>
+                        Department
+                      </option>
+                      {departments.map((department) => (
+                        <option key={department} value={department}>
+                          {department}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="absolute top-1 right-0 flex items-center justify-center w-8 h-full pointer-events-none">
+                      <svg
+                        className="w-4 h-4 text-gray-400"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7 7L10 10L13 7"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <div className="font-semibold pt-5">Password</div>
-                  <div>
-                    <input
-                      className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md mr-2"
-                      placeholder="Password"
-                      type="password"
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                      }}
-                    />
+
+                <div className="flex justify-between gap-8">
+                  <div className="w-full">
+                    <div className="mt-6">
+                      <input
+                        className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md"
+                        placeholder="Email ID"
+                        type="email"
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full">
+                    <div className="mt-6">
+                      <input
+                        className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md mr-2"
+                        placeholder="Password"
+                        type="password"
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
-                {loading == true && (
-                  <div className="flex justify-center relative">
-                    <div className=" custom-loader absolute top-2"></div>
+                <div className="relative mt-7">
+                  <input
+                    className="hidden"
+                    type="file"
+                    name="image"
+                    id="img"
+                    onChange={handleFileChange}
+                  />
+                  <label
+                    htmlFor="img"
+                    className="bg-white text-gray-500 border border-gray-300 px-4 py-2 rounded-md cursor-pointer hover:bg-gray-100"
+                  >
+                    <span className="text-sm">Choose Image</span>
+                  </label>
+                  <div className="my-2 text-black">
+                    {formData?.image?.name && (
+                      <span>{formData?.image?.name}</span>
+                    )}
                   </div>
-                )}
+                </div>
                 {registrationFailed == true && (
                   <div className="flex justify-center relative">
                     <div className="absolute top-1 text-rose-500 text-center">
@@ -250,36 +241,22 @@ const Register = () => {
                     </div>
                   </div>
                 )}
-                <div className="pt-16 w-full flex justify-center">
-                  <button
-                    type="button"
-                    className={` rounded-xl border bg-color_brand px-4 py-2 font-medium text-gray-100 mb-5 ${
-                      (!employeeId && !password) || registrationFailed
-                        ? ""
-                        : " hover:bg-white hover:text-black"
-                    } transition-all duration-100`}
-                    disabled={(!employeeId && !password) || registrationFailed}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleRegistration();
-                    }}
-                  >
-                    Create Account
-                  </button>
+                <div className="pt-10 my-5 w-full flex justify-center">
+                  {loading ? (
+                    <div className="flex justify-center relative mt-[20px] mr-5">
+                      <div className="custom-loader"></div>
+                    </div>
+                  ) : (
+                    <button
+                      type="submit"
+                      className={` rounded-xl border bg-color_brand px-10 py-2 font-medium text-gray-100 transition-all duration-100`}
+                    >
+                      Create Account
+                    </button>
+                  )}
                 </div>
               </form>
             </div>
-            {/* <div className="flex gap-2 py-4">
-              <div>{`Already Registered?`}</div>
-              <button
-                className="text-color_brand font-semibold"
-                onClick={() => {
-                  router.push("./login");
-                }}
-              >
-                Sign In
-              </button>
-            </div> */}
           </div>
         </div>
       </div>
