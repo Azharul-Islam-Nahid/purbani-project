@@ -31,15 +31,11 @@ const Sidebar = () => {
             <h2>Department</h2>
           </button>
           <button
-            onClick={() => router.push("/dashboard/notice/upload")}
+            onClick={() => router.push("/dashboard/notice")}
             className="flex items-center gap-x-2 w-fit"
           >
             <HiOutlineClipboardList />
             <h2>Notice</h2>
-          </button>
-          <button className="flex items-center gap-x-2 w-fit">
-            <SiKnowledgebase />
-            <h2>Knowledge</h2>
           </button>
           <button
             onClick={() => router.push("/dashboard/policy")}
@@ -47,6 +43,17 @@ const Sidebar = () => {
           >
             <MdOutlinePolicy />
             <h2>Polices</h2>
+          </button>
+          <button className="flex items-center gap-x-2 w-fit">
+            <SiKnowledgebase />
+            <h2>Knowledge</h2>
+          </button>
+          <button
+            onClick={() => router.push("/dashboard/register")}
+            className="flex items-center gap-x-2 w-fit"
+          >
+            <SiKnowledgebase />
+            <h2>Create User</h2>
           </button>
           <button
             onClick={handleLogout}

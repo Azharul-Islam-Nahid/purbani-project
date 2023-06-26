@@ -1,7 +1,7 @@
 import React from "react";
 
 const DisplayCard = ({ children, dataLength }) => {
-  console.log("dataLength", dataLength);
+
   return (
     <div className="w-full">
       <div

@@ -15,21 +15,32 @@ const PageDetails = () => {
   const [policy, setPolicy] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  let url = `/policy/get-all-policy?department`;
+  if (
+    pages === "certification" ||
+    pages === "buyer" ||
+    pages === "forms" ||
+    pages === "agreements"
+  ) {
+    url = `/policy/get-all-policy?subDepartment`;
+  } else if (pages === "law") {
+    url = `/policy/get-all-policy?searchTerm`;
+  }
+
   useEffect(() => {
     (async () => {
       try {
-        const { data: data } = await axios.get(
-          `${baseUrl}/policy/get-all-policy?department=${pages}`,
-          { headers: getHeaders() }
-        );
+        const { data: data } = await axios.get(`${baseUrl}${url}=${pages}`, {
+          headers: getHeaders(),
+        });
         setLoading(false);
         setPolicy(data?.data?.data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
         setLoading(false);
       }
     })();
-  }, [pages]);
+  }, [pages, url]);
 
   if (loading) {
     return (
@@ -52,7 +63,7 @@ const PageDetails = () => {
             <div className="grid  grid-cols-1 bg-white rounded-lg w-[800px] py-20 px-10 h-full">
               {policy?.map((item, idx) => {
                 return (
-                  <div key={idx} className="flex justify-between flex-row">
+                  <div key={idx} className="flex justify-between flex-row mb-4">
                     <div className="text-lg font-bold px-4">{` ${idx + 1}.  ${
                       item.title
                     }`}</div>
