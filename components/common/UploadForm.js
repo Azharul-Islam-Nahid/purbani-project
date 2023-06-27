@@ -47,7 +47,6 @@ const UploadForm = ({
       setLoading(false);
       if (data.statusCode === 201) {
         Swal.fire({
-          position: "top-end",
           icon: "success",
           title: "Your work has been saved",
           showConfirmButton: false,

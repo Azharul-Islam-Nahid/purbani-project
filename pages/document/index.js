@@ -66,7 +66,7 @@ const Document = () => {
       <Navbar />
       <div className="max-w-[800px] h-[80vh] w-full mx-auto flex flex-col justify-center">
         <div className="p-6 backdrop-blur-md rounded-3xl border-l-2 border-r-2 border-color_secondary">
-          <div className="text-3xl text-color_pink text-center mb-5 font-semibold">
+          <div className="text-3xl text-white text-center mb-5 font-semibold">
             Documents
           </div>
           <div className="flex flex-wrap gap-5 justify-center">

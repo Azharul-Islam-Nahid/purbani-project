@@ -65,7 +65,7 @@ const Department = () => {
   return (
     <DashboardLayout title="Document">
       <div className="p-10 max-w-[1250px] w-full h-full backdrop-blur-md rounded-md border-l-3 border-r-3 border-color_pink">
-        <div className="text-color_pink font-semibold text-3xl mb-3">
+        <div className="text-white font-semibold text-3xl mb-3">
           Department
         </div>
         <div className="flex flex-col h-full justify-around">

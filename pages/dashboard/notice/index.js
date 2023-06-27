@@ -32,7 +32,7 @@ const Notice = () => {
   return (
     <DashboardLayout>
       <div className="p-10 max-w-[1250px] mt-[100px] w-full h-[55vh] backdrop-blur-md border-l-3 border-r-3 border-color_pink rounded-md">
-        <div className="text-color_pink font-semibold text-3xl">
+        <div className="text-white font-semibold text-3xl">
           Notice
         </div>
         <div className="flex flex-col h-full justify-around">

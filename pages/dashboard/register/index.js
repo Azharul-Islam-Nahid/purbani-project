@@ -114,12 +114,15 @@ const Register = () => {
   return (
     <DashboardLayout>
       <div className="p-10 max-w-[1250px] w-full h-full backdrop-blur-md border-l-3 border-r-3 border-color_pink rounded-md mt-[100px]">
-        <div className="text-color_pink font-semibold text-3xl mb-3">
+        <div className="text-white font-semibold text-3xl mb-3">
           Create Account
         </div>
         <div className="w-full flex items-center justify-start">
           <div className="flex flex-col items-center bg-white rounded-lg w-[540px] h-full">
             <div className="p-10 w-full border-b-3 border-t-3 bg-white border-color_pink rounded-md">
+              <div className="text-color_pink font-semibold text-3xl">
+                Legacy
+              </div>
               <form onSubmit={handleRegistration}>
                 <div className="w-full ">
                   <div className="w-full mt-2 flex gap-8">
