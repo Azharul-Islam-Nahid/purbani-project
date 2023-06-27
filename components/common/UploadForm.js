@@ -1,6 +1,7 @@
 import { baseUrl } from "../../api/api";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { AiFillFilePdf } from "react-icons/ai";
 
 const UploadForm = ({
   url,
@@ -129,9 +130,16 @@ const UploadForm = ({
               >
                 <span className="text-sm">Choose PDF</span>
               </label>
-              <div className="my-2 text-black">
+              <div className="my-2 ml-1 text-black">
                 {formData?.pdfFile?.name && (
-                  <span>{formData?.pdfFile?.name}</span>
+                  <div className="flex items-center gap-x-2">
+                    <span className="text-color_dark_gray">
+                      {formData?.pdfFile?.name}
+                    </span>
+                    <span className="text-color_secondary text-xl">
+                      <AiFillFilePdf />
+                    </span>
+                  </div>
                 )}
               </div>
             </div>

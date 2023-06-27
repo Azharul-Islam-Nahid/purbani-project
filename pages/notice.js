@@ -5,12 +5,13 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { baseUrl, getHeaders } from "../api/api";
 import axios from "axios";
+import { BsEye } from "react-icons/bs";
 
 const Notice = () => {
   const { data: session } = useSession();
   const [notice, setNotice] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(notice);
+
   useEffect(() => {
     (async () => {
       try {
@@ -59,7 +60,15 @@ const Notice = () => {
                     <div className="text-white text-xl font-bold pt-4 min-h-[130px]">
                       {item.title}
                     </div>
-                    <div className="w-full inline-flex justify-end py-6">
+                    <div className="w-full inline-flex justify-end py-6 gap-x-3">
+                      <a
+                        target="_blank"
+                        rel="noreferrer"
+                        href={item?.readableLink}
+                        className="cursor-pointer text-2xl text-color_brand hover:text-white transition-all duration-200"
+                      >
+                        <BsEye />
+                      </a>
                       <a
                         href={item?.downloadableLink}
                         className="text-2xl text-color_brand hover:text-white transition-all duration-200"

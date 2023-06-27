@@ -1,5 +1,5 @@
-import { MdAccountBalance, MdSystemUpdateAlt } from "react-icons/md";
-import { TbFileCertificate, TbPigMoney } from "react-icons/tb";
+import { MdSystemUpdateAlt } from "react-icons/md";
+import { TbFileCertificate } from "react-icons/tb";
 import { useRouter } from "next/router";
 import { BsFillPersonVcardFill } from "react-icons/bs";
 import { FaRegHandshake, FaWpforms } from "react-icons/fa";

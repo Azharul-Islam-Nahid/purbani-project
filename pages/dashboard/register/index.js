@@ -120,8 +120,8 @@ const Register = () => {
         <div className="w-full flex items-center justify-start">
           <div className="flex flex-col items-center bg-white rounded-lg w-[540px] h-full">
             <div className="p-10 w-full border-b-3 border-t-3 bg-white border-color_pink rounded-md">
-              <div className="text-color_pink font-semibold text-3xl">
-                Legacy
+              <div className="text-color_pink font-semibold text-3xl italic">
+                PURBANI
               </div>
               <form onSubmit={handleRegistration}>
                 <div className="w-full ">

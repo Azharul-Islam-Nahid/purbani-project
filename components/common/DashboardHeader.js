@@ -3,12 +3,13 @@ import styles from "../../styles/Sidebar.module.css";
 import Image from "next/image";
 import logoPurbani from "../../public/assets/Logos/logo-purbani.png";
 import profileImg from "../../public/assets/images/profile.webp";
-import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { useRouter } from "next/router";
+import { MdAdminPanelSettings, MdOutlineAdminPanelSettings } from "react-icons/md";
+import { SiPhpmyadmin } from "react-icons/si";
 
 const DashboardHeader = ({ session }) => {
   const router = useRouter();
-
+  console.log(session);
   return (
     <div className={`${styles.dashboardHeader}`}>
       <div>
@@ -24,21 +25,12 @@ const DashboardHeader = ({ session }) => {
       </div>
       <div className="text-white">
         <div
-          className={`${styles.profileBtn} flex justify-center items-center gap-x-3 p-3`}
+          className={`${styles.profileBtn} flex justify-center items-center gap-x-1 py-2 px-6`}
         >
-          <div className="w-[30px] h-[30px] rounded-full border">
-            <Image
-              className="rounded-full"
-              src={profileImg}
-              width={100}
-              height={100}
-              alt=""
-            />
+          <div className="w-[30px] h-[30px] flex flex-col justify-center items-center text-2xl">
+            <SiPhpmyadmin />
           </div>
           <span className="uppercase">{session?.user?.role}</span>
-          <button>
-            <IoIosArrowDropdownCircle className="text-2xl" />
-          </button>
         </div>
       </div>
     </div>
