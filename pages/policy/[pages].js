@@ -1,4 +1,5 @@
 import { FaDownload } from "react-icons/fa";
+import { AiFillFilePdf } from "react-icons/ai";
 import { BsEye } from "react-icons/bs";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
@@ -15,21 +16,32 @@ const PageDetails = () => {
   const [policy, setPolicy] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  let url = `/policy/get-all-policy?department`;
+  if (
+    pages === "certification" ||
+    pages === "buyer" ||
+    pages === "forms" ||
+    pages === "agreements"
+  ) {
+    url = `/policy/get-all-policy?subDepartment`;
+  } else if (pages === "law") {
+    url = `/policy/get-all-policy?searchTerm`;
+  }
+
   useEffect(() => {
     (async () => {
       try {
-        const { data: data } = await axios.get(
-          `${baseUrl}/policy/get-all-policy?department=${pages}`,
-          { headers: getHeaders() }
-        );
+        const { data: data } = await axios.get(`${baseUrl}${url}=${pages}`, {
+          headers: getHeaders(),
+        });
         setLoading(false);
         setPolicy(data?.data?.data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
         setLoading(false);
       }
     })();
-  }, [pages]);
+  }, [pages, url]);
 
   if (loading) {
     return (
@@ -52,21 +64,22 @@ const PageDetails = () => {
             <div className="grid  grid-cols-1 bg-white rounded-lg w-[800px] py-20 px-10 h-full">
               {policy?.map((item, idx) => {
                 return (
-                  <div key={idx} className="flex justify-between flex-row">
-                    <div className="text-lg font-bold px-4">{` ${idx + 1}.  ${
-                      item.title
-                    }`}</div>
+                  <div key={idx} className="flex justify-between flex-row mb-2">
+                    <div className="text-lg font-bold px-4 flex gap-x-1 items-center">
+                      {idx + 1}. {item.title}
+                      <AiFillFilePdf className="text-color_brand" />
+                    </div>
                     <div className="flex gap-x-5">
                       <a
                         target="_blank"
                         rel="noreferrer"
                         href={item?.readableLink}
-                        className="cursor-pointer text-2xl text-color_brand hover:text-black transition-all duration-200"
+                        className="cursor-pointer text-2xl text-color_brand hover:text-white transition-all duration-200"
                       >
                         <BsEye />
                       </a>
                       <a
-                        className="text-2xl text-color_brand hover:text-black transition-all duration-200"
+                        className="text-2xl text-color_brand hover:text-white transition-all duration-200"
                         href={item?.downloadableLink}
                       >
                         <FaDownload />

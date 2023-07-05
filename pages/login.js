@@ -65,7 +65,7 @@ const Login = () => {
       <Navbar />
       <div>
         <div className="w-full flex items-center justify-center pt-28">
-          <div className="flex flex-col items-center bg-white rounded-lg w-[440px] h-full">
+          <div className="flex flex-col items-center border-b-3 border-t-3 bg-white border-color_pink rounded-lg w-[440px] h-full">
             <div className="pt-8 flex flex-col items-center">
               <Image
                 src={purbaniPurbani}
@@ -107,8 +107,9 @@ const Login = () => {
                 </div>
                 <div className="text-center py-2 text-rose-500 font-medium h-10">
                   <span
-                    className={`${incorrectCredentials === false ? "invisible" : "visible"
-                      } transition-all duration-300`}
+                    className={`${
+                      incorrectCredentials === false ? "invisible" : "visible"
+                    } transition-all duration-300`}
                   >
                     Your employee ID or password is incorrect
                   </span>
@@ -134,9 +135,7 @@ const Login = () => {
               </form>
               <p className="text-center pb-5">
                 {`Don't have account? `}{" "}
-                <button
-                  onClick={() => window.SignUPModal.showModal()}
-                >
+                <button onClick={() => window.SignUPModal.showModal()}>
                   <a className="text-color_pink">Sign Up</a>
                 </button>
               </p>

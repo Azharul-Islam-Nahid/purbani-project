@@ -1,46 +1,95 @@
-import React from "react";
-import Image from "next/image";
-import Image01 from "../../public/assets/images/Group-22.png";
-import Image02 from "../../public/assets/images/Group-23.png";
-import Image03 from "../../public/assets/images/Group-24.png";
-import Image04 from "../../public/assets/images/Group-25.png";
-import Image05 from "../../public/assets/images/Group-26.png";
+import { useRouter } from "next/router";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
-import Link from "next/link";
+import {
+  MdLaptopMac,
+  MdAccountBalance,
+  MdLocalFlorist,
+  MdOutlineAttachMoney,
+  MdLocalPolice,
+  MdOutlineAdminPanelSettings,
+} from "react-icons/md";
+import { RiAdminFill } from "react-icons/ri";
+import { TbPackageExport, TbPigMoney } from "react-icons/tb";
+import { SiHelpscout, SiUblockorigin } from "react-icons/si";
+import { AiOutlineAudit } from "react-icons/ai";
+import { FaMoneyCheckAlt, FaPaperPlane } from "react-icons/fa";
+import { GiLargeDress } from "react-icons/gi";
+
+const departments = [
+  {
+    name: "sustainability",
+    url: "/policy/sustainabilityMenu",
+    logo: <MdLocalFlorist />,
+  },
+  { name: "it", url: "/policy/it", logo: <MdLaptopMac /> },
+  { name: "hr", url: "/policy/hr", logo: <RiAdminFill /> },
+  { name: "accounts", url: "/policy/accounts", logo: <MdAccountBalance /> },
+  { name: "procurement", url: "/policy/procurement", logo: <TbPigMoney /> },
+  { name: "export", url: "/policy/export", logo: <TbPackageExport /> },
+  { name: "legal", url: "/policy/legal", logo: <SiUblockorigin /> },
+  {
+    name: "internal audit",
+    url: "/policy/internal audit",
+    logo: <AiOutlineAudit />,
+  },
+  {
+    name: "yarn sales",
+    url: "/policy/yarn sales",
+    logo: <MdOutlineAttachMoney />,
+  },
+  {
+    name: "co-ordination",
+    url: "/policy/co-ordination",
+    logo: <SiHelpscout />,
+  },
+  { name: "foreign", url: "/policy/foreign", logo: <FaPaperPlane /> },
+  { name: "local", url: "/policy/local", logo: <MdLocalPolice /> },
+  { name: "apparel", url: "/policy/apparel", logo: <GiLargeDress /> },
+  {
+    name: "admin",
+    url: "/policy/admin",
+    logo: <MdOutlineAdminPanelSettings />,
+  },
+  { name: "finance", url: "/policy/finance", logo: <FaMoneyCheckAlt /> },
+];
 
 const Department = () => {
+  const router = useRouter();
+
+  const handleClick = (url) => {
+    router.push(url);
+  };
+
   return (
     <Layout>
       <Navbar />
-      <div className="w-full h-full flex justify-center items-center mt-40">
-        <div className="w-1/2">
-          <div
-            className={`bg-white py-16 px-20 drop-shadow-lg rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-32 h-[55vh]`}
-          >
-            <button>
-              <Image src={Image01} alt="img" width={120} height={120} />
-            </button>
-            <Link className="hover:cursor-pointer" href="/policy/it">
-              <button>
-                <Image src={Image02} alt="img" width={120} height={120} />
-              </button>
-            </Link>
-            <Link className="hover:cursor-pointer" href="/policy/hr">
-              <button>
-                <Image src={Image03} alt="img" width={120} height={120} />
-              </button>
-            </Link>
-            <Link className="hover:cursor-pointer" href="/policy/accounce">
-              <button>
-                <Image src={Image04} alt="img" width={120} height={120} />
-              </button>
-            </Link>
-            <Link className="hover:cursor-pointer" href="/policy/procurement">
-              <button>
-                <Image src={Image05} alt="img" width={120} height={120} />
-              </button>
-            </Link>
+      <div className="max-w-[800px] h-[80vh] w-full mx-auto flex flex-col justify-center">
+        <div className="p-6 backdrop-blur-md rounded-3xl border-l-2 border-r-2 border-color_secondary">
+          <div className="text-3xl text-white text-center mb-5 font-semibold">
+            Policies
+          </div>
+          <div className="flex flex-wrap gap-5 justify-center">
+            {departments.map((item, index) => {
+              return (
+                <button
+                  key={index}
+                  onClick={() => handleClick(item.url)}
+                  className={`flex gap-x-5 items-center justify-between shadow-lg py-2 px-5 group hover:bg-color_brand duration-300  rounded mb-2 bg-white`}
+                >
+                  <div
+                    className={`font-bold text-xl capitalize group-hover:text-color_white duration-300 text-color_secondary`}
+                  >
+                    {item.name}
+                  </div>
+                  <div
+                    className={`text-3xl ext-color_pink group-hover:text-color_white duration-300 text-color_secondary`}
+                  >
+                    {item.logo}
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>

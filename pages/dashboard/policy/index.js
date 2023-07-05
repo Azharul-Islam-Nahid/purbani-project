@@ -1,52 +1,91 @@
+import { useEffect, useState } from "react";
 import DashboardLayout from "../../../components/common/DashboardLayout";
-import Image from "next/image";
-import Image01 from "../../../public/assets/images/Group-22.png";
-import Image02 from "../../../public/assets/images/Group-23.png";
-import Image03 from "../../../public/assets/images/Group-24.png";
-import Image04 from "../../../public/assets/images/Group-25.png";
-import Image05 from "../../../public/assets/images/Group-26.png";
-import { useRouter } from "next/router";
+import DepartmentList from "../../../components/common/DepartmentList";
+import UploadForm from "../../../components/common/UploadForm";
+import {
+  MdLaptopMac,
+  MdAccountBalance,
+  MdLocalPolice,
+  MdOutlineAttachMoney,
+  MdLocalFlorist,
+  MdOutlineAdminPanelSettings,
+} from "react-icons/md";
+import { RiAdminFill } from "react-icons/ri";
+import { TbPackageExport, TbPigMoney } from "react-icons/tb";
+import { SiUblockorigin, SiHelpscout } from "react-icons/si";
+import { AiOutlineAudit } from "react-icons/ai";
+import { FaPaperPlane, FaMoneyCheckAlt } from "react-icons/fa";
+import { GiLargeDress } from "react-icons/gi";
+
+const departments = [
+  { name: "sustainability", logo: <MdLocalFlorist /> },
+  { name: "it", logo: <MdLaptopMac /> },
+  { name: "hr", logo: <RiAdminFill /> },
+  { name: "accounts", logo: <MdAccountBalance /> },
+  { name: "procurement", logo: <TbPigMoney /> },
+  { name: "export", logo: <TbPackageExport /> },
+  { name: "legal", logo: <SiUblockorigin /> },
+  { name: "internal audit", logo: <AiOutlineAudit /> },
+  { name: "yarn sales", logo: <MdOutlineAttachMoney /> },
+  { name: "co-ordination", logo: <SiHelpscout /> },
+  { name: "foreign", logo: <FaPaperPlane /> },
+  { name: "local", logo: <MdLocalPolice /> },
+  { name: "apparel", logo: <GiLargeDress /> },
+  { name: "admin", logo: <MdOutlineAdminPanelSettings /> },
+  { name: "finance", logo: <FaMoneyCheckAlt /> },
+];
 
 const Department = () => {
-  const router = useRouter();
+  const [status, setStatus] = useState("loading");
+  const [formData, setFormData] = useState({});
+  const [department, setDepartment] = useState("sustainability");
+  const [title, setTitle] = useState("");
+  const [subDepartment, setSubDepartment] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // Simulating an asynchronous process
+    setTimeout(() => {
+      setStatus("authenticated");
+    }, 500);
+  }, []);
+
+  if (status !== "authenticated") {
+    return (
+      <DashboardLayout title="Document">
+        <div className="w-full h-[80vh] flex flex-col justify-center items-center">
+          <div className="flex justify-center relative">
+            <div className="custom-loader"></div>
+          </div>
+        </div>
+      </DashboardLayout>
+    );
+  }
 
   return (
     <DashboardLayout>
-      <div>
-        <div
-          className={`bg-white py-16 px-20 drop-shadow-lg rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-32 mt-20 lg:mt-44`}
-        >
-          <button>
-            <Image src={Image01} alt="img" width={120} height={120} />
-          </button>
-          <button
-            onClick={() =>
-              router.push(`/dashboard/policy/upload?department=it`)
-            }
-          >
-            <Image src={Image02} alt="img" width={120} height={120} />
-          </button>
-          <button
-            onClick={() =>
-              router.push("/dashboard/policy/upload?department=hr")
-            }
-          >
-            <Image src={Image03} alt="img" width={120} height={120} />
-          </button>
-          <button
-            onClick={() =>
-              router.push("/dashboard/policy/upload?department=accounce")
-            }
-          >
-            <Image src={Image04} alt="img" width={120} height={120} />
-          </button>
-          <button
-            onClick={() =>
-              router.push("/dashboard/document/upload?department=procurement")
-            }
-          >
-            <Image src={Image05} alt="img" width={120} height={120} />
-          </button>
+      <div className="p-10 max-w-[1250px] w-full h-full backdrop-blur-md border-l-3 border-r-3 border-color_pink rounded-md">
+        <div className="text-white font-semibold text-3xl mb-3">
+          Policy
+        </div>
+        <div className="flex flex-col h-full justify-around">
+          <DepartmentList
+            departments={departments}
+            setDepartment={setDepartment}
+          />
+          <UploadForm
+            url="/policy/upload-policy-pdf"
+            formData={formData}
+            setFormData={setFormData}
+            department={department}
+            setDepartment={setDepartment}
+            title={title}
+            setTitle={setTitle}
+            subDepartment={subDepartment}
+            setSubDepartment={setSubDepartment}
+            loading={loading}
+            setLoading={setLoading}
+          />
         </div>
       </div>
     </DashboardLayout>
