@@ -99,7 +99,7 @@ const Navbar = () => {
                 Policies
               </button>
               <button
-                // onClick={() => handleLinkClick("/login?redirect=/knowledge")}
+                onClick={() => handleLinkClick("/login?redirect=/knowledge")}
                 className="text-color_white hover:text-color_brand transition-all duration-500"
               >
                 Knowledge
