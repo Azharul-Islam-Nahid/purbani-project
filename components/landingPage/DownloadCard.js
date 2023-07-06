@@ -6,7 +6,7 @@ import DownloadPopUp from "../common/downloadPopUp";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-
+import Typewriter from 'typewriter-effect';
 const DownloadCard = () => {
   const [url, setUrl] = useState(true);
   const { data: session } = useSession();
@@ -26,7 +26,13 @@ const DownloadCard = () => {
           <Image src={purbaniLogo} alt="Logo" width={184} height={48} />
         </div>
         <div className="text-2xl text-white font-extrabold w-64 text-center">
-          OUR PURPOSE IS TO BUILD BETTER FUTURE TOGETHER
+          <Typewriter
+            options={{
+              strings: ['OUR PURPOSE IS TO BUILD BETTER FUTURE TOGETHER', 'OUR PURPOSE IS TO SUSTAINIBILITY BETTER FUTURE TOGETHER'],
+              autoStart: true,
+              loop: true,
+            }}
+          />
         </div>
         <div>
           <button

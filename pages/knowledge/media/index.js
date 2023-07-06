@@ -90,5 +90,5 @@ const KnowledgeMedia = () => {
         </Layout>
     );
 };
-
+KnowledgeMedia.auth = true
 export default KnowledgeMedia;

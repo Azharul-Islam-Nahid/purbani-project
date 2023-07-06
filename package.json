@@ -20,7 +20,8 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "react-pdf": "^7.1.2",
-    "sweetalert2": "^11.7.12"
+    "sweetalert2": "^11.7.12",
+    "typewriter-effect": "^2.20.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",
