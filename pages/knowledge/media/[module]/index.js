@@ -3,7 +3,8 @@ import React from 'react';
 const index = () => {
     return (
         <div className='m-auto pt-20'>
-            <div className='m-auto bg-white w-8/12 h-3/6  overflow-y-auto'>
+            <div className='border rounded-md m-auto bg-white w-8/12 h-96
+             overflow-y-scroll'>
                 <div className='ml-40 flex flex-col'>
                     <div>pdf shows here</div>
                     <div>
