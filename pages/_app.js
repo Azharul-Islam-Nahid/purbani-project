@@ -37,17 +37,17 @@ function Auth({ children, adminOnly }) {
     },
   });
 
-  // if (status === "loading") {
-    // return (
-    //   <Layout title="Loading">
-        // <div className="w-full h-screen flex flex-col justify-center items-center">
-        //   <div className="flex justify-center relative">
-        //     <div className="custom-loader"></div>
-        //   </div>
-        // </div>
-    //   </Layout>
-    // );
-  // }
+  if (status === "loading") {
+    return (
+      <Layout title="Loading">
+        <div className="w-full h-screen flex flex-col justify-center items-center">
+          <div className="flex justify-center relative">
+            <div className="custom-loader"></div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   if (adminOnly && !session?.user?.isAdmin) {
     if (typeof window !== "undefined") {

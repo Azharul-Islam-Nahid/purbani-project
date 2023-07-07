@@ -11,17 +11,18 @@ const Notice = () => {
   const { data: session } = useSession();
   const [notice, setNotice] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     (async () => {
       try {
         const { data: data } = await axios.get(
           `${baseUrl}/notice/get-all-notice?sortOrder=asc`,
           { headers: getHeaders() }
-        );
-        setLoading(false);
-        setNotice(data.data);
-      } catch (error) {
+          );
+          setLoading(false);
+          setNotice(data.data);
+        } catch (error) {
+        // console.log(error);
         setLoading(false);
       }
     })();

@@ -18,8 +18,8 @@ const Login = () => {
   const [incorrectCredentials, setIncorrectCredentials] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem("token") && session?.user?.accessToken) {
-      localStorage.setItem("token", session?.user?.accessToken);
+    if (!localStorage.getItem("x-auth-token") && session?.user?.accessToken) {
+      localStorage.setItem("x-auth-token", session?.user?.accessToken);
     }
     if (session?.user) {
       router.push(redirect || "/");
