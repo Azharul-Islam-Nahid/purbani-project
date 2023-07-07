@@ -18,7 +18,7 @@ export default NextAuth({
             password,
           }),
         });
-        console.log(res.refreshToken);
+
         const user = await res.json();
 
         if (res.ok && user) {
