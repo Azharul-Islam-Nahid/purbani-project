@@ -88,6 +88,7 @@ const Department = () => {
             setLoading={setLoading}
           />
         </div>
+        <p>dashboard page upload pdf</p>
       </div>
     </DashboardLayout>
   );

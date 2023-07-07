@@ -44,6 +44,7 @@ const Notice = () => {
     <Layout title="Notice">
       <div className="flex flex-col justify-between items-center h-screen overflow-y-auto">
         <Navbar />
+        
         <div className="w-full flex items-center justify-center mt-10">
           <div className="grid grid-cols-3 gap-20">
             {notice
