@@ -2,14 +2,12 @@ import React from "react";
 import styles from "../../styles/Sidebar.module.css";
 import Image from "next/image";
 import logoPurbani from "../../public/assets/Logos/logo-purbani.png";
-import profileImg from "../../public/assets/images/profile.webp";
 import { useRouter } from "next/router";
-import { MdAdminPanelSettings, MdOutlineAdminPanelSettings } from "react-icons/md";
 import { SiPhpmyadmin } from "react-icons/si";
 
 const DashboardHeader = ({ session }) => {
   const router = useRouter();
-  console.log(session);
+
   return (
     <div className={`${styles.dashboardHeader}`}>
       <div>

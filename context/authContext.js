@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(rootReducer, initialState);
   
   // useEffect(() => {
-  //   const token = localStorage.getItem("token");
+  //   const token = localStorage.getItem("x-auth-token");
   //   const user = JSON.parse(localStorage.getItem("user"));
   //   dispatch({
   //     type: "LOGIN",

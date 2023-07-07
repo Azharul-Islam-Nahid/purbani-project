@@ -6,23 +6,23 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const departments = [
-  "Export",
-  "Legal",
-  "Accounts",
-  "IT",
-  "HR",
-  "Internal Audit",
-  "Yarn Sales",
-  "Co-Ordination",
-  "Foreign",
-  "Local",
-  "Apparel",
-  "Admin",
-  "Finance",
-  "Sustainability",
+  "export",
+  "legal",
+  "accounts",
+  "it",
+  "hr",
+  "internal audit",
+  "yarn sales",
+  "co-ordination",
+  "foreign",
+  "local",
+  "apparel",
+  "admin",
+  "finance",
+  "sustainability",
 ];
 
-const roles = ["Admin", "User"];
+const roles = ["admin", "user"];
 
 const Register = () => {
   const [status, setStatus] = useState("loading");
@@ -60,7 +60,7 @@ const Register = () => {
     setLoading(true);
     setRegistrationFailed(false);
     const form = new FormData();
-    form.append("file", formData.image);
+    form.append("image", formData.image);
     form.append("name", name);
     form.append("employeeId", employeeId);
     form.append("role", role);
@@ -71,14 +71,14 @@ const Register = () => {
     axios
       .post(`${baseUrl}/users/create-user`, form, {
         headers: {
-          "x-auth-token": localStorage.getItem("token"),
+          "x-auth-token": localStorage.getItem("x-auth-token"),
         },
       })
       .then((response) => {
         const { data } = response;
         if (data?.statusCode === 201) {
           setLoading(false);
-          setRegistrationFailed(true);
+          setRegistrationFailed(false);
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -88,14 +88,10 @@ const Register = () => {
           });
         }
       })
-      .catch((error) => {
+      .catch(({ response }) => {
+        console.log(response);
         setLoading(false);
-        setRegistrationFailed(false);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
-        });
+        setRegistrationFailed(true);
       });
   };
 
@@ -154,7 +150,7 @@ const Register = () => {
                 <div className="relative flex justify-between gap-8 mt-6">
                   <div className="w-full">
                     <select
-                      className="appearance-none outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md bg-white cursor-pointer"
+                      className="appearance-none outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md bg-white cursor-pointer capitalize"
                       defaultValue={"Role"}
                       onChange={(e) => setRole(e.target.value)}
                     >
@@ -186,7 +182,7 @@ const Register = () => {
                   </div>
                   <div className="w-full">
                     <select
-                      className="appearance-none outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md bg-white cursor-pointer"
+                      className="appearance-none outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md bg-white cursor-pointer capitalize"
                       defaultValue={"Department"}
                       onChange={(e) => setDepartment(e.target.value)}
                     >

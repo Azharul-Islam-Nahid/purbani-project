@@ -41,7 +41,7 @@ const UploadForm = ({
     try {
       const { data: data } = await axios.post(`${baseUrl}${url}`, form, {
         headers: {
-          "x-auth-token": localStorage.getItem("token"),
+          "x-auth-token": localStorage.getItem("x-auth-token"),
         },
       });
 
