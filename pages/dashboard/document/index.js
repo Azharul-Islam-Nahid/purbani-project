@@ -13,7 +13,7 @@ import {
 import { RiAdminFill } from "react-icons/ri";
 import { TbPackageExport, TbPigMoney } from "react-icons/tb";
 import { SiUblockorigin, SiHelpscout } from "react-icons/si";
-import { AiOutlineAudit } from "react-icons/ai";
+import { AiFillFilePdf, AiOutlineAudit } from "react-icons/ai";
 import { FaPaperPlane, FaMoneyCheckAlt } from "react-icons/fa";
 import { GiLargeDress } from "react-icons/gi";
 
@@ -42,6 +42,9 @@ const Department = () => {
   const [subDepartment, setSubDepartment] = useState("");
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({});
+  const [allPdf, setAllPdf] = useState([]);
+
+
 
   useEffect(() => {
     // Simulating an asynchronous process
@@ -49,6 +52,22 @@ const Department = () => {
       setStatus("authenticated");
     }, 500);
   }, []);
+
+  useEffect(() => {
+
+    fetch('http://localhost:5000/api/v1/document/get-all-document', {
+      headers: {
+        authorization: `${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        setAllPdf(data);
+
+      })
+  }, [])
 
   if (status !== "authenticated") {
     return (
@@ -62,6 +81,7 @@ const Department = () => {
     );
   }
 
+
   return (
     <DashboardLayout title="Document">
       <div className="p-10 max-w-[1250px] w-full h-full backdrop-blur-md rounded-md border-l-3 border-r-3 border-color_pink">
@@ -74,21 +94,60 @@ const Department = () => {
             setDepartment={setDepartment}
             setSubDepartment={setSubDepartment}
           />
-          <UploadForm
-            url="/document/upload-document-pdf"
-            formData={formData}
-            setFormData={setFormData}
-            department={department}
-            setDepartment={setDepartment}
-            title={title}
-            setTitle={setTitle}
-            subDepartment={subDepartment}
-            setSubDepartment={setSubDepartment}
-            loading={loading}
-            setLoading={setLoading}
-          />
+          <div className="flex justify-between">
+            <UploadForm
+              url="/document/upload-document-pdf"
+              formData={formData}
+              setFormData={setFormData}
+              department={department}
+              setDepartment={setDepartment}
+              title={title}
+              setTitle={setTitle}
+              subDepartment={subDepartment}
+              setSubDepartment={setSubDepartment}
+              loading={loading}
+              setLoading={setLoading}
+            />
+            <div>
+              <div className="max-w-[500px] w-full flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
+                <div className="text-xl flex justify-start border-b w-full px-10 font-semibold text-color_pink uppercase text-left pb-1">
+                  {department}
+                </div>
+                <div className="px-10 w-full ">
+                  <div>
+
+                    <div className="overflow-x-auto">
+                      <table className="table w-full">
+                        <thead>
+                          <tr>
+                            <th></th>
+                            <th>PDF Name</th>
+                            <th></th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {/* {
+                            allPdf?.map((list, i) => <tr
+                              key={list._id}
+                              value={pdf}
+                              className="hover">
+                              console.log(allPdf)
+                              <th>{i + 1}</th>
+                              <td>{ }</td>
+                              <td>{ }</td>
+                              <td><label onClick={() => handleDeletePdf()} className="btn btn-xs btn-error">delete</label></td>
+                            </tr>)
+                          } */}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <p>dashboard page upload pdf</p>
       </div>
     </DashboardLayout>
   );
