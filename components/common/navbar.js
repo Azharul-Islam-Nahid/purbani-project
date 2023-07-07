@@ -16,7 +16,7 @@ const Navbar = () => {
   const { data: session } = useSession();
 
   const handleLogout = () => {
-    localStorage.clear("token");
+    localStorage.clear("x-auth-token");
     signOut({ callbackUrl: "/login" });
   };
 
