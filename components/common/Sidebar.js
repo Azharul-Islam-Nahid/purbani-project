@@ -4,9 +4,9 @@ import { AiOutlineLogout, AiOutlineUserAdd } from "react-icons/ai";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { SiKnowledgebase } from "react-icons/si";
 import { MdOutlinePolicy } from "react-icons/md";
+import {IoIosPeople} from 'react-icons/io'
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
-
 const routes = [
   {
     title: "Department",
@@ -32,6 +32,11 @@ const routes = [
     title: "Create Account",
     route: "/dashboard/register",
     Icon: <AiOutlineUserAdd />,
+  },
+  {
+    title: "All Employeers",
+    route: "/dashboard/employee",
+    Icon: <IoIosPeople />,
   },
 ];
 
