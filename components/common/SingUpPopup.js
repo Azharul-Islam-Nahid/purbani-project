@@ -6,7 +6,6 @@ import Image from 'next/image';
 const SingUpPopup = () => {
     return (
         <div>
-
             <dialog id="SignUPModal" className={`modal ${styles.customModal}`}>
                 <form method="dialog" className="modal-box">
                     <button className="absolute right-2 top-2">✕</button>

@@ -28,5 +28,5 @@ const Knowledge = () => {
 
     );
 };
-
+Knowledge.auth = true
 export default Knowledge;
