@@ -3,97 +3,115 @@ import DashboardLayout from '../../../components/common/DashboardLayout';
 import Image from 'next/image';
 import { FaUser } from 'react-icons/fa';
 import { AiFillEdit, AiOutlineDelete } from 'react-icons/ai'
-import { useSession } from 'next-auth/react';
 import { baseUrl, getHeaders } from '../../../api/api';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 // import {AiOutlineDelete} from 'react-icons/ai'
-const users = [
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-    {
-        name: "ABU Hanif Chowdhuri",
-        role: "Admin",
-    },
-]
+// const users = [
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+//     {
+//         name: "ABU Hanif Chowdhuri",
+//         role: "Admin",
+//     },
+// ]
 const Employeers = () => {
-    const [status, setStatus] = useState("loading");
-    const [user, setUser] = useState([]);
+    const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const [refetch, setRefetch] = useState(true)
     useEffect(() => {
         (async () => {
             try {
-                console.log("hello i'm inside")
                 const { data: data } = await axios.get(
                     `${baseUrl}/users/get-all-user`,
                     { headers: getHeaders() }
                 );
                 setLoading(false);
-                setUser(data.data);
+                setUsers(data.data.data);
             } catch (error) {
                 // console.log(error);
                 setLoading(false);
             }
         })();
-    }, []);
-    console.log("all user", user)
-    useEffect(() => {
-        // Simulating an asynchronous process
-        setTimeout(() => {
-            setStatus("authenticated");
-        }, 500);
-    }, []);
+    }, [refetch]);
 
-    if (status !== "authenticated") {
+    console.log(users[0])
+
+    const handleDeleteUser = async (id) => {
+        try {
+            const { data: data } = await axios.delete(
+                `${baseUrl}/users/delete-one-user/${id}`,
+                { headers: getHeaders() }
+            );
+            Swal.fire({
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+            setRefetch(!refetch)
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+            });
+        }
+
+    }
+
+    if (loading) {
         return (
             <DashboardLayout title="Document">
                 <div className="w-full flex h-[80vh] flex-col justify-center items-center">
@@ -104,11 +122,11 @@ const Employeers = () => {
             </DashboardLayout>
         );
     }
+
     return (
         <DashboardLayout>
-            <div className='mt-5'>
-                <table className='bg-dark_overlay min-w-[800px] text-center p-6'>
-                    {/* head */}
+            <div className='mt-5 bg-white text-black border-l-3 border-r-3 border-color_pink rounded-lg p-6'>
+                <table className='min-w-[800px] text-center '>
                     <thead>
                         <tr>
                             <th></th>
@@ -120,14 +138,14 @@ const Employeers = () => {
                     </thead>
                     <tbody>
                         {
-                            users.map((user, index) => <tr key={index} className='hover'>
+                            users.map((user, index) => <tr key={user._id} className='hover'>
                                 <th className='p-2'>{index + 1}</th>
                                 <td className='p-2'>{user.name}</td>
                                 <td className='p-2'>{user.role}</td>
                                 <td className='cursor-pointer p-2 '><div className='flex items-center gap-x-2'>
                                     <AiFillEdit /> <span>Edit</span>
                                 </div></td>
-                                <td className='cursor-pointer p-2 hover:text-red-500'>
+                                <td onClick={() => handleDeleteUser(user._id)} className='cursor-pointer p-2 hover:text-red-500'>
                                     <div className='flex items-center gap-x-2'>
                                         <AiOutlineDelete /> <span>Delete</span>
                                     </div>
@@ -143,4 +161,7 @@ const Employeers = () => {
     );
 };
 
+Employeers.auth = {
+    adminOnly: true
+}
 export default Employeers;
