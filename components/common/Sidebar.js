@@ -45,7 +45,7 @@ const Sidebar = () => {
   return (
     <aside>
       <div className={styles.sidebar}>
-        <div className={`${styles.sidebarTop} text-color_white text-2xl`}>
+        <div onClick={() => router.push('/dashboard')} className={`${styles.sidebarTop} text-color_white text-2xl cursor-pointer`}>
           <h2>Admin</h2> <h2>Dashboard</h2>
         </div>
         <div

@@ -72,6 +72,7 @@ const Department = () => {
           <DepartmentList
             departments={departments}
             setDepartment={setDepartment}
+            department = {department}
           />
           <UploadForm
             url="/document/upload-document-pdf"

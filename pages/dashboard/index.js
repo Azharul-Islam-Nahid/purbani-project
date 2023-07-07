@@ -69,6 +69,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div
+              onClick={() => router.push("/dashboard/knowledge")}
               className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
             >
               <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
