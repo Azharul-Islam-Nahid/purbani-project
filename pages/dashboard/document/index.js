@@ -16,6 +16,8 @@ import { SiUblockorigin, SiHelpscout } from "react-icons/si";
 import { AiFillFilePdf, AiOutlineAudit } from "react-icons/ai";
 import { FaPaperPlane, FaMoneyCheckAlt } from "react-icons/fa";
 import { GiLargeDress } from "react-icons/gi";
+import axios from "axios";
+import { baseUrl, getHeaders } from "../../../api/api";
 
 const departments = [
   { name: "sustainability", logo: <MdLocalFlorist /> },
@@ -54,20 +56,29 @@ const Department = () => {
   }, []);
 
   useEffect(() => {
+    (async () => {
+      try {
+        const { data: data } = await axios.get(
+          `${baseUrl}/document/get-all-document`,
+          { headers: getHeaders() }
+        );
+        console.log(data);
+        setLoading(false);
+        setAllPdf(data.data.data);
 
-    fetch('http://localhost:5000/api/v1/document/get-all-document', {
-      headers: {
-        authorization: `${localStorage.getItem('token')}`
+
       }
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(data => {
-        setAllPdf(data);
+      catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
 
-      })
-  }, [])
+
+    })();
+  }, []);
+
+  console.log(allPdf);
+
 
   if (status !== "authenticated") {
     return (
@@ -92,10 +103,10 @@ const Department = () => {
           <DepartmentList
             departments={departments}
             setDepartment={setDepartment}
-            department = {department}
+            department={department}
             setSubDepartment={setSubDepartment}
           />
-          <div className="flex justify-between">
+          <div className="flex gap-x-2 justify-between">
             <UploadForm
               url="/document/upload-document-pdf"
               formData={formData}
@@ -109,40 +120,29 @@ const Department = () => {
               loading={loading}
               setLoading={setLoading}
             />
-            <div>
-              <div className="max-w-[500px] w-full flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
+            <div className="flex-1">
+              <div className="max-w-[500px] flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
                 <div className="text-xl flex justify-start border-b w-full px-10 font-semibold text-color_pink uppercase text-left pb-1">
                   {department}
                 </div>
-                <div className="px-10 w-full ">
-                  <div>
+                <div className="overflow-x-auto">
+                  <div className="text-black table w-full">
 
-                    <div className="overflow-x-auto">
-                      <table className="table w-full">
-                        <thead>
-                          <tr>
-                            <th></th>
-                            <th>PDF Name</th>
-                            <th></th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {/* {
-                            allPdf?.map((list, i) => <tr
-                              key={list._id}
-                              value={pdf}
-                              className="hover">
-                              console.log(allPdf)
-                              <th>{i + 1}</th>
-                              <td>{ }</td>
-                              <td>{ }</td>
-                              <td><label onClick={() => handleDeletePdf()} className="btn btn-xs btn-error">delete</label></td>
-                            </tr>)
-                          } */}
-                        </tbody>
-                      </table>
-                    </div>
+
+
+                    {
+                      allPdf?.map((list, i) => <div
+                        key={list._id}
+                        className="hover">
+                        <div className="flex justify-end">
+                          <div className="flex gap-x-3 justify-between">
+                            <div className="mr-2">{i + 1}</div>
+                            <div>{list?.title}</div>
+                          </div>
+                          <div><label onClick={() => handleDeletePdf()} className="btn btn-xs btn-error"> delete</label></div>
+                        </div>
+                      </div>)
+                    }
                   </div>
                 </div>
               </div>
