@@ -13,7 +13,7 @@ import {
 import { RiAdminFill } from "react-icons/ri";
 import { TbPackageExport, TbPigMoney } from "react-icons/tb";
 import { SiUblockorigin, SiHelpscout } from "react-icons/si";
-import { AiFillFilePdf, AiOutlineAudit } from "react-icons/ai";
+import { AiFillFilePdf, AiOutlineAudit, AiOutlineDelete } from "react-icons/ai";
 import { FaPaperPlane, FaMoneyCheckAlt } from "react-icons/fa";
 import { GiLargeDress } from "react-icons/gi";
 import axios from "axios";
@@ -125,26 +125,22 @@ const Department = () => {
                 <div className="text-xl flex justify-start border-b w-full px-10 font-semibold text-color_pink uppercase text-left pb-1">
                   {department}
                 </div>
-                <div className="overflow-x-auto">
-                  <div className="text-black table w-full">
-
-
-
-                    {
-                      allPdf?.map((list, i) => <div
-                        key={list._id}
-                        className="hover">
-                        <div className="flex justify-end">
-                          <div className="flex gap-x-3 justify-between">
-                            <div className="mr-2">{i + 1}</div>
-                            <div>{list?.title}</div>
-                          </div>
-                          <div><label onClick={() => handleDeletePdf()} className="btn btn-xs btn-error"> delete</label></div>
+                <div className="text-black  w-full">
+                  {
+                    allPdf?.map((list, i) => <div
+                      key={list._id}
+                      className="hover">
+                      <div className="mx-auto w-4/5 flex justify-between">
+                        <div className="flex gap-x-2">
+                          <div className="mr-2">{i + 1}</div>
+                          <div>{list?.title}</div>
                         </div>
-                      </div>)
-                    }
-                  </div>
+                        <div><label onClick={() => handleDeletePdf()} className="btn btn-xs btn-error"><AiOutlineDelete /></label></div>
+                      </div>
+                    </div>)
+                  }
                 </div>
+
               </div>
             </div>
           </div>
