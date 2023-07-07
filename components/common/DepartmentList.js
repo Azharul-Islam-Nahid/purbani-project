@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
-const DepartmentList = ({ departments, setDepartment, setSubDepartment }) => {
-  const [selected, setSelected] = useState("sustainability");
+const DepartmentList = ({
+  departments,
+  department,
+  setDepartment,
+  setSubDepartment,
+}) => {
+  const [selected, setSelected] = useState(department);
 
   const handleClick = (name) => {
     if (name !== "sustainability") setSubDepartment("");

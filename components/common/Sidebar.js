@@ -4,9 +4,9 @@ import { AiOutlineLogout, AiOutlineUserAdd } from "react-icons/ai";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { SiKnowledgebase } from "react-icons/si";
 import { MdOutlinePolicy } from "react-icons/md";
+import {IoIosPeople} from 'react-icons/io'
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
-
 const routes = [
   {
     title: "Department",
@@ -33,6 +33,11 @@ const routes = [
     route: "/dashboard/register",
     Icon: <AiOutlineUserAdd />,
   },
+  {
+    title: "All Employeers",
+    route: "/dashboard/employee",
+    Icon: <IoIosPeople />,
+  },
 ];
 
 const Sidebar = () => {
@@ -45,7 +50,7 @@ const Sidebar = () => {
   return (
     <aside>
       <div className={styles.sidebar}>
-        <div className={`${styles.sidebarTop} text-color_white text-2xl`}>
+        <div onClick={() => router.push('/dashboard')} className={`${styles.sidebarTop} text-color_white text-2xl cursor-pointer`}>
           <h2>Admin</h2> <h2>Dashboard</h2>
         </div>
         <div
