@@ -28,6 +28,7 @@ const Notice = () => {
     })();
   }, []);
 
+  console.log(notice)
   if (loading) {
     return (
       <Layout title="Loading">
