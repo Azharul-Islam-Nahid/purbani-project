@@ -18,7 +18,7 @@ export default NextAuth({
             password,
           }),
         });
-        console.log(res.refreshToken)
+        console.log(res.refreshToken);
         const user = await res.json();
 
         if (res.ok && user) {
@@ -37,6 +37,8 @@ export default NextAuth({
     async session({ session, token }) {
       if (token?._id) session.user._id = token._id;
       if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
+      if (token?.knowledgeAccesses)
+        session.user.knowledgeAccesses = token.knowledgeAccesses;
       if (token?.accessToken) session.user.accessToken = token.accessToken;
       if (token?.profileImage) session.user.profileImage = token.profileImage;
       if (token?.profileImage) session.user.image = token.profileImage;
