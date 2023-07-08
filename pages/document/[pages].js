@@ -73,12 +73,12 @@ const PageDetails = () => {
                         target="_blank"
                         rel="noreferrer"
                         href={item?.readableLink}
-                        className="cursor-pointer text-2xl text-color_brand hover:text-white transition-all duration-200"
+                        className="cursor-pointer text-2xl text-color_brand hover:text-black transition-all duration-200"
                       >
                         <BsEye />
                       </a>
                       <a
-                        className="text-2xl text-color_brand hover:text-white transition-all duration-200"
+                        className="text-2xl text-color_brand hover:text-black transition-all duration-200"
                         href={item?.downloadableLink}
                       >
                         <FaDownload />

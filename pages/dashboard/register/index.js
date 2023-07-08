@@ -20,6 +20,8 @@ const departments = [
   "admin",
   "finance",
   "sustainability",
+  "commercial",
+  "import & banking",
 ];
 
 const roles = ["admin", "user"];
