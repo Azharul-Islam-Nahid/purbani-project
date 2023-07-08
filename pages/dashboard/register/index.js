@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { baseUrl } from "../../../api/api";
 import DashboardLayout from "../../../components/common/DashboardLayout";
-import { useRouter } from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -28,7 +27,6 @@ const roles = ["admin", "user"];
 
 const Register = () => {
   const [status, setStatus] = useState("loading");
-  const router = useRouter();
   const [registrationFailed, setRegistrationFailed] = useState(false);
   const [formData, setFormData] = useState({});
   const [name, setName] = useState("");
