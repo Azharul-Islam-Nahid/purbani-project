@@ -42,7 +42,6 @@ const Employeers = () => {
             });
             setRefetch(!refetch)
         } catch (error) {
-            console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -73,22 +72,26 @@ const Employeers = () => {
                             <th></th>
                             <th>Name</th>
                             <th>Role</th>
+                            <th>Knowledge</th>
                             <th>Action</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            users.map((user, index) => <tr key={user._id} className='hover'>
+                            users && 
+                            users.map((user, index) => <tr key={user?._id} className='hover'>
                                 <th className='p-2'>{index + 1}</th>
-                                <td className='p-2'>{user.name}</td>
-                                <td className='p-2'>{user.role}</td>
+                                <td className='p-2'>{user?.name}</td>
+                                <td className='p-2'>{user?.role}</td>
+                                <td className='p-2'>{user.knowledgeAccesses.length > 0 ? "Yes" : "No"}</td>
+
                                 <td onClick={() => {
-                                    router.push(`/dashboard/employee/${user._id}`)
+                                    router.push(`/dashboard/employee/${user?._id}`)
                                 }} className='cursor-pointer p-2 '><div className='flex items-center gap-x-2'>
                                     <AiFillEdit /> <span>Edit</span>
                                 </div></td>
-                                <td onClick={() => handleDeleteUser(user._id)} className='cursor-pointer p-2 hover:text-red-500'>
+                                <td onClick={() => handleDeleteUser(user?._id)} className='cursor-pointer p-2 hover:text-red-500'>
                                     <div className='flex items-center gap-x-2'>
                                         <AiOutlineDelete /> <span>Delete</span>
                                     </div>
