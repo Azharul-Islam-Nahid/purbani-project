@@ -1,5 +1,5 @@
 import axios from "axios";
-const pb = "development";
+const pb = "production";
 export const baseUrl =
   pb === "production"
     ? "https://purbani-dms-backend.vercel.app/api/v1"
