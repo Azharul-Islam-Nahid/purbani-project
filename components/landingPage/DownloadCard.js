@@ -26,13 +26,16 @@ const DownloadCard = () => {
           <Image src={purbaniLogo} alt="Logo" width={184} height={48} />
         </div>
         <div className="text-2xl text-white font-extrabold w-64 text-center">
-          <Typewriter
-            options={{
-              strings: ['OUR PURPOSE IS TO BUILD BETTER FUTURE TOGETHER', 'OUR PURPOSE IS TO SUSTAINIBILITY BETTER FUTURE TOGETHER'],
-              autoStart: true,
-              loop: true,
-            }}
-          />
+          OUR PURPOSE IS TO BUILD A
+          <div className="text-color_pink">
+            <Typewriter
+              options={{
+                strings: ['BETTER FUTURE TOGETHER', 'SUSTAINABLE BETTER FUTURE TOGETHER'],
+                autoStart: true,
+                loop: true,
+              }}
+            />
+          </div>
         </div>
         <div>
           <button
