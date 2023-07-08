@@ -13,10 +13,10 @@ import {
 import { RiAdminFill } from "react-icons/ri";
 import { TbPackageExport, TbPigMoney } from "react-icons/tb";
 import { SiUblockorigin, SiHelpscout } from "react-icons/si";
-import { AiOutlineAudit } from "react-icons/ai";
+import { AiOutlineAudit, AiFillBank } from "react-icons/ai";
 import { FaPaperPlane, FaMoneyCheckAlt } from "react-icons/fa";
 import { GiLargeDress } from "react-icons/gi";
-
+import {FaMoneyBillWaveAlt} from 'react-icons/fa'
 const departments = [
   { name: "sustainability", logo: <MdLocalFlorist /> },
   { name: "it", logo: <MdLaptopMac /> },

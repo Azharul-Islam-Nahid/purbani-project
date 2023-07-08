@@ -6,66 +6,10 @@ import { AiFillEdit, AiOutlineDelete } from 'react-icons/ai'
 import { baseUrl, getHeaders } from '../../../api/api';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-// import {AiOutlineDelete} from 'react-icons/ai'
-// const users = [
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-//     {
-//         name: "ABU Hanif Chowdhuri",
-//         role: "Admin",
-//     },
-// ]
+import { useRouter } from 'next/router';
+
 const Employeers = () => {
+    const router = useRouter()
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [refetch, setRefetch] = useState(true)
@@ -84,9 +28,6 @@ const Employeers = () => {
             }
         })();
     }, [refetch]);
-
-    console.log(users[0])
-
     const handleDeleteUser = async (id) => {
         try {
             const { data: data } = await axios.delete(
@@ -142,7 +83,9 @@ const Employeers = () => {
                                 <th className='p-2'>{index + 1}</th>
                                 <td className='p-2'>{user.name}</td>
                                 <td className='p-2'>{user.role}</td>
-                                <td className='cursor-pointer p-2 '><div className='flex items-center gap-x-2'>
+                                <td onClick={() => {
+                                    router.push(`/dashboard/employee/${user._id}`)
+                                }} className='cursor-pointer p-2 '><div className='flex items-center gap-x-2'>
                                     <AiFillEdit /> <span>Edit</span>
                                 </div></td>
                                 <td onClick={() => handleDeleteUser(user._id)} className='cursor-pointer p-2 hover:text-red-500'>
