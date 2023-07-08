@@ -37,7 +37,7 @@ const departments = [
   { name: "admin", logo: <MdOutlineAdminPanelSettings /> },
   { name: "finance", logo: <FaMoneyCheckAlt /> },
   { name: "commercial", logo: <FaMoneyCheckAlt /> },
-  { name: "import & banking", logo: <FaMoneyCheckAlt /> },
+  { name: "import-banking", logo: <FaMoneyCheckAlt /> },
 ];
 
 const Department = () => {

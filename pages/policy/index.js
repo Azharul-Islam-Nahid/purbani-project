@@ -52,6 +52,12 @@ const departments = [
     logo: <MdOutlineAdminPanelSettings />,
   },
   { name: "finance", url: "/policy/finance", logo: <FaMoneyCheckAlt /> },
+  { name: "commercial", url: "/policy/commercial", logo: <FaMoneyCheckAlt /> },
+  {
+    name: "import-banking",
+    url: "/policy/import-banking",
+    logo: <FaMoneyCheckAlt />,
+  },
 ];
 
 const Department = () => {
