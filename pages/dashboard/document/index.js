@@ -18,6 +18,7 @@ import { FaPaperPlane, FaMoneyCheckAlt } from "react-icons/fa";
 import { GiLargeDress } from "react-icons/gi";
 import axios from "axios";
 import { baseUrl, getHeaders } from "../../../api/api";
+import Swal from "sweetalert2";
 
 const departments = [
   { name: "sustainability", logo: <MdLocalFlorist /> },
@@ -35,8 +36,6 @@ const departments = [
   { name: "apparel", logo: <GiLargeDress /> },
   { name: "admin", logo: <MdOutlineAdminPanelSettings /> },
   { name: "finance", logo: <FaMoneyCheckAlt /> },
-  { name: "commercial", logo: <FaMoneyCheckAlt /> },
-  { name: "import & banking", logo: <FaMoneyCheckAlt /> },
 ];
 
 const Department = () => {
@@ -47,6 +46,7 @@ const Department = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({});
   const [allPdf, setAllPdf] = useState([]);
+  const [refetch, setRefetch] = useState(true);
 
 
 
@@ -61,10 +61,9 @@ const Department = () => {
     (async () => {
       try {
         const { data: data } = await axios.get(
-          `${baseUrl}/document/get-all-document`,
+          `${baseUrl}/document/get-all-document?department=${department}`,
           { headers: getHeaders() }
         );
-        console.log(data);
         setLoading(false);
         setAllPdf(data.data.data);
 
@@ -77,9 +76,31 @@ const Department = () => {
 
 
     })();
-  }, []);
+  }, [department, refetch]);
 
-  console.log(allPdf);
+  const handleDeletePdf = async (id) => {
+    try {
+      const { data: data } = await axios.delete(
+        `${baseUrl}/document/delete-one-document/${id}`,
+        { headers: getHeaders() }
+      );
+      Swal.fire({
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setRefetch(!refetch)
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+    }
+
+  }
 
 
   if (status !== "authenticated") {
@@ -108,7 +129,7 @@ const Department = () => {
             department={department}
             setSubDepartment={setSubDepartment}
           />
-          <div className="flex gap-x-2 justify-between">
+          <div className="h-full flex gap-x-2 justify-between">
             <UploadForm
               url="/document/upload-document-pdf"
               formData={formData}
@@ -127,7 +148,7 @@ const Department = () => {
                 <div className="text-xl flex justify-start border-b w-full px-10 font-semibold text-color_pink uppercase text-left pb-1">
                   {department}
                 </div>
-                <div className="text-black  w-full">
+                <div className="py-5 text-black  w-full">
                   {
                     allPdf?.map((list, i) => <div
                       key={list._id}
@@ -137,7 +158,7 @@ const Department = () => {
                           <div className="mr-2">{i + 1}</div>
                           <div>{list?.title}</div>
                         </div>
-                        <div><label onClick={() => handleDeletePdf()} className="btn btn-xs btn-error"><AiOutlineDelete /></label></div>
+                        <div><label onClick={() => handleDeletePdf(list?._id)} className="cursor-pointer"><AiOutlineDelete /></label></div>
                       </div>
                     </div>)
                   }
