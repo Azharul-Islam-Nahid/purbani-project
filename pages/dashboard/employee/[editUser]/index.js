@@ -20,6 +20,8 @@ const departments = [
     "admin",
     "finance",
     "sustainability",
+    "commercial",
+    "import-banking"
 ];
 const allRole = [
     "admin",
@@ -50,7 +52,7 @@ const EditUser = () => {
                 setLoading(false)
             }
         })()
-    }, [])
+    }, [id])
 
     const handleUpdateUser = async (e) => {
         e.preventDefault()
@@ -140,14 +142,14 @@ const EditUser = () => {
                             <label className='font-semibold cursor-pointer' htmlFor='department'>Department</label>
                             <select onChange={(e) => setDepartment(e.target.value)} defaultValue={user?.department} name='department' className='border-2 border-color-pink p-2 outline-none'>
                                 <option defaultChecked value={user?.department}>{user?.department}</option>
-                                {departments.map((department, index) => <option key={index} value={department}>{department}</option>)}
+                                {departments?.map((department, index) => <option key={index} value={department}>{department}</option>)}
                             </select>
                         </div>
                         <div className='flex flex-col'>
                             <label className='font-semibold cursor-pointer' htmlFor='role'>Role</label>
                             <select onChange={(e) => setRole(e.target.value)} id='role' name='role' className='border-2 border-color-pink p-2 outline-none'>
                                 <option defaultChecked value={user?.role}>{user?.role}</option>
-                                {allRole.map((role, index) => <option key={index} value={role}  >{role}</option>)}
+                                {allRole?.map((role, index) => <option key={index} value={role}  >{role}</option>)}
                             </select>
                         </div>
                         <div className='flex flex-col'>
@@ -157,12 +159,12 @@ const EditUser = () => {
                             </select>
                         </div>
                         {
-                            user.knowledgeAccesses.length > 0 &&
+                            user?.knowledgeAccesses?.length > 0 &&
                             <div>
                                 <h4 className='font-semibold'>Accessed</h4>
                                 <ul>
                                     {
-                                        user.knowledgeAccesses.map((knw, index) => <li key={index}>{knw}</li>)
+                                        user?.knowledgeAccesses?.map((knw, index) => <li key={index}>{knw}</li>)
                                     }
                                 </ul>
                             </div>
