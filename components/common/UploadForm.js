@@ -14,7 +14,6 @@ const UploadForm = ({
   setSubDepartment,
   loading,
   setLoading,
-  video
 }) => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -24,15 +23,6 @@ const UploadForm = ({
       pdfFile: file,
     }));
   };
-  const handleVideoFileChange = (e) => {
-    const file = e.target.files[0];
-
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      videoFile: file,
-    }));
-  };
-
   const handleOptionChange = (e) => {
     setSubDepartment(e.target.value);
   };
@@ -152,36 +142,6 @@ const UploadForm = ({
                 )}
               </div>
             </div>
-            {
-              video &&
-              <div className="relative mt-7">
-                <input
-                  className="hidden"
-                  type="file"
-                  name="videoFile"
-                  id="video"
-                  onChange={handleVideoFileChange}
-                />
-                <label
-                  htmlFor="video"
-                  className="bg-white text-gray-500 border border-gray-300 px-4 py-2 rounded-md cursor-pointer hover:bg-gray-100"
-                >
-                  <span className="text-sm">Choose Video</span>
-                </label>
-                <div className="my-2 ml-1 text-black">
-                  {formData?.videoFile?.name && (
-                    <div className="flex items-center gap-x-2">
-                      <span className="text-color_dark_gray">
-                        {formData?.videoFile?.name}
-                      </span>
-                      <span className="text-color_secondary text-xl">
-                        {/* <AiFillFilePdf /> */}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            }
           </div>
           <div className="py-8 w-full flex justify-end">
             {loading ? (

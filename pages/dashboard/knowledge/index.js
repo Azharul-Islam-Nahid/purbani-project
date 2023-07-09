@@ -6,20 +6,21 @@ import { MdLaptopMac, MdAccountBalance, MdLocalFlorist } from "react-icons/md";
 import { RiAdminFill } from "react-icons/ri";
 import { TbPackageExport, TbPigMoney } from "react-icons/tb";
 import { SiUblockorigin, SiHelpscout } from "react-icons/si";
+import UploadKnowledge from "../../../components/common/UploadKnowledge";
 
 const departments = [
-  { name: "basis", logo: <MdLocalFlorist /> },
-  { name: "abap", logo: <MdLaptopMac /> },
-  { name: "fico", logo: <RiAdminFill /> },
-  { name: "pm", logo: <MdAccountBalance /> },
-  { name: "hcm", logo: <TbPigMoney /> },
-  { name: "sd", logo: <TbPackageExport /> },
-  { name: "mm", logo: <SiUblockorigin /> },
+  { name: "sap", logo: <MdLocalFlorist /> },
+  // { name: "abap", logo: <MdLaptopMac /> },
+  // { name: "fico", logo: <RiAdminFill /> },
+  // { name: "pm", logo: <MdAccountBalance /> },
+  // { name: "hcm", logo: <TbPigMoney /> },
+  // { name: "sd", logo: <TbPackageExport /> },
+  // { name: "mm", logo: <SiUblockorigin /> },
 ];
 
 const KnowledgeDashboard = () => {
   const [status, setStatus] = useState("loading");
-  const [department, setDepartment] = useState("basis");
+  const [department, setDepartment] = useState("sap");
   const [subDepartment, setSubDepartment] = useState("");
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
@@ -55,17 +56,20 @@ const KnowledgeDashboard = () => {
             setSubDepartment={setSubDepartment}
             department={department}
           />
-          <UploadForm
-            url="/knowledge/upload-document-pdf"
+          <UploadKnowledge
+            url="/knowledge/upload-knowledge-pdf"
             formData={formData}
             setFormData={setFormData}
-            department={department}
-            setDepartment={setDepartment}
+            department={department} 
+            // setDepartment={setDepartment}
             title={title}
-            setTitle={setTitle}
+            setTitle={setTitle} 
             loading={loading}
             setLoading={setLoading}
             video={true}
+            subDepartment={subDepartment}
+            setSubDepartment={setSubDepartment}
+            
           />
         </div>
       </div>
