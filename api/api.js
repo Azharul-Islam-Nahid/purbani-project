@@ -12,6 +12,11 @@ export const getHeaders = () => ({
   "x-auth-token": `${localStorage?.getItem("x-auth-token")}`,
 });
 
+export const getHeadersMultiPart = () => ({
+  "Content-Type": "multipart/form-data",
+  "x-auth-token": `${localStorage.getItem("x-auth-token")}`,
+});
+
 export const getLoggedInUser = async () => {
   try {
     const data = await axios.get(baseUrl + "/users/get-logged-in-user", {
@@ -24,11 +29,6 @@ export const getLoggedInUser = async () => {
     return handleError(error);
   }
 };
-
-export const getHeadersMultiPart = () => ({
-  "Content-Type": "multipart/form-data",
-  "x-auth-token": `${localStorage.getItem("x-auth-token")}`,
-});
 
 const getQueryString = (query = {}) => {
   let queryString = "?";

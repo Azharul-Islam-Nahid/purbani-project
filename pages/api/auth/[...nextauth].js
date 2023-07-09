@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { baseUrl } from "../../../api/api";
 
 export default NextAuth({
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: "348798r7ffhhfkdf",
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -32,6 +32,7 @@ export default NextAuth({
   },
   callbacks: {
     async jwt({ token, user }) {
+      console.log("user.............. ", user, token);
       return { ...token, ...user };
     },
     async session({ session, token }) {
