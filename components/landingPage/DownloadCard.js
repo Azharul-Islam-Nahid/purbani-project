@@ -30,7 +30,7 @@ const DownloadCard = () => {
           <div className="text-color_pink">
             <Typewriter
               options={{
-                strings: ['BETTER FUTURE TOGETHER', 'SUSTAINABLE BETTER FUTURE TOGETHER'],
+                strings: ['BETTER FUTURE TOGETHER', 'SUSTAINABLE FUTURE TOGETHER'],
                 autoStart: true,
                 loop: true,
               }}
