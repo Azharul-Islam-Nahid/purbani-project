@@ -28,6 +28,7 @@ const Employeers = () => {
             }
         })();
     }, [refetch]);
+    console.log("all users", users)
     const handleDeleteUser = async (id) => {
         try {
             const { data: data } = await axios.delete(

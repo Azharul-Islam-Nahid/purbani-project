@@ -37,7 +37,7 @@ const EditUser = () => {
     const [user, setUser] = useState({})
     const [department, setDepartment] = useState(user?.department)
     const [role, setRole] = useState(user?.role)
-    const [knowledgeAccesses, setKnowlege] = useState()
+    const [knowledgeAccesses, setKnowlege] = useState('basis')
     useEffect(() => {
         (async () => {
             try {
@@ -53,25 +53,20 @@ const EditUser = () => {
             }
         })()
     }, [id])
-
+    if (knowledgeAccesses !== "" || !user.knowledgeAccesses.includes(knowledgeAccesses)) {
+        // updateUser.knowledgeAccesses = knowledgeAccesses
+        console.log("hellow", knowledgeAccesses)
+        console.log(user.knowledgeAccesses.includes(knowledgeAccesses))
+    }
     const handleUpdateUser = async (e) => {
         e.preventDefault()
         setLoading(true)
         const form = e.target
         const name = form.name.value
-        const emplyeeid = form.emplyeeid.value
-        const email = form.email.value
         const password = form.password.value
-        console.log(form.department.value)
         let updateUser = {}
         if (name !== user?.name) {
             updateUser.name = name
-        }
-        if (emplyeeid !== user?.emplyeeid) {
-            updateUser.emplyeeid = emplyeeid
-        }
-        if (email !== user?.email) {
-            updateUser.email = email
         }
         if (password !== '') {
             updateUser.password = password
@@ -82,8 +77,9 @@ const EditUser = () => {
         if (role !== user?.role || role !== "") {
             updateUser.role = role
         }
-        if (knowledgeAccesses !== user?.knowledgeAccesses.includes(knowledgeAccesses) && knowledgeAccesses !== "") {
+        if (knowledgeAccesses !== "" || !user.knowledgeAccesses.includes(knowledgeAccesses)) {
             updateUser.knowledgeAccesses = knowledgeAccesses
+            console.log("hellow", knowledgeAccesses)
         }
         try {
             const response = await axios.put(`${baseUrl}/users/update-one-user/${id}`, updateUser,
@@ -105,7 +101,6 @@ const EditUser = () => {
             });
         }
     }
-    console.log(user)
     if (loading) {
         return (
             <DashboardLayout title="Document">
@@ -125,14 +120,6 @@ const EditUser = () => {
                         <div className='flex flex-col'>
                             <label className='font-semibold cursor-pointer' htmlFor='name'>Name</label>
                             <input id='name' name='name' defaultValue={user?.name} className='border-2 border-color-pink p-2 outline-none' />
-                        </div>
-                        <div className='flex flex-col'>
-                            <label className='font-semibold cursor-pointer' htmlFor='emplyeeid'>employeeId</label>
-                            <input id='emplyeeid' name='emplyeeid' defaultValue={user?.employeeId} className='border-2 border-color-pink p-2 outline-none' />
-                        </div>
-                        <div className='flex flex-col'>
-                            <label className='font-semibold cursor-pointer' htmlFor='email'>Email</label>
-                            <input id='email' name='email' defaultValue={user?.email} className='border-2 border-color-pink p-2 outline-none' />
                         </div>
                         <div className='flex flex-col'>
                             <label className='font-semibold cursor-pointer' htmlFor='password'>Password</label>
