@@ -5,16 +5,15 @@ import Navbar from "../../components/common/navbar";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { baseUrl, getHeaders } from "../../api/api";
-import { useSession } from "next-auth/react";
 import axios from "axios";
 import { AiFillFilePdf } from "react-icons/ai";
 
 const PageDetails = () => {
-  const { data: state } = useSession();
   const router = useRouter();
   const { pages } = router.query;
   const [document, setDocument] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState({});
 
   let url = `/document/get-all-document?department`;
   if (
@@ -29,6 +28,7 @@ const PageDetails = () => {
   }
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
     (async () => {
       try {
         const { data: data } = await axios.get(`${baseUrl}${url}=${pages}`, {
@@ -40,6 +40,7 @@ const PageDetails = () => {
         setLoading(false);
       }
     })();
+    setUser(user);
   }, [pages, url]);
 
   if (loading) {
@@ -91,7 +92,7 @@ const PageDetails = () => {
           </div>
         )}
         <div className="text-white text-center pt-6 text-xl capitalize">
-          {`${state?.user?.name}, Welcome to Purbani Document Management System`}
+        {`${user?.name}, Welcome to Purbani Document Management System`}
         </div>
       </div>
     </Layout>

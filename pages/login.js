@@ -4,51 +4,48 @@ import Navbar from "../components/common/navbar";
 import Image from "next/image";
 import purbaniPurbani from "../public/assets/Logos/logo-purbani.png";
 import { useRouter } from "next/router";
-import { signIn, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import SingUpPopup from "../components/common/SingUpPopup";
+import { baseUrl } from "../api/api";
 
 const Login = () => {
   const router = useRouter();
   const { redirect } = router.query;
-  const { status, data: session } = useSession();
   const [employeeId, setEmployeeId] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [password, setPassword] = useState("");
   const [incorrectCredentials, setIncorrectCredentials] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem("x-auth-token") && session?.user?.accessToken) {
-      localStorage.setItem("x-auth-token", session?.user?.accessToken);
-    }
-    if (session?.user) {
+    if (!localStorage.getItem("user")) {
+      setLoading(false);
+      router.push("/login");
+    } else {
       router.push(redirect || "/");
     }
-  }, [redirect, router, session?.user]);
+  }, [redirect]);
 
   // Login API
   const handleLogin = async () => {
-    try {
-      setLoading(true);
-      const result = await signIn("credentials", {
-        redirect: false,
+    fetch(`${baseUrl}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         employeeId: employeeId,
         password: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        localStorage.setItem("x-auth-token", json.data.accessToken);
+        localStorage.setItem("user", JSON.stringify(json.data));
+        router.push(redirect || "/");
       });
-
-      setLoading(false);
-      setIncorrectCredentials(false);
-      if (result.error) {
-        setIncorrectCredentials(true);
-        setLoading(false);
-      }
-    } catch (error) {
-      setIncorrectCredentials(true);
-      setLoading(false);
-    }
   };
 
-  if (status === "authenticated" || status === "loading") {
+  if (loading) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">

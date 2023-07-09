@@ -4,16 +4,16 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import DownloadPopUp from "../common/downloadPopUp";
 import { useState } from "react";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import Typewriter from 'typewriter-effect';
+import Typewriter from "typewriter-effect";
 const DownloadCard = () => {
   const [url, setUrl] = useState(true);
-  const { data: session } = useSession();
   const router = useRouter();
+
   const handleLinkClick = (link) => {
-    if (!session?.user) {
-      window.DownloadModal.showModal();
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      window.my_modal_3.showModal();
       setUrl(link);
     } else {
       router.push(link);
@@ -30,7 +30,10 @@ const DownloadCard = () => {
           <div className="text-color_pink">
             <Typewriter
               options={{
-                strings: ['BETTER FUTURE TOGETHER', 'SUSTAINABLE BETTER FUTURE TOGETHER'],
+                strings: [
+                  "BETTER FUTURE TOGETHER",
+                  "SUSTAINABLE BETTER FUTURE TOGETHER",
+                ],
                 autoStart: true,
                 loop: true,
               }}

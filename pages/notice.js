@@ -1,34 +1,33 @@
 import { FaDownload } from "react-icons/fa";
 import Layout from "../components/common/Layout";
 import Navbar from "../components/common/navbar";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { baseUrl, getHeaders } from "../api/api";
 import axios from "axios";
 import { BsEye } from "react-icons/bs";
 
 const Notice = () => {
-  const { data: session } = useSession();
   const [notice, setNotice] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+  const [user, setUser] = useState({});
+
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
     (async () => {
       try {
         const { data: data } = await axios.get(
           `${baseUrl}/notice/get-all-notice?sortOrder=asc`,
           { headers: getHeaders() }
-          );
-          setLoading(false);
-          setNotice(data.data);
-        } catch (error) {
-        // console.log(error);
+        );
+        setLoading(false);
+        setNotice(data.data);
+      } catch (error) {
         setLoading(false);
       }
     })();
+    setUser(user);
   }, []);
 
-  console.log(notice)
   if (loading) {
     return (
       <Layout title="Loading">
@@ -45,7 +44,7 @@ const Notice = () => {
     <Layout title="Notice">
       <div className="flex flex-col justify-between items-center h-screen overflow-y-auto">
         <Navbar />
-        
+
         <div className="w-full flex items-center justify-center mt-10">
           <div className="grid grid-cols-3 gap-20">
             {notice
@@ -85,7 +84,7 @@ const Notice = () => {
           </div>
         </div>
         <div className="text-white text-center pt-6 text-xl capitalize">
-          {`${session?.user?.name}, Welcome to Purbani Document Mangement System`}
+          {`${user?.name}, Welcome to Purbani Document Management System`}
         </div>
       </div>
     </Layout>
