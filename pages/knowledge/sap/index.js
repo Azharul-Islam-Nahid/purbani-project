@@ -1,19 +1,15 @@
-import router, { useRouter } from "next/router";
-import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 import styles from "../../../styles/knowledge.module.css";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-
-// Dynamically import components
-const Layout = dynamic(() => import("../../../components/common/Layout"));
-const Navbar = dynamic(() => import("../../../components/common/navbar"));
+import Layout from "../../../components/common/Layout";
+import Navbar from "../../../components/common/navbar";
 
 // Reusable OptionCard component
 const OptionCard = ({ number, title, user }) => {
   const router = useRouter();
 
-  const handleLinkClick = (link) => {
-    const user = JSON.parse(localStorage.getItem("user"));
+  const handleButtonClick = (link) => {
     if (
       !user.isAdmin &&
       !user.knowledgeAccesses.includes(title.toLowerCase())
@@ -29,17 +25,16 @@ const OptionCard = ({ number, title, user }) => {
   };
 
   return (
-    <button onClick={() => handleLinkClick(`sap/${title.toLowerCase()}`)}>
-      <a
-        className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
-      >
-        <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
-          {number}
-        </div>
-        <div className="text-xl font-semibold h-full flex justify-center items-center">
-          {title}
-        </div>
-      </a>
+    <button
+      className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
+      onClick={() => handleButtonClick(`sap/${title.toLowerCase()}`)}
+    >
+      <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
+        {number}
+      </div>
+      <div className="text-xl font-semibold h-full flex justify-center items-center">
+        {title}
+      </div>
     </button>
   );
 };
