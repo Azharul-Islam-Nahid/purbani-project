@@ -4,7 +4,7 @@ import { AiOutlineLogout, AiOutlineUserAdd } from "react-icons/ai";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { SiKnowledgebase } from "react-icons/si";
 import { MdOutlinePolicy } from "react-icons/md";
-import {IoIosPeople} from 'react-icons/io'
+import { IoIosPeople } from "react-icons/io";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
 const routes = [
@@ -44,16 +44,18 @@ const Sidebar = () => {
   const router = useRouter();
 
   const handleLogout = () => {
-    // signOut({ callbackUrl: "/login" });
     localStorage.clear("x-auth-token");
     localStorage.clear("user");
-    router.reload();
+    router.push("/");
   };
 
   return (
     <aside>
       <div className={styles.sidebar}>
-        <div onClick={() => router.push('/dashboard')} className={`${styles.sidebarTop} text-color_white text-2xl cursor-pointer`}>
+        <div
+          onClick={() => router.push("/dashboard")}
+          className={`${styles.sidebarTop} text-color_white text-2xl cursor-pointer`}
+        >
           <h2>Admin</h2> <h2>Dashboard</h2>
         </div>
         <div
