@@ -27,10 +27,10 @@ const DownloadCard = () => {
         </div>
         <div className="text-2xl text-white font-extrabold w-64 text-center">
           OUR PURPOSE IS TO BUILD A
-          <div className="text-color_pink">
+          <div >
             <Typewriter
               options={{
-                strings: ['BETTER FUTURE TOGETHER', 'SUSTAINABLE FUTURE TOGETHER'],
+                strings: ['BETTER FUTURE TOGETHER', '<span style="color:rgba(163, 35, 141, 1);">SUSTAINABLE FUTURE TOGETHER</span>'],
                 autoStart: true,
                 loop: true,
               }}
