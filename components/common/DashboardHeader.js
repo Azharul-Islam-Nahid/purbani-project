@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/Sidebar.module.css";
 import Image from "next/image";
 import logoPurbani from "../../public/assets/Logos/logo-purbani.png";
@@ -7,7 +7,11 @@ import { SiPhpmyadmin } from "react-icons/si";
 
 const DashboardHeader = () => {
   const router = useRouter();
-
+  const [user, setUser] = useState('')
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    setUser(user);
+  }, []);
   return (
     <div className={`${styles.dashboardHeader}`}>
       <div>
@@ -25,6 +29,7 @@ const DashboardHeader = () => {
         <div
           className={`${styles.profileBtn} flex justify-center items-center gap-x-1 py-2 px-6`}
         >
+          {user?.role}
           <div className="w-[30px] h-[30px] flex flex-col justify-center items-center text-2xl">
             <SiPhpmyadmin />
           </div>

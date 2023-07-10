@@ -44,7 +44,10 @@ const Sidebar = () => {
   const router = useRouter();
 
   const handleLogout = () => {
-    signOut({ callbackUrl: "/login" });
+    // signOut({ callbackUrl: "/login" });
+    localStorage.clear("x-auth-token");
+    localStorage.clear("user");
+    router.reload();
   };
 
   return (
