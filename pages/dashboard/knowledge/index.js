@@ -7,6 +7,10 @@ import { RiAdminFill } from "react-icons/ri";
 import { TbPackageExport, TbPigMoney } from "react-icons/tb";
 import { SiUblockorigin, SiHelpscout } from "react-icons/si";
 import UploadKnowledge from "../../../components/common/UploadKnowledge";
+import { AiOutlineDelete } from "react-icons/ai";
+import axios from "axios";
+import { baseUrl, getHeaders } from "../../../api/api";
+import Swal from "sweetalert2";
 
 const departments = [
   { name: "sap", logo: <MdLocalFlorist /> },
@@ -25,6 +29,8 @@ const KnowledgeDashboard = () => {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({});
+  const [allPdf, setAllPdf] = useState([]);
+  const [refetch, setRefetch] = useState(true);
 
   useEffect(() => {
     // Simulating an asynchronous process
@@ -32,6 +38,51 @@ const KnowledgeDashboard = () => {
       setStatus("authenticated");
     }, 500);
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data: data } = await axios.get(
+          `${baseUrl}/knowledge/get-all-knowledge?department=${department}`,
+          { headers: getHeaders() }
+        );
+        setLoading(false);
+        setAllPdf(data.data.data);
+
+
+      }
+      catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+
+
+    })();
+  }, [department, refetch]);
+
+  const handleDeletePdf = async (id) => {
+    try {
+      const { data: data } = await axios.delete(
+        `${baseUrl}/knowledge/delete-one-knowledge/${id}`,
+        { headers: getHeaders() }
+      );
+      Swal.fire({
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setRefetch(!refetch)
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+    }
+
+  }
 
   if (status !== "authenticated") {
     return (
@@ -56,21 +107,46 @@ const KnowledgeDashboard = () => {
             setSubDepartment={setSubDepartment}
             department={department}
           />
-          <UploadKnowledge
-            url="/knowledge/upload-knowledge-pdf"
-            formData={formData}
-            setFormData={setFormData}
-            department={department} 
-            // setDepartment={setDepartment}
-            title={title}
-            setTitle={setTitle} 
-            loading={loading}
-            setLoading={setLoading}
-            video={true}
-            subDepartment={subDepartment}
-            setSubDepartment={setSubDepartment}
-            
-          />
+          <div className="h-full flex gap-x-2 justify-between">
+            <UploadKnowledge
+              url="/knowledge/upload-knowledge-pdf"
+              formData={formData}
+              setFormData={setFormData}
+              department={department}
+              // setDepartment={setDepartment}
+              title={title}
+              setTitle={setTitle}
+              loading={loading}
+              setLoading={setLoading}
+              video={true}
+              subDepartment={subDepartment}
+              setSubDepartment={setSubDepartment}
+
+            />
+            <div className="flex-1">
+              <div className="max-w-[500px] flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
+                <div className="text-xl flex justify-start border-b w-full px-10 font-semibold text-color_pink uppercase text-left pb-1">
+                  {department}
+                </div>
+                <div className="py-5 text-black  w-full">
+                  {
+                    allPdf?.map((list, i) => <div
+                      key={list?._id}
+                      className="hover">
+                      <div className="mx-auto w-4/5 flex justify-between">
+                        <div className="flex gap-x-2">
+                          <div className="mr-2">{i + 1}</div>
+                          <div>{list?.title}</div>
+                        </div>
+                        <div><label onClick={() => handleDeletePdf(list?._id)} className="cursor-pointer"><AiOutlineDelete /></label></div>
+                      </div>
+                    </div>)
+                  }
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </DashboardLayout>
