@@ -24,7 +24,7 @@ const departments = [
   "import-banking",
 ];
 const allRole = ["admin", "user"];
-const knowledges = ["basis", "abap", "fico", "pm", "hcm", "sd", "mm"];
+const knowledge = ["basis", "abap", "fico", "pm", "hcm", "sd", "mm"];
 
 const EditUser = () => {
   const router = useRouter();
@@ -33,7 +33,7 @@ const EditUser = () => {
   const [user, setUser] = useState({});
   const [department, setDepartment] = useState(user?.department);
   const [role, setRole] = useState(user?.role);
-  const [knowledgeAccesses, setKnowlege] = useState("basis");
+  const [knowledgeAccesses, setKnowledgeAccess] = useState("basis");
 
   useEffect(() => {
     (async () => {
@@ -45,7 +45,6 @@ const EditUser = () => {
         setUser(data.data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
         setLoading(false);
       }
     })();
@@ -191,11 +190,11 @@ const EditUser = () => {
                 Knowledge Access
               </label>
               <select
-                onChange={(e) => setKnowlege(e.target.value)}
+                onChange={(e) => setKnowledgeAccess(e.target.value)}
                 name="department"
                 className="border-2 border-color-pink p-2 outline-none"
               >
-                {knowledges.map((knowledge, index) => (
+                {knowledge.map((knowledge, index) => (
                   <option key={index} value={knowledge}>
                     {knowledge}
                   </option>
