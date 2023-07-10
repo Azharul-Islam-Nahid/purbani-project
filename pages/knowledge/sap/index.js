@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import styles from "../../../styles/knowledge.module.css";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 // Dynamically import components
 const Layout = dynamic(() => import("../../../components/common/Layout"));
@@ -10,48 +11,41 @@ const Navbar = dynamic(() => import("../../../components/common/navbar"));
 
 // Reusable OptionCard component
 const OptionCard = ({ number, title, user }) => {
-    if (user?.role === "super_admin") {
-        console.log(user);
+    const router = useRouter();
 
-        return (
-            <Link href={`sap/${title.toLowerCase()}`}>
-                <a
-                    className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
-                >
-                    <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
-                        {number}
-                    </div>
-                    <div className="text-xl font-semibold h-full flex justify-center items-center">
-                        {title}
-                    </div>
-                </a>
-            </Link>
-        );
-    }
-    if (user?.knowledgeAccesses.includes(basis)) {
+    const handleLinkClick = (link) => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (
+            !user.isAdmin &&
+            !user.knowledgeAccesses.includes(title.toLowerCase())
+        ) {
+            Swal.fire({
+                icon: "error",
+                title: title,
+                text: "You are not authorized",
+            });
+        } else {
+            router.push(link);
+        }
+    };
 
-        return (
-            <Link href={`sap/${title.toLowerCase()}`}>
-                <a
-                    className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
-                >
-                    <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
-                        {number}
-                    </div>
-                    <div className="text-xl font-semibold h-full flex justify-center items-center">
-                        {title}
-                    </div>
-                </a>
-            </Link>
-        );
-    }
-    else {
-        router.push("/unauthorized");
-    }
+    return (
+        <button onClick={() => handleLinkClick(`sap/${title.toLowerCase()}`)}>
+            <a
+                className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
+            >
+                <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
+                    {number}
+                </div>
+                <div className="text-xl font-semibold h-full flex justify-center items-center">
+                    {title}
+                </div>
+            </a>
+        </button>
+    );
 };
 
 const KnowledgeMedia = () => {
-    const router = useRouter();
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
 

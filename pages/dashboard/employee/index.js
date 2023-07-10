@@ -28,7 +28,6 @@ const Employeers = () => {
             }
         })();
     }, [refetch]);
-    console.log("all users", users)
     const handleDeleteUser = async (id) => {
         try {
             const { data: data } = await axios.delete(
@@ -88,7 +87,7 @@ const Employeers = () => {
                                 <td className='p-2'>{user.knowledgeAccesses.length > 0 ? "Yes" : "No"}</td>
 
                                 <td onClick={() => {
-                                    router.push(`/dashboard/employee/${user?._id}`)
+                                    router.push(`/dashboard/employee/${user?.email}`)
                                 }} className='cursor-pointer p-2 '><div className='flex items-center gap-x-2'>
                                     <AiFillEdit /> <span>Edit</span>
                                 </div></td>

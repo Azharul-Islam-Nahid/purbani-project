@@ -32,7 +32,7 @@ const knowledges = [
 ]
 const EditUser = () => {
     const router = useRouter()
-    const id = router.query.editUser
+    const email = router.query.editUser
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState({})
     const [department, setDepartment] = useState(user?.department)
@@ -42,7 +42,7 @@ const EditUser = () => {
         (async () => {
             try {
                 const { data: data } = await axios.get(
-                    `${baseUrl}/users/get-one-user/${id}`,
+                    `${baseUrl}/users/get-one-user/${email}`,
                     { headers: getHeaders() }
                 )
                 setUser(data.data)
@@ -52,12 +52,8 @@ const EditUser = () => {
                 setLoading(false)
             }
         })()
-    }, [id])
-    if (knowledgeAccesses !== "" || !user.knowledgeAccesses.includes(knowledgeAccesses)) {
-        // updateUser.knowledgeAccesses = knowledgeAccesses
-        console.log("hellow", knowledgeAccesses)
-        console.log(user.knowledgeAccesses.includes(knowledgeAccesses))
-    }
+    }, [email])
+
     const handleUpdateUser = async (e) => {
         e.preventDefault()
         setLoading(true)
@@ -79,10 +75,9 @@ const EditUser = () => {
         }
         if (knowledgeAccesses !== "" || !user.knowledgeAccesses.includes(knowledgeAccesses)) {
             updateUser.knowledgeAccesses = knowledgeAccesses
-            console.log("hellow", knowledgeAccesses)
         }
         try {
-            const response = await axios.put(`${baseUrl}/users/update-one-user/${id}`, updateUser,
+            const response = await axios.put(`${baseUrl}/users/update-one-user/${user?._id}`, updateUser,
                 { headers: getHeaders() })
             setLoading(false)
             Swal.fire({

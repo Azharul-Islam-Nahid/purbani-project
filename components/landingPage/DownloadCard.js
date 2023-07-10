@@ -19,6 +19,7 @@ const DownloadCard = () => {
       router.push(link);
     }
   };
+  
   return (
     <div className="flex w-full justify-center my-24 font-extrabold px-60 p-10">
       <div className="flex flex-col justify-between py-6 h-[379px] w-[681px] backdrop-blur-md bg-gray-100/10 rounded-3xl items-center">
@@ -27,10 +28,10 @@ const DownloadCard = () => {
         </div>
         <div className="text-2xl text-white font-extrabold w-64 text-center">
           OUR PURPOSE IS TO BUILD A
-          <div className="text-color_pink">
+          <div >
             <Typewriter
               options={{
-                strings: ['BETTER FUTURE TOGETHER', 'SUSTAINABLE FUTURE TOGETHER'],
+                strings: ['BETTER FUTURE TOGETHER', '<span style="color:rgba(163, 35, 141, 1);">SUSTAINABLE FUTURE TOGETHER</span>'],
                 autoStart: true,
                 loop: true,
               }}
