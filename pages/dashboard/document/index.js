@@ -153,7 +153,7 @@ const Department = () => {
                 <div className="py-5 text-black  w-full">
                   {
                     allPdf?.map((list, i) => <div
-                      key={list._id}
+                      key={list?._id}
                       className="hover">
                       <div className="mx-auto w-4/5 flex justify-between">
                         <div className="flex gap-x-2">
