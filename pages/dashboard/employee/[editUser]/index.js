@@ -34,6 +34,13 @@ const EditUser = () => {
   const [department, setDepartment] = useState(user?.department);
   const [role, setRole] = useState(user?.role);
   const [knowledgeAccesses, setKnowledgeAccess] = useState("basis");
+  const [currentUser, setCurrentUser] = useState({
+    name: "",
+    department: "",
+    role: "",
+    knowledgeAccess: "",
+    password: "",
+  });
 
   useEffect(() => {
     (async () => {
@@ -49,6 +56,8 @@ const EditUser = () => {
       }
     })();
   }, [email]);
+
+  console.log(currentUser);
 
   const handleUpdateUser = async (e) => {
     e.preventDefault();
