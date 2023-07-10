@@ -33,14 +33,10 @@ const EditUser = () => {
   const [user, setUser] = useState({});
   const [department, setDepartment] = useState(user?.department);
   const [role, setRole] = useState(user?.role);
-  const [knowledgeAccesses, setKnowledgeAccess] = useState("basis");
-  const [currentUser, setCurrentUser] = useState({
-    name: "",
-    department: "",
-    role: "",
-    knowledgeAccess: "",
-    password: "",
-  });
+  const [knowledgeAccesses, setKnowledgeAccess] = useState();
+  const filteredKnowledge = knowledge.filter(
+    (item) => !user.knowledgeAccesses?.includes(item)
+  );
 
   useEffect(() => {
     (async () => {
@@ -57,11 +53,9 @@ const EditUser = () => {
     })();
   }, [email]);
 
-  console.log(currentUser);
-
   const handleUpdateUser = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     const form = e.target;
     const name = form.name.value;
     const password = form.password.value;
@@ -72,18 +66,20 @@ const EditUser = () => {
     if (password !== "") {
       updateUser.password = password;
     }
-    if (department !== user?.department || department !== "") {
-      updateUser.department = department;
-    }
-    if (role !== user?.role || role !== "") {
-      updateUser.role = role;
-    }
     if (
-      knowledgeAccesses !== "" ||
-      !user.knowledgeAccesses.includes(knowledgeAccesses)
+      department !== user?.department ||
+      department !== "" ||
+      department !== undefined
     ) {
+      updateUser.department = department ? department : user?.department;
+    }
+    if (role !== user?.role || role !== "" || role !== undefined) {
+      updateUser.role = role ? role : user?.role;
+    }
+    if (knowledgeAccesses) {
       updateUser.knowledgeAccesses = knowledgeAccesses;
     }
+
     try {
       const response = await axios.put(
         `${baseUrl}/users/update-one-user/${user?._id}`,
@@ -202,8 +198,12 @@ const EditUser = () => {
                 onChange={(e) => setKnowledgeAccess(e.target.value)}
                 name="department"
                 className="border-2 border-color-pink p-2 outline-none"
+                defaultValue="Select an option"
               >
-                {knowledge.map((knowledge, index) => (
+                <option defaultValue="Select an option" disabled defaultChecked>
+                  Select an option
+                </option>
+                {filteredKnowledge.map((knowledge, index) => (
                   <option key={index} value={knowledge}>
                     {knowledge}
                   </option>

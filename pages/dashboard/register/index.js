@@ -80,7 +80,6 @@ const Register = () => {
           setLoading(false);
           setRegistrationFailed(false);
           Swal.fire({
-            position: "top-end",
             icon: "success",
             title: "Account created successfully",
             showConfirmButton: false,
@@ -89,7 +88,6 @@ const Register = () => {
         }
       })
       .catch(({ response }) => {
-        console.log(response);
         setLoading(false);
         setRegistrationFailed(true);
       });

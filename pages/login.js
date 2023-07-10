@@ -7,12 +7,15 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import SingUpPopup from "../components/common/SingUpPopup";
 import { baseUrl } from "../api/api";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const router = useRouter();
   const { redirect } = router.query;
   const [employeeId, setEmployeeId] = useState("");
   const [loading, setLoading] = useState(true);
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [incorrectCredentials, setIncorrectCredentials] = useState(false);
 
@@ -27,22 +30,25 @@ const Login = () => {
 
   // Login API
   const handleLogin = async () => {
-    fetch(`${baseUrl}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    try {
+      setSubmitLoading(true);
+      const { data: data } = await axios.post(`${baseUrl}/auth/login`, {
         employeeId: employeeId,
         password: password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        localStorage.setItem("x-auth-token", json.data.accessToken);
-        localStorage.setItem("user", JSON.stringify(json.data));
-        router.push(redirect || "/");
       });
+
+      setSubmitLoading(false);
+      localStorage.setItem("x-auth-token", data.data.accessToken);
+      localStorage.setItem("user", JSON.stringify(data.data));
+      router.push(redirect || "/");
+    } catch ({ response }) {
+      setSubmitLoading(false);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: response.data.message,
+      });
+    }
   };
 
   if (loading) {
@@ -117,17 +123,25 @@ const Login = () => {
                   </div>
                 )}
                 <div className="w-full flex justify-center">
-                  <button
-                    type="button"
-                    className={`rounded-xl border bg-color_brand px-4 py-2 font-medium text-gray-100 hover:bg-white hover:text-black transition-all duration-100 mb-[20px] cursor-pointer`}
-                    disabled={!employeeId && !password}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleLogin();
-                    }}
-                  >
-                    Sign In
-                  </button>
+                  <div className="py-8 w-full flex justify-center">
+                    {submitLoading ? (
+                      <div className="flex justify-center relative mt-[10px]">
+                        <div className="custom-loader"></div>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        className={`rounded-xl border bg-color_brand px-4 py-2 font-medium text-gray-100 hover:bg-white hover:text-black transition-all duration-100 mb-[20px] cursor-pointer`}
+                        disabled={!employeeId && !password}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleLogin();
+                        }}
+                      >
+                        Sign In
+                      </button>
+                    )}
+                  </div>
                 </div>
               </form>
               <p className="text-center pb-5">

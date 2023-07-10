@@ -13,7 +13,7 @@ const Navbar = () => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON?.parse(localStorage?.getItem("user"));
     setUser(user);
   }, []);
 
@@ -21,11 +21,10 @@ const Navbar = () => {
     localStorage.clear("x-auth-token");
     localStorage.clear("user");
     router.reload();
-    router.push("/");
   };
 
   const handleLinkClick = (link) => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON?.parse(localStorage?.getItem("user"));
     if (!user) {
       window.my_modal_3.showModal();
       setUrl(link);

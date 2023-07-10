@@ -34,7 +34,7 @@ const Index = () => {
     })();
   }, [url]);
 
-  if (loading && !user) {
+  if (loading || !user) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">
@@ -46,10 +46,18 @@ const Index = () => {
     );
   }
 
+  // if (!user) {
+  //   router.push("/unauthorized");
+  // } else {
+  //   if (!user.isAdmin) {
+  //     if (!user?.knowledgeAccesses?.includes(module?.toLowerCase())) {
+  //       router.push("/unauthorized");
+  //     }
+  //   }
+  // }
   if (
     !user ||
-    (!user?.isAdmin &&
-      !user?.knowledgeAccesses?.includes(module?.toLowerCase()))
+    (!user.isAdmin && !user?.knowledgeAccesses?.includes(module?.toLowerCase()))
   ) {
     router.push("/unauthorized");
   }
