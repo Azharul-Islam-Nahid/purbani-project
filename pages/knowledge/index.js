@@ -11,7 +11,7 @@ const Knowledge = () => {
         <Navbar />
         <div className="w-full flex items-center justify-center mt-10">
           <div
-            onClick={() => router.push("/knowledge/media")}
+            onClick={() => router.push("/knowledge/sap")}
             className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
           >
             <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
