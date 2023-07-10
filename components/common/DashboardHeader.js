@@ -5,7 +5,7 @@ import logoPurbani from "../../public/assets/Logos/logo-purbani.png";
 import { useRouter } from "next/router";
 import { SiPhpmyadmin } from "react-icons/si";
 
-const DashboardHeader = ({ session }) => {
+const DashboardHeader = () => {
   const router = useRouter();
 
   return (
@@ -28,7 +28,6 @@ const DashboardHeader = ({ session }) => {
           <div className="w-[30px] h-[30px] flex flex-col justify-center items-center text-2xl">
             <SiPhpmyadmin />
           </div>
-          <span className="uppercase">{session?.user?.role}</span>
         </div>
       </div>
     </div>

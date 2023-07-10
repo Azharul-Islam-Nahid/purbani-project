@@ -1,43 +1,36 @@
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
-import { AuthProvider } from "../context/authContext.js";
-import { SessionProvider, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import Layout from "../components/common/Layout";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
-export default function MyApp({
-  Component,
-  pageProps: { session, ...pageProps },
-}) {
+export default function MyApp({ Component, pageProps: { ...pageProps } }) {
   return (
-    <SessionProvider session={session}>
-      <AuthProvider>
-        <div className="bg-[url('https://i.ibb.co/8Ycnyqx/bg-primary.png')] bg-no-repeat bg-cover h-screen">
-          {Component.auth ? (
-            <Auth adminOnly={Component?.auth?.adminOnly}>
-              <Component {...pageProps} />
-            </Auth>
-          ) : (
-            <Component {...pageProps} />
-          )}
-        </div>
-      </AuthProvider>
-    </SessionProvider>
+    <div className="bg-[url('https://i.ibb.co/8Ycnyqx/bg-primary.png')] bg-no-repeat bg-cover h-screen">
+      {Component.auth ? (
+        <Auth adminOnly={Component?.auth?.adminOnly}>
+          <Component {...pageProps} />
+        </Auth>
+      ) : (
+        <Component {...pageProps} />
+      )}
+    </div>
   );
 }
 
 function Auth({ children, adminOnly }) {
   const router = useRouter();
-  const { status, data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      if (typeof window !== "undefined") {
-        router.push("/unauthorized?message=login required");
-      }
-    },
-  });
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  if (status === "loading") {
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    setUser(user);
+    setLoading(false);
+  }, []);
+
+  
+  if (loading) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">
@@ -48,10 +41,14 @@ function Auth({ children, adminOnly }) {
       </Layout>
     );
   }
-
-  if (adminOnly && !session?.user?.isAdmin) {
+  
+  if (!user?.accessToken) {
+    router.push("/unauthorized?message=Login Required");
+  }
+  
+  if (adminOnly && !user?.isAdmin) {
     if (typeof window !== "undefined") {
-      router.push("/unauthorized?message=admin login required");
+      router.push("/unauthorized?message=Admin Login Required");
     }
   }
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-const pb = "production";
+const pb = "development";
 export const baseUrl =
   pb === "production"
     ? "https://purbani-dms-backend.vercel.app/api/v1"
@@ -10,6 +10,11 @@ export const baseUrl =
 export const getHeaders = () => ({
   "Content-Type": "application/json",
   "x-auth-token": `${localStorage?.getItem("x-auth-token")}`,
+});
+
+export const getHeadersMultiPart = () => ({
+  "Content-Type": "multipart/form-data",
+  "x-auth-token": `${localStorage.getItem("x-auth-token")}`,
 });
 
 export const getLoggedInUser = async () => {
@@ -24,11 +29,6 @@ export const getLoggedInUser = async () => {
     return handleError(error);
   }
 };
-
-export const getHeadersMultiPart = () => ({
-  "Content-Type": "multipart/form-data",
-  "x-auth-token": `${localStorage.getItem("x-auth-token")}`,
-});
 
 const getQueryString = (query = {}) => {
   let queryString = "?";

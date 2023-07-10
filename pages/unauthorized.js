@@ -15,16 +15,21 @@ const UnauthorizedScreen = () => {
           {message && (
             <div className="mb-4 text-error text-center">{message}</div>
           )}
-          <Link className=" mt-2" href={'/'}>Go to Home Page</Link>
+          <Link className=" mt-2" href={"/"}>
+            Go to Home Page
+          </Link>
           <hr className="my-2" />
           <h2 className="">Or</h2>
           <hr className="my-2" />
-          <Link className=" mt-4 block" href={'/login'}>Login</Link>
+          <Link className=" mt-4 block" href={"/login"}>
+            Login
+          </Link>
         </div>
       </div>
     </Layout>
   );
 };
 
-
-export default dynamic(() => Promise.resolve(UnauthorizedScreen), { ssr: false });
+export default dynamic(() => Promise.resolve(UnauthorizedScreen), {
+  ssr: false,
+});
