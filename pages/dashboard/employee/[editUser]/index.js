@@ -56,7 +56,7 @@ const EditUser = () => {
 
     const handleUpdateUser = async (e) => {
         e.preventDefault()
-        setLoading(true)
+        // setLoading(true)
         const form = e.target
         const name = form.name.value
         const password = form.password.value
@@ -67,11 +67,12 @@ const EditUser = () => {
         if (password !== '') {
             updateUser.password = password
         }
-        if (department !== user?.department || department !== "") {
-            updateUser.department = department
+        if (department !== user?.department || department !== "" || department !== undefined) {
+            updateUser.department = department ? department : user?.department
         }
-        if (role !== user?.role || role !== "") {
-            updateUser.role = role
+        if (role !== user?.role || role !== "" || role !== undefined) {
+            updateUser.role = role ? role : user?.role
+            // console.log("role", role)
         }
         if (knowledgeAccesses !== "" || !user.knowledgeAccesses.includes(knowledgeAccesses)) {
             updateUser.knowledgeAccesses = knowledgeAccesses
