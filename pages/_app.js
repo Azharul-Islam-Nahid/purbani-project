@@ -29,7 +29,6 @@ function Auth({ children, adminOnly }) {
     setLoading(false);
   }, []);
 
-  
   if (loading) {
     return (
       <Layout title="Loading">
@@ -41,14 +40,14 @@ function Auth({ children, adminOnly }) {
       </Layout>
     );
   }
-  
+
   if (!user?.accessToken) {
-    router.push("/unauthorized?message=Login Required");
+    router.push("/");
   }
-  
+
   if (adminOnly && !user?.isAdmin) {
     if (typeof window !== "undefined") {
-      router.push("/unauthorized?message=Admin Login Required");
+      router.push("/");
     }
   }
 

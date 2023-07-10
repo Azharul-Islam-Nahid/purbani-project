@@ -46,6 +46,7 @@ const Sidebar = () => {
   const handleLogout = () => {
     localStorage.clear("x-auth-token");
     localStorage.clear("user");
+    router.reload();
     router.push("/");
   };
 

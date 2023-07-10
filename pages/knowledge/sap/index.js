@@ -1,6 +1,5 @@
 import router, { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import styles from "../../../styles/knowledge.module.css";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
