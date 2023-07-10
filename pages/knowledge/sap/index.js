@@ -1,94 +1,70 @@
-import React from 'react';
-import Layout from '../../../components/common/Layout';
-import Navbar from '../../../components/common/navbar';
+import router, { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import styles from '../../../styles/knowledge.module.css'
-import { useRouter } from 'next/router';
-const KnowledgeMedia = () => {
-    const router = useRouter()
+import { useEffect, useState } from 'react';
+
+// Dynamically import components
+const Layout = dynamic(() => import('../../../components/common/Layout'));
+const Navbar = dynamic(() => import('../../../components/common/navbar'));
+
+// Reusable OptionCard component
+const OptionCard = ({ number, title }) => {
+
+    const [user, setUser] = useState({});
+    const router = useRouter();
+
+
+    console.log("🚀 ~ file: index.js:17 ~ OptionCard ~ user:", user)
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        setUser(user);
+    }, []);
+
+
+    console.log(user?.role);
+
+    // if (user?.role === 'super_admin') {
     return (
-        <Layout title={"Knowledge"}>
-            <div className='flex flex-col  items-center h-screen overflow-y-auto'>
+        <Link href={`sap/${title.toLowerCase()}`}>
+            <a className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}>
+                <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
+                    {number}
+                </div>
+                <div className="text-xl font-semibold h-full flex justify-center items-center">
+                    {title}
+                </div>
+            </a>
+        </Link>
+    );
+    // }
+
+    // else {
+    //     router.push('/unauthorized')
+    // }
+}
+
+const KnowledgeMedia = () => {
+
+    return (
+        <Layout title="knowledge">
+            <div className="flex flex-col items-center h-screen overflow-y-auto">
                 <Navbar />
-                <div
-                    className={`${styles.dashboardOptions} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center items-center my-5 mx-auto`}
-                >
-                    <div
-                        onClick={() => router.push(`/`)}
-                        className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
-                    >
-                        <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
-                            1
-                        </div>
-                        <div className="text-xl font-semibold h-full flex justify-center items-center">
-                            BASIS
-                        </div>
-                    </div>
-                    <div
-                        onClick={() => router.push("/")}
-                        className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
-                    >
-                        <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
-                            2
-                        </div>
-                        <div className="text-xl font-semibold h-full flex justify-center items-center">
-                            ABAP
-                        </div>
-                    </div>
-                    <div
-                        onClick={() => router.push("/")}
-                        className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
-                    >
-                        <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
-                            3
-                        </div>
-                        <div className="text-xl font-semibold h-full flex justify-center items-center">
-                            FICO
-                        </div>
-                    </div>
-                    <div
-                        className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
-                    >
-                        <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
-                            4
-                        </div>
-                        <div className="text-xl font-semibold h-full flex justify-center items-center">
-                            PM
-                        </div>
-                    </div>
-                    <div
-                        className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
-                    >
-                        <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
-                            5
-                        </div>
-                        <div className="text-xl font-semibold h-full flex justify-center items-center">
-                            HCM
-                        </div>
-                    </div>
-                    <div
-                        className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
-                    >
-                        <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
-                            6
-                        </div>
-                        <div className="text-xl font-semibold h-full flex justify-center items-center">
-                            SD
-                        </div>
-                    </div>
-                    <div
-                        className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
-                    >
-                        <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
-                            7
-                        </div>
-                        <div className="text-xl font-semibold h-full flex justify-center items-center">
-                            MM
-                        </div>
-                    </div>
+                <div className={`${styles.dashboardOptions} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center items-center my-5 mx-auto`}>
+                    <OptionCard number={1} title="BASIS" />
+                    <OptionCard number={2} title="ABAP" />
+                    <OptionCard number={3} title="FICO" />
+                    <OptionCard number={4} title="PM" />
+                    <OptionCard number={5} title="HCM" />
+                    <OptionCard number={6} title="SD" />
+                    <OptionCard number={7} title="MM" />
                 </div>
             </div>
         </Layout>
     );
 };
-KnowledgeMedia.auth = true
+
+KnowledgeMedia.auth = true;
+
 export default KnowledgeMedia;

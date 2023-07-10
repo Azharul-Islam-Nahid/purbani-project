@@ -7,20 +7,7 @@ import axios from "axios";
 import { baseUrl, getHeaders } from "../../../../api/api";
 
 const Index = () => {
-    const data = [
-        {
-            title: "The pdf file name goes right here",
-            videoUrl: "",
-        },
-        {
-            title: "The pdf file name goes right here",
-            videoUrl: "",
-        },
-        {
-            title: "The pdf file name goes right here",
-            videoUrl: "",
-        },
-    ];
+
 
     const router = useRouter();
     const { module } = router.query;
@@ -31,7 +18,7 @@ const Index = () => {
     let url = ``;
     if (
         module === "basis" ||
-        module === "abab" ||
+        module === "abap" ||
         module === "fico" ||
         module === "hcm" ||
         module === "sd" ||
