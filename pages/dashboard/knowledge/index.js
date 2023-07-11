@@ -48,15 +48,10 @@ const KnowledgeDashboard = () => {
         );
         setLoading(false);
         setAllPdf(data.data.data);
-
-
-      }
-      catch (error) {
+      } catch (error) {
         console.log(error);
         setLoading(false);
       }
-
-
     })();
   }, [department, refetch]);
 
@@ -72,7 +67,7 @@ const KnowledgeDashboard = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      setRefetch(!refetch)
+      setRefetch(!refetch);
     } catch (error) {
       console.log(error);
       Swal.fire({
@@ -81,8 +76,7 @@ const KnowledgeDashboard = () => {
         text: "Something went wrong!",
       });
     }
-
-  }
+  };
 
   if (status !== "authenticated") {
     return (
@@ -107,7 +101,7 @@ const KnowledgeDashboard = () => {
             setSubDepartment={setSubDepartment}
             department={department}
           />
-          <div className="h-full flex gap-x-2 justify-between">
+          <div className="h-full w-full flex flex-col gap-x-2 justify-between">
             <UploadKnowledge
               url="/knowledge/upload-knowledge-pdf"
               formData={formData}
@@ -121,29 +115,32 @@ const KnowledgeDashboard = () => {
               video={true}
               subDepartment={subDepartment}
               setSubDepartment={setSubDepartment}
-
             />
             <div className="flex-1">
-              <div className="max-w-[500px] flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
+              <div className="w-full flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
                 <div className="text-xl flex justify-start border-b w-full px-10 font-semibold text-color_pink uppercase text-left pb-1">
-                  {department}
+                  {department} - List
                 </div>
                 <div className="py-5 text-black  w-full">
-                  {
-                    allPdf?.map((list, i) => <div
-                      key={list?._id}
-                      className="hover">
+                  {allPdf?.map((list, i) => (
+                    <div key={list?._id} className="shadow p-3">
                       <div className="mx-auto w-4/5 flex justify-between">
                         <div className="flex gap-x-2">
                           <div className="mr-2">{i + 1}</div>
-                          <div>{list?.title}</div>
+                          <div className="text-lg">{list?.title}</div>
                         </div>
-                        <div><label onClick={() => handleDeletePdf(list?._id)} className="cursor-pointer"><AiOutlineDelete /></label></div>
+                        <div className="hover:text-red-600 text-2xl">
+                          <label
+                            onClick={() => handleDeletePdf(list?._id)}
+                            className="cursor-pointer"
+                          >
+                            <AiOutlineDelete />
+                          </label>
+                        </div>
                       </div>
-                    </div>)
-                  }
+                    </div>
+                  ))}
                 </div>
-
               </div>
             </div>
           </div>

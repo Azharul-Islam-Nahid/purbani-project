@@ -16,7 +16,6 @@ const Notice = () => {
   const [allPdf, setAllPdf] = useState([]);
   const [refetch, setRefetch] = useState(true);
 
-
   useEffect(() => {
     (async () => {
       try {
@@ -26,15 +25,10 @@ const Notice = () => {
         );
         setLoading(false);
         setAllPdf(data.data);
-
-
-      }
-      catch (error) {
+      } catch (error) {
         console.log(error);
         setLoading(false);
       }
-
-
     })();
   }, [refetch]);
 
@@ -52,7 +46,7 @@ const Notice = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      setRefetch(!refetch)
+      setRefetch(!refetch);
     } catch (error) {
       console.log(error);
       Swal.fire({
@@ -61,8 +55,7 @@ const Notice = () => {
         text: "Something went wrong!",
       });
     }
-
-  }
+  };
 
   useEffect(() => {
     // Simulating an asynchronous process
@@ -86,10 +79,8 @@ const Notice = () => {
   return (
     <DashboardLayout>
       <div className="p-10 max-w-[1250px] mt-[100px] w-full backdrop-blur-md border-l-3 border-r-3 border-color_pink rounded-md">
-        <div className="text-white font-semibold text-3xl">
-          Notice
-        </div>
-        <div className="flex gap-x-2 justify-between">
+        <div className="text-white font-semibold text-3xl">Notice</div>
+        <div className="flex flex-col justify-between">
           <UploadForm
             url="/notice/upload-notice-pdf"
             formData={formData}
@@ -104,24 +95,29 @@ const Notice = () => {
             setLoading={setLoading}
           />
           <div className="flex-1">
-            <div className="max-w-[500px] flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
+            <div className="w-full flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
               <div className="text-xl flex justify-start border-b w-full px-10 font-semibold text-color_pink uppercase text-left pb-1">
-                {department}
+                {department} - List
               </div>
               <div className="py-5 text-black  w-full">
-                {
-                  allPdf?.map((list, i) => <div
-                    key={list?._id}
-                    className="hover">
+                {allPdf?.map((list, i) => (
+                  <div key={list?._id} className="shadow p-3">
                     <div className="mx-auto w-4/5 flex justify-between">
                       <div className="flex gap-x-2">
                         <div className="mr-2">{i + 1}</div>
                         <div>{list?.title}</div>
                       </div>
-                      <div><label onClick={() => handleDeletePdf(list?._id)} className="cursor-pointer"><AiOutlineDelete /></label></div>
+                      <div className="hover:text-red-600 text-2xl">
+                        <label
+                          onClick={() => handleDeletePdf(list?._id)}
+                          className="cursor-pointer"
+                        >
+                          <AiOutlineDelete />
+                        </label>
+                      </div>
                     </div>
-                  </div>)
-                }
+                  </div>
+                ))}
               </div>
             </div>
           </div>

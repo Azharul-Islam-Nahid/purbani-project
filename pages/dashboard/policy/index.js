@@ -50,7 +50,6 @@ const Department = () => {
   const [allPdf, setAllPdf] = useState([]);
   const [refetch, setRefetch] = useState(true);
 
-
   useEffect(() => {
     (async () => {
       try {
@@ -60,14 +59,9 @@ const Department = () => {
         );
         setLoading(false);
         setAllPdf(data.data.data);
-
-
-      }
-      catch (error) {
+      } catch (error) {
         setLoading(false);
       }
-
-
     })();
   }, [department, refetch]);
 
@@ -83,7 +77,7 @@ const Department = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      setRefetch(!refetch)
+      setRefetch(!refetch);
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -91,10 +85,7 @@ const Department = () => {
         text: "Something went wrong!",
       });
     }
-
-  }
-
-
+  };
 
   useEffect(() => {
     // Simulating an asynchronous process
@@ -118,9 +109,7 @@ const Department = () => {
   return (
     <DashboardLayout>
       <div className="p-10 max-w-[1250px] w-full h-full backdrop-blur-md border-l-3 border-r-3 border-color_pink rounded-md">
-        <div className="text-white font-semibold text-3xl mb-3">
-          Policy
-        </div>
+        <div className="text-white font-semibold text-3xl mb-3">Policy</div>
         <div className="flex flex-col h-full justify-around">
           <DepartmentList
             departments={departments}
@@ -128,7 +117,7 @@ const Department = () => {
             department={department}
             setSubDepartment={setSubDepartment}
           />
-          <div className="h-full flex gap-x-2 justify-between">
+          <div className="h-full flex flex-col justify-between">
             <UploadForm
               url="/policy/upload-policy-pdf"
               formData={formData}
@@ -143,26 +132,30 @@ const Department = () => {
               setLoading={setLoading}
             />
             <div className="flex-1">
-              <div className="max-w-[500px] flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
+              <div className="w-full flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
                 <div className="text-xl flex justify-start border-b w-full px-10 font-semibold text-color_pink uppercase text-left pb-1">
                   {department}
                 </div>
                 <div className="py-5 text-black  w-full">
-                  {
-                    allPdf?.map((list, i) => <div
-                      key={list?._id}
-                      className="hover">
+                  {allPdf?.map((list, i) => (
+                    <div key={list?._id} className="shadow p-3">
                       <div className="mx-auto w-4/5 flex justify-between">
                         <div className="flex gap-x-2">
                           <div className="mr-2">{i + 1}</div>
                           <div>{list?.title}</div>
                         </div>
-                        <div><label onClick={() => handleDeletePdf(list?._id)} className="cursor-pointer"><AiOutlineDelete /></label></div>
+                        <div className="hover:text-red-600 text-2xl">
+                          <label
+                            onClick={() => handleDeletePdf(list?._id)}
+                            className="cursor-pointer"
+                          >
+                            <AiOutlineDelete />
+                          </label>
+                        </div>
                       </div>
-                    </div>)
-                  }
+                    </div>
+                  ))}
                 </div>
-
               </div>
             </div>
           </div>

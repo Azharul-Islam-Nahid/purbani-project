@@ -132,7 +132,7 @@ const UploadKnowledge = ({
   };
 
   return (
-    <div className="max-w-[500px] w-full flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
+    <div className="w-full flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
       <div className="text-xl flex justify-start border-b w-full px-10 font-semibold text-color_pink uppercase text-left pb-1">
         {department}
       </div>
@@ -145,6 +145,7 @@ const UploadKnowledge = ({
                 className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md "
                 placeholder="Title"
                 type="text"
+                required
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
@@ -152,6 +153,7 @@ const UploadKnowledge = ({
               <div className="relative">
                 <div className="font-semibold text-black">Category</div>
                 <select
+                  required
                   className="appearance-none outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md bg-white cursor-pointer"
                   value={subDepartment}
                   // onChange={handleOptionChange}
