@@ -74,6 +74,7 @@ const UploadForm = ({
             <div className="my-5 py-1">
               <div className="font-semibold text-black">Document Title</div>
               <input
+                required
                 className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md "
                 placeholder="Title"
                 type="text"
@@ -84,6 +85,7 @@ const UploadForm = ({
               <div className="relative">
                 <div className="font-semibold text-black">Department</div>
                 <select
+                  required
                   className="appearance-none outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md bg-white cursor-pointer"
                   value={subDepartment}
                   onChange={handleOptionChange}
@@ -117,6 +119,7 @@ const UploadForm = ({
             )}
             <div className="relative mt-7">
               <input
+                required
                 className="hidden"
                 type="file"
                 name="pdfFile"
