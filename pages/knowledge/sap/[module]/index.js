@@ -4,6 +4,7 @@ import Navbar from "../../../../components/common/navbar";
 import { BsEye } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Video } from "cloudinary-react";
 import { baseUrl, getHeaders } from "../../../../api/api";
 
 const Index = () => {
@@ -90,10 +91,11 @@ const Index = () => {
                 </div>
                 <div className="flex-1">
                   {media?.videoLink && (
-                    <video
+                    <Video
+                      cloudName="dqlxcdlce"
+                      publicId={media?.cloudinaryVideoId}
                       controls
                       controlsList="nodownload"
-                      src={media?.videoLink}
                       style={{ width: "400px" }}
                     />
                   )}
