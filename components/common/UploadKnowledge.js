@@ -2,6 +2,10 @@ import { baseUrl, getHeaders } from "../../api/api";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { AiFillFilePdf } from "react-icons/ai";
+import ProgressBar from "react-progress-bar-plus";
+import "react-progress-bar-plus/lib/progress-bar.css";
+import { useState } from "react";
+import styles from "../../styles/CustomProgress.module.css";
 
 const UploadKnowledge = ({
   url,
@@ -15,6 +19,8 @@ const UploadKnowledge = ({
   loading,
   setLoading,
 }) => {
+  const [uploadProgress, setUploadProgress] = useState(0);
+
   const handlePdf = (e) => {
     const file = e.target.files[0];
 
@@ -88,6 +94,14 @@ const UploadKnowledge = ({
         const { data } = await axios.post(
           "https://api.cloudinary.com/v1_1/dqlxcdlce/upload",
           videoForm,
+          {
+            onUploadProgress: (progressEvent) => {
+              const progress = Math.round(
+                (progressEvent.loaded / progressEvent.total) * 100
+              );
+              setUploadProgress(progress);
+            },
+          },
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -248,9 +262,19 @@ const UploadKnowledge = ({
           </div>
           <div className="py-8 w-full flex justify-end">
             {loading ? (
-              <div className="flex justify-center relative mt-[20px] mr-5">
-                <div className="custom-loader"></div>
-              </div>
+              <>
+                <ProgressBar
+                  percent={uploadProgress}
+                  autoIncrement={false}
+                  intervalTime={100}
+                  spinner={false}
+                  className="rpb-progress rpb-percent-container"
+                  containerClassName="rpb-progress rpb-percent-container"
+                />
+                <div className="flex justify-center relative mt-[20px] mr-5">
+                  <div className="custom-loader"></div>
+                </div>
+              </>
             ) : (
               <button
                 type="submit"
