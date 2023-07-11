@@ -34,7 +34,7 @@ const routes = [
     Icon: <AiOutlineUserAdd />,
   },
   {
-    title: "All Employeers",
+    title: "Employees",
     route: "/dashboard/employee",
     Icon: <IoIosPeople />,
   },
