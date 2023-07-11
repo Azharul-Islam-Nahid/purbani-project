@@ -218,6 +218,7 @@ const UploadKnowledge = ({
             {
               <div className="relative mt-7">
                 <input
+                  required
                   className="hidden"
                   type="file"
                   name="videoFile"
