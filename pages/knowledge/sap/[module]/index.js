@@ -96,6 +96,7 @@ const Index = () => {
                       publicId={media?.cloudinaryVideoId}
                       controls
                       controlsList="nodownload"
+                      quality="auto:eco"
                       style={{ width: "400px" }}
                     />
                   )}
