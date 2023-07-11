@@ -2,6 +2,7 @@ import { baseUrl, getHeaders } from "../../api/api";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { AiFillFilePdf } from "react-icons/ai";
+import { FcVlc } from "react-icons/fc";
 import ProgressBar from "react-progress-bar-plus";
 import "react-progress-bar-plus/lib/progress-bar.css";
 import { useState } from "react";
@@ -222,7 +223,7 @@ const UploadKnowledge = ({
                     <span className="text-color_dark_gray">
                       {formData?.pdfFile?.name}
                     </span>
-                    <span className="text-color_secondary text-xl">
+                    <span className="text-red-700 text-xl">
                       <AiFillFilePdf />
                     </span>
                   </div>
@@ -251,8 +252,8 @@ const UploadKnowledge = ({
                       <span className="text-color_dark_gray">
                         {formData?.videoFile?.name}
                       </span>
-                      <span className="text-color_secondary text-xl">
-                        {/* <AiFillFilePdf /> */}
+                      <span className="text-xl">
+                        <FcVlc />
                       </span>
                     </div>
                   )}
