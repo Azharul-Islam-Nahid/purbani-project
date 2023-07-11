@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import DashboardLayout from "../../../components/common/DashboardLayout";
-import Image from "next/image";
-import { FaUser } from "react-icons/fa";
 import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
 import { baseUrl, getHeaders } from "../../../api/api";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 
-const Employeers = () => {
+const Employees = () => {
   const router = useRouter();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refetch, setRefetch] = useState(true);
+  const filteredUsers = users.filter((user) => user.role !== "super_admin");
+
   useEffect(() => {
     (async () => {
       try {
@@ -23,11 +23,11 @@ const Employeers = () => {
         setLoading(false);
         setUsers(data.data.data);
       } catch (error) {
-        // console.log(error);
         setLoading(false);
       }
     })();
   }, [refetch]);
+
   const handleDeleteUser = async (id) => {
     try {
       const { data: data } = await axios.delete(
@@ -77,8 +77,8 @@ const Employeers = () => {
             </tr>
           </thead>
           <tbody>
-            {users &&
-              users.map((user, index) => (
+            {filteredUsers &&
+              filteredUsers.map((user, index) => (
                 <tr key={user?._id} className="hover">
                   <th className="p-2">{index + 1}</th>
                   <td className="p-2">{user?.name}</td>
@@ -114,7 +114,7 @@ const Employeers = () => {
   );
 };
 
-Employeers.auth = {
+Employees.auth = {
   adminOnly: true,
 };
-export default Employeers;
+export default Employees;
