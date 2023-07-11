@@ -73,6 +73,7 @@ const Notice = () => {
                       </a>
                       <a
                         href={item?.downloadableLink}
+                        download
                         className="text-2xl text-color_brand hover:text-white transition-all duration-200"
                       >
                         <FaDownload />

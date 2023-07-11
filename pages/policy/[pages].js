@@ -81,6 +81,7 @@ const PageDetails = () => {
                       <a
                         className="text-2xl text-color_brand hover:text-color_dark transition-all duration-200"
                         href={item?.downloadableLink}
+                        download
                       >
                         <FaDownload />
                       </a>
