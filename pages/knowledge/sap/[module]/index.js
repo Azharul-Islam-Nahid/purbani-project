@@ -47,15 +47,6 @@ const Index = () => {
     );
   }
 
-  // if (!user) {
-  //   router.push("/unauthorized");
-  // } else {
-  //   if (!user.isAdmin) {
-  //     if (!user?.knowledgeAccesses?.includes(module?.toLowerCase())) {
-  //       router.push("/unauthorized");
-  //     }
-  //   }
-  // }
   if (
     !user ||
     (!user.isAdmin && !user?.knowledgeAccesses?.includes(module?.toLowerCase()))
@@ -68,14 +59,14 @@ const Index = () => {
       <Layout>
         <Navbar />
         <div className="p-5">
-          <div className="rounded-md m-auto bg-white max-w-[1100px] w-full h-[80vh] overflow-y-auto">
+          <div className="rounded-md m-auto bg-white max-w-[1000px] h-[80vh] overflow-y-auto">
             {knowledge?.map((media, i) => (
               <div
                 key={media?._id}
-                className="flex w-full p-10 justify-center items-center"
+                className="w-full p-10 flex flex-col justify-center items-center"
               >
-                <div className="flex-1 flex items-center">
-                  <div className="text-lg font-bold px-4">
+                <div className="flex gap-x-2 items-center mb-5">
+                  <div className="text-lg font-bold">
                     {i + 1}. {media?.title}
                   </div>
                   <div>
@@ -89,10 +80,10 @@ const Index = () => {
                     </a>
                   </div>
                 </div>
-                <div className="flex-1">
+                <div>
                   {media?.videoLink && (
                     <Video
-                      cloudName="dqlxcdlce"
+                      cloudName="dfhzvfeh4"
                       publicId={media?.cloudinaryVideoId}
                       controls
                       controlsList="nodownload"

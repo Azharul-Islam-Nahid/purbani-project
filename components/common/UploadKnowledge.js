@@ -63,10 +63,11 @@ const UploadKnowledge = ({
     if (formData.pdfFile) {
       try {
         pdfForm.append("file", formData.pdfFile);
-        pdfForm.append("upload_preset", "wi9geu2m");
-        pdfForm.append("cloud_name", "dqlxcdlce");
+        pdfForm.append("upload_preset", "b97hu80x");
+        pdfForm.append("cloud_name", "dfhzvfeh4");
+        pdfForm.append("folder", "knowledge/pdf");
         const { data } = await axios.post(
-          "https://api.cloudinary.com/v1_1/dqlxcdlce/upload",
+          "https://api.cloudinary.com/v1_1/dfhzvfeh4/upload",
           pdfForm,
           {
             headers: {
@@ -90,10 +91,11 @@ const UploadKnowledge = ({
     if (formData.videoFile) {
       try {
         videoForm.append("file", formData.videoFile);
-        videoForm.append("upload_preset", "wi9geu2m");
-        videoForm.append("cloud_name", "dqlxcdlce");
+        videoForm.append("upload_preset", "b97hu80x");
+        videoForm.append("cloud_name", "dfhzvfeh4");
+        videoForm.append("folder", "knowledge/video");
         const { data } = await axios.post(
-          "https://api.cloudinary.com/v1_1/dqlxcdlce/upload",
+          "https://api.cloudinary.com/v1_1/dfhzvfeh4/upload",
           videoForm,
           {
             onUploadProgress: (progressEvent) => {
