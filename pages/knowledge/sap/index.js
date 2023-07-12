@@ -1,19 +1,19 @@
 import { useRouter } from "next/router";
 import styles from "../../../styles/knowledge.module.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import Layout from "../../../components/common/Layout";
 import Navbar from "../../../components/common/navbar";
-import UseGetUser from "../../../hooks/useGetUser";
+import { authContext } from "../../../context/authContext";
 
-// Reusable OptionCard component
+
 const OptionCard = ({ number, title, user }) => {
   const router = useRouter();
 
   const handleButtonClick = (link) => {
     if (
-      !user.isAdmin &&
-      !user.knowledgeAccesses.includes(title.toLowerCase())
+      !user?.isAdmin &&
+      !user?.knowledgeAccesses.includes(title.toLowerCase())
     ) {
       Swal.fire({
         icon: "error",
@@ -41,9 +41,9 @@ const OptionCard = ({ number, title, user }) => {
 };
 
 const KnowledgeMedia = () => {
-  const { user, isLoading } = UseGetUser();
+  const { state } = useContext(authContext);
 
-  if (isLoading) {
+  if (!state.user) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">
@@ -62,13 +62,13 @@ const KnowledgeMedia = () => {
         <div
           className={`${styles.dashboardOptions} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center items-center my-5 mx-auto`}
         >
-          <OptionCard number={1} title="BASIS" user={user} />
-          <OptionCard number={2} title="ABAP" user={user} />
-          <OptionCard number={3} title="FICO" user={user} />
-          <OptionCard number={4} title="PM" user={user} />
-          <OptionCard number={5} title="HCM" user={user} />
-          <OptionCard number={6} title="SD" user={user} />
-          <OptionCard number={7} title="MM" user={user} />
+          <OptionCard number={1} title="BASIS" user={state.user} />
+          <OptionCard number={2} title="ABAP" user={state.user} />
+          <OptionCard number={3} title="FICO" user={state.user} />
+          <OptionCard number={4} title="PM" user={state.user} />
+          <OptionCard number={5} title="HCM" user={state.user} />
+          <OptionCard number={6} title="SD" user={state.user} />
+          <OptionCard number={7} title="MM" user={state.user} />
         </div>
       </div>
     </Layout>

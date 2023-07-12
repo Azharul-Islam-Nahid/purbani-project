@@ -7,12 +7,12 @@ import { baseUrl, getHeaders } from "../../../api/api";
 import Swal from "sweetalert2";
 
 const Notice = () => {
-  const [status, setStatus] = useState("loading");
   const [formData, setFormData] = useState({});
   const [department, setDepartment] = useState("notice");
   const [title, setTitle] = useState("");
   const [subDepartment, setSubDepartment] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [allPdf, setAllPdf] = useState([]);
   const [refetch, setRefetch] = useState(true);
 
@@ -23,32 +23,27 @@ const Notice = () => {
           `${baseUrl}/notice/get-all-notice`,
           { headers: getHeaders() }
         );
-        setLoading(false);
         setAllPdf(data.data);
+        setIsLoading(false);
       } catch (error) {
-        console.log(error);
-        setLoading(false);
+        setIsLoading(false);
       }
     })();
   }, [refetch]);
 
-  console.log(allPdf);
-
   const handleDeletePdf = async (id) => {
     try {
-      const { data: data } = await axios.delete(
-        `${baseUrl}/notice/delete-one-notice/${id}`,
-        { headers: getHeaders() }
-      );
+      await axios.delete(`${baseUrl}/notice/delete-one-notice/${id}`, {
+        headers: getHeaders(),
+      });
       Swal.fire({
         icon: "success",
-        title: "Your work has been saved",
+        title: "Deleted successfully",
         showConfirmButton: false,
         timer: 1500,
       });
       setRefetch(!refetch);
     } catch (error) {
-      console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -57,17 +52,10 @@ const Notice = () => {
     }
   };
 
-  useEffect(() => {
-    // Simulating an asynchronous process
-    setTimeout(() => {
-      setStatus("authenticated");
-    }, 500);
-  }, []);
-
-  if (status !== "authenticated") {
+  if (isLoading) {
     return (
       <DashboardLayout title="Document">
-        <div className="w-full h-[80vh] flex flex-col justify-center items-center">
+        <div className="w-full flex h-[80vh] flex-col justify-center items-center">
           <div className="flex justify-center relative">
             <div className="custom-loader"></div>
           </div>

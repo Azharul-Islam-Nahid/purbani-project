@@ -13,7 +13,7 @@ import {
 import { RiAdminFill } from "react-icons/ri";
 import { TbPackageExport, TbPigMoney } from "react-icons/tb";
 import { SiUblockorigin, SiHelpscout } from "react-icons/si";
-import { AiFillFilePdf, AiOutlineAudit, AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineAudit, AiOutlineDelete } from "react-icons/ai";
 import { FaPaperPlane, FaMoneyCheckAlt } from "react-icons/fa";
 import { GiLargeDress } from "react-icons/gi";
 import axios from "axios";
@@ -41,21 +41,14 @@ const departments = [
 ];
 
 const Department = () => {
-  const [status, setStatus] = useState("loading");
   const [department, setDepartment] = useState("sustainability");
   const [title, setTitle] = useState("");
   const [subDepartment, setSubDepartment] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState({});
   const [allPdf, setAllPdf] = useState([]);
   const [refetch, setRefetch] = useState(true);
-
-  useEffect(() => {
-    // Simulating an asynchronous process
-    setTimeout(() => {
-      setStatus("authenticated");
-    }, 500);
-  }, []);
 
   useEffect(() => {
     (async () => {
@@ -64,30 +57,27 @@ const Department = () => {
           `${baseUrl}/document/get-all-document?department=${department}`,
           { headers: getHeaders() }
         );
-        setLoading(false);
         setAllPdf(data.data.data);
+        setIsLoading(false);
       } catch (error) {
-        console.log(error);
-        setLoading(false);
+        setIsLoading(false);
       }
     })();
   }, [department, refetch]);
 
   const handleDeletePdf = async (id) => {
     try {
-      const { data: data } = await axios.delete(
-        `${baseUrl}/document/delete-one-document/${id}`,
-        { headers: getHeaders() }
-      );
+      await axios.delete(`${baseUrl}/document/delete-one-document/${id}`, {
+        headers: getHeaders(),
+      });
       Swal.fire({
         icon: "success",
-        title: "Your work has been saved",
+        title: "Deleted successfully",
         showConfirmButton: false,
         timer: 1500,
       });
       setRefetch(!refetch);
     } catch (error) {
-      console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -96,7 +86,7 @@ const Department = () => {
     }
   };
 
-  if (status !== "authenticated") {
+  if (isLoading) {
     return (
       <DashboardLayout title="Document">
         <div className="w-full flex h-[80vh] flex-col justify-center items-center">

@@ -2,15 +2,15 @@ import { useRouter } from "next/router";
 import Layout from "../../../../components/common/Layout";
 import Navbar from "../../../../components/common/navbar";
 import { BsEye } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Video } from "cloudinary-react";
 import { baseUrl, getHeaders } from "../../../../api/api";
-import UseGetUser from "../../../../hooks/useGetUser";
+import { authContext } from "../../../../context/authContext";
 
 const Index = () => {
   const router = useRouter();
-  const { user, isLoading } = UseGetUser();
+  const { state } = useContext(authContext);
   const { module } = router.query;
   const [knowledge, setKnowledge] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +31,7 @@ const Index = () => {
     })();
   }, [url, module]);
 
-  if (loading || isLoading) {
+  if (loading) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">
@@ -44,8 +44,9 @@ const Index = () => {
   }
 
   if (
-    !user ||
-    (!user.isAdmin && !user?.knowledgeAccesses?.includes(module?.toLowerCase()))
+    !state?.user ||
+    (!state?.user?.isAdmin &&
+      !state?.user?.knowledgeAccesses?.includes(module?.toLowerCase()))
   ) {
     router.push("/");
   }

@@ -41,12 +41,12 @@ const departments = [
 ];
 
 const Department = () => {
-  const [status, setStatus] = useState("loading");
   const [formData, setFormData] = useState({});
   const [department, setDepartment] = useState("sustainability");
   const [title, setTitle] = useState("");
   const [subDepartment, setSubDepartment] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [allPdf, setAllPdf] = useState([]);
   const [refetch, setRefetch] = useState(true);
 
@@ -57,10 +57,10 @@ const Department = () => {
           `${baseUrl}/policy/get-all-policy?department=${department}`,
           { headers: getHeaders() }
         );
-        setLoading(false);
         setAllPdf(data.data.data);
+        setIsLoading(false);
       } catch (error) {
-        setLoading(false);
+        setIsLoading(false);
       }
     })();
   }, [department, refetch]);
@@ -73,7 +73,7 @@ const Department = () => {
       );
       Swal.fire({
         icon: "success",
-        title: "Your work has been saved",
+        title: "Deleted successfully",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -87,14 +87,7 @@ const Department = () => {
     }
   };
 
-  useEffect(() => {
-    // Simulating an asynchronous process
-    setTimeout(() => {
-      setStatus("authenticated");
-    }, 500);
-  }, []);
-
-  if (status !== "authenticated") {
+  if (isLoading) {
     return (
       <DashboardLayout title="Document">
         <div className="w-full h-[80vh] flex flex-col justify-center items-center">

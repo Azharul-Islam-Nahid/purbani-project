@@ -6,7 +6,8 @@ import { SiKnowledgebase } from "react-icons/si";
 import { MdOutlinePolicy } from "react-icons/md";
 import { IoIosPeople } from "react-icons/io";
 import { useRouter } from "next/router";
-import { signOut } from "next-auth/react";
+import { useContext } from "react";
+import { authContext } from "../../context/authContext";
 
 const routes = [
   {
@@ -43,10 +44,12 @@ const routes = [
 
 const Sidebar = () => {
   const router = useRouter();
+  const { dispatch } = useContext(authContext);
 
   const handleLogout = () => {
+    router.push("/login");
     localStorage.clear("x-auth-token");
-    router.reload();
+    dispatch({ type: "LOGOUT" });
   };
 
   return (

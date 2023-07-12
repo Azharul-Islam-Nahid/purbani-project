@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { baseUrl } from "../../../api/api";
 import DashboardLayout from "../../../components/common/DashboardLayout";
 import axios from "axios";
@@ -26,7 +26,6 @@ const departments = [
 const roles = ["admin", "user"];
 
 const Register = () => {
-  const [status, setStatus] = useState("loading");
   const [registrationFailed, setRegistrationFailed] = useState(false);
   const [formData, setFormData] = useState({});
   const [name, setName] = useState("");
@@ -46,15 +45,6 @@ const Register = () => {
     }));
   };
 
-  useEffect(() => {
-    setRegistrationFailed(false);
-    // Simulating an asynchronous process
-    setTimeout(() => {
-      setStatus("authenticated");
-    }, 500);
-  }, []);
-
-  // Registration API
   const handleRegistration = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -92,18 +82,6 @@ const Register = () => {
         setRegistrationFailed(true);
       });
   };
-
-  if (status !== "authenticated") {
-    return (
-      <DashboardLayout title="Document">
-        <div className="w-full h-[80vh] flex flex-col justify-center items-center">
-          <div className="flex justify-center relative">
-            <div className="custom-loader"></div>
-          </div>
-        </div>
-      </DashboardLayout>
-    );
-  }
 
   return (
     <DashboardLayout>

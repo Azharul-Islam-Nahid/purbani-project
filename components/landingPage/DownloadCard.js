@@ -1,17 +1,18 @@
 import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import Image from "next/image";
 import DownloadPopUp from "../common/downloadPopUp";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import Typewriter from "typewriter-effect";
+import { authContext } from "../../context/authContext";
 
 const DownloadCard = () => {
   const router = useRouter();
+  const { state } = useContext(authContext);
   const [url, setUrl] = useState(true);
 
   const handleLinkClick = (link) => {
-    const token = localStorage.getItem("x-auth-token");
-    if (!token) {
+    if (!state.user) {
       window.my_modal_3.showModal();
       setUrl(link);
     } else {

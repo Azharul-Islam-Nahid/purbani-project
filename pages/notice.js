@@ -1,14 +1,14 @@
 import { FaDownload } from "react-icons/fa";
 import Layout from "../components/common/Layout";
 import Navbar from "../components/common/navbar";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { baseUrl, getHeaders } from "../api/api";
 import axios from "axios";
 import { BsEye } from "react-icons/bs";
-import UseGetUser from "../hooks/useGetUser";
+import { authContext } from "../context/authContext";
 
 const Notice = () => {
-  const { user, isLoading } = UseGetUser();
+  const { state } = useContext(authContext);
   const [notice, setNotice] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +27,7 @@ const Notice = () => {
     })();
   }, []);
 
-  if (loading || isLoading) {
+  if (loading) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">
@@ -84,7 +84,7 @@ const Notice = () => {
           </div>
         </div>
         <div className="text-white text-center pt-6 text-xl capitalize">
-          {`${user?.name}, Welcome to Purbani Document Management System`}
+          {`${state?.user?.name}, Welcome to Purbani Document Management System`}
         </div>
       </div>
     </Layout>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Layout from "../components/common/Layout";
 import Navbar from "../components/common/navbar";
 import Image from "next/image";
@@ -9,11 +9,11 @@ import SingUpPopup from "../components/common/SingUpPopup";
 import { baseUrl } from "../api/api";
 import axios from "axios";
 import Swal from "sweetalert2";
-import UseGetUser from "../hooks/useGetUser";
+import { authContext } from "../context/authContext";
 
 const Login = () => {
   const router = useRouter();
-  const { user, isLoading } = UseGetUser();
+  const { state, dispatch } = useContext(authContext);
   const [loading, setLoading] = useState(true);
   const { redirect } = router.query;
   const [employeeId, setEmployeeId] = useState("");
@@ -22,11 +22,11 @@ const Login = () => {
   const [incorrectCredentials, setIncorrectCredentials] = useState(false);
 
   useEffect(() => {
-    if (user.email) {
+    if (state.user) {
       router.push(redirect || "/");
     }
     setLoading(false);
-  }, [router, redirect, user.email, isLoading]);
+  }, [router, redirect, state.user]);
 
   // Login API
   const handleLogin = async () => {
@@ -39,6 +39,13 @@ const Login = () => {
 
       setSubmitLoading(false);
       localStorage.setItem("x-auth-token", data.data.accessToken);
+      dispatch({
+        type: "LOGIN",
+        payload: {
+          user: data.data,
+          loading: false,
+        },
+      });
       router.push(redirect || "/");
     } catch ({ response }) {
       setSubmitLoading(false);
@@ -50,7 +57,7 @@ const Login = () => {
     }
   };
 
-  if (loading || isLoading || submitLoading) {
+  if (loading || submitLoading) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">
@@ -62,7 +69,7 @@ const Login = () => {
     );
   }
 
-  if (user.email) {
+  if (state.user) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">

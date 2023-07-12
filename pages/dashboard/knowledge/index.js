@@ -1,26 +1,14 @@
 import React, { useEffect, useState } from "react";
 import DashboardLayout from "../../../components/common/DashboardLayout";
 import DepartmentList from "../../../components/common/DepartmentList";
-import UploadForm from "../../../components/common/UploadForm";
-import { MdLaptopMac, MdAccountBalance, MdLocalFlorist } from "react-icons/md";
-import { RiAdminFill } from "react-icons/ri";
-import { TbPackageExport, TbPigMoney } from "react-icons/tb";
-import { SiUblockorigin, SiHelpscout } from "react-icons/si";
+import { MdLocalFlorist } from "react-icons/md";
 import UploadKnowledge from "../../../components/common/UploadKnowledge";
 import { AiOutlineDelete } from "react-icons/ai";
 import axios from "axios";
 import { baseUrl, getHeaders } from "../../../api/api";
 import Swal from "sweetalert2";
 
-const departments = [
-  { name: "sap", logo: <MdLocalFlorist /> },
-  // { name: "abap", logo: <MdLaptopMac /> },
-  // { name: "fico", logo: <RiAdminFill /> },
-  // { name: "pm", logo: <MdAccountBalance /> },
-  // { name: "hcm", logo: <TbPigMoney /> },
-  // { name: "sd", logo: <TbPackageExport /> },
-  // { name: "mm", logo: <SiUblockorigin /> },
-];
+const departments = [{ name: "sap", logo: <MdLocalFlorist /> }];
 
 const KnowledgeDashboard = () => {
   const [status, setStatus] = useState("loading");
@@ -28,16 +16,10 @@ const KnowledgeDashboard = () => {
   const [subDepartment, setSubDepartment] = useState("");
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState({});
   const [allPdf, setAllPdf] = useState([]);
   const [refetch, setRefetch] = useState(true);
-
-  useEffect(() => {
-    // Simulating an asynchronous process
-    setTimeout(() => {
-      setStatus("authenticated");
-    }, 500);
-  }, []);
 
   useEffect(() => {
     (async () => {
@@ -46,30 +28,28 @@ const KnowledgeDashboard = () => {
           `${baseUrl}/knowledge/get-all-knowledge?department=${department}`,
           { headers: getHeaders() }
         );
-        setLoading(false);
         setAllPdf(data.data.data);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
-        setLoading(false);
+        setIsLoading(false);
       }
     })();
   }, [department, refetch]);
 
   const handleDeletePdf = async (id) => {
     try {
-      const { data: data } = await axios.delete(
-        `${baseUrl}/knowledge/delete-one-knowledge/${id}`,
-        { headers: getHeaders() }
-      );
+      await axios.delete(`${baseUrl}/knowledge/delete-one-knowledge/${id}`, {
+        headers: getHeaders(),
+      });
       Swal.fire({
         icon: "success",
-        title: "Your work has been saved",
+        title: "Deleted successfully",
         showConfirmButton: false,
         timer: 1500,
       });
       setRefetch(!refetch);
     } catch (error) {
-      console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -78,7 +58,7 @@ const KnowledgeDashboard = () => {
     }
   };
 
-  if (status !== "authenticated") {
+  if (isLoading) {
     return (
       <DashboardLayout title="Document">
         <div className="w-full flex h-[80vh] flex-col justify-center items-center">
@@ -107,7 +87,6 @@ const KnowledgeDashboard = () => {
               formData={formData}
               setFormData={setFormData}
               department={department}
-              // setDepartment={setDepartment}
               title={title}
               setTitle={setTitle}
               loading={loading}

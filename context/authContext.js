@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useReducer, createContext } from "react";
+import { baseUrl, getHeaders } from "../api/api";
 
 // Initial State
-const initialState = { userData: null };
+const initialState = { user: null, loading: true, logout: false };
 
 // Create Context
 const authContext = createContext();
@@ -11,28 +12,49 @@ const authContext = createContext();
 const rootReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      return { ...state, userData: action.payload };
+      return {
+        ...state,
+        user: action.payload?.user,
+        loading: action.payload?.loading,
+      };
     case "LOGOUT":
-      return { ...state, userData: null };
+      return { ...state, user: null, loading: false, logout: true };
     default:
       return state;
   }
 };
 
-// console.log("initial State", initialState.user);
-// Context AuthProvider
-
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(rootReducer, initialState);
-  
-  // useEffect(() => {
-  //   const token = localStorage.getItem("x-auth-token");
-  //   const user = JSON.parse(localStorage.getItem("user"));
-  //   dispatch({
-  //     type: "LOGIN",
-  //     payload: { token, user },
-  //   });
-  // }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data: data } = await axios.get(
+          `${baseUrl}/users/get-one-user`,
+          {
+            headers: getHeaders(),
+          }
+        );
+
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            user: data.data,
+            loading: false,
+          },
+        });
+      } catch ({ response }) {
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            user: null,
+            loading: false,
+          },
+        });
+      }
+    })();
+  }, []);
 
   return (
     <authContext.Provider value={{ state, dispatch }}>

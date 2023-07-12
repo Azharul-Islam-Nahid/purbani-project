@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -6,21 +6,21 @@ import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import dynamic from "next/dynamic";
 import { BsFillPersonFill } from "react-icons/bs";
 import PopUp from "./PopUp";
-import UseGetUser from "../../hooks/useGetUser";
+import { authContext } from "../../context/authContext";
 
 const Navbar = () => {
-  const { user } = UseGetUser();
   const router = useRouter();
+  const { state, dispatch } = useContext(authContext);
   const [url, setUrl] = useState(true);
 
   const handleLogout = () => {
+    router.push("/login");
     localStorage.clear("x-auth-token");
-    router.reload();
+    dispatch({ type: "LOGOUT" });
   };
 
   const handleLinkClick = (link) => {
-    const token = localStorage?.getItem("x-auth-token");
-    if (!token) {
+    if (!state.user) {
       window.my_modal_3.showModal();
       setUrl(link);
     } else {
@@ -72,14 +72,12 @@ const Navbar = () => {
               </Link>
               <button
                 onClick={() => handleLinkClick("/login?redirect=/notice")}
-                // onClick={() => handleLinkClick("/login?redirect=/notice")}
                 className="text-color_white hover:text-color_brand transition-all duration-500"
               >
                 Notices
               </button>
               <button
                 onClick={() => handleLinkClick("/login?redirect=/policy")}
-                // onClick={() => handleLinkClick("/login?redirect=/department")}
                 className="text-color_white hover:text-color_brand transition-all duration-500"
               >
                 Policies
@@ -90,7 +88,7 @@ const Navbar = () => {
               >
                 Knowledge
               </button>
-              {user?.isAdmin && (
+              {state?.user?.isAdmin && (
                 <button
                   onClick={() => handleLinkClick("/login?redirect=/dashboard")}
                   className="text-color_white hover:text-color_brand transition-all duration-500"
@@ -106,7 +104,7 @@ const Navbar = () => {
             router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""
           } `}
         >
-          {user.email ? (
+          {state?.user ? (
             <div className="flex items-center gap-x-3">
               <BsFillPersonFill size={34} className="text-white" />
               <button

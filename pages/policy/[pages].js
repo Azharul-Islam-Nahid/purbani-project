@@ -4,14 +4,14 @@ import { BsEye } from "react-icons/bs";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { baseUrl, getHeaders } from "../../api/api";
 import axios from "axios";
-import UseGetUser from "../../hooks/useGetUser";
+import { authContext } from "../../context/authContext";
 
 const PageDetails = () => {
-  const { user, isLoading } = UseGetUser();
   const router = useRouter();
+  const { state } = useContext(authContext);
   const { pages } = router.query;
   const [policy, setPolicy] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -42,7 +42,7 @@ const PageDetails = () => {
     })();
   }, [pages, url]);
 
-  if (loading || isLoading) {
+  if (loading) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">
@@ -92,7 +92,7 @@ const PageDetails = () => {
           </div>
         )}
         <div className="text-white text-center pt-6 text-xl capitalize">
-          {`${user?.name}, Welcome to Purbani Document Management System`}
+          {`${state?.user?.name}, Welcome to Purbani Document Management System`}
         </div>
       </div>
     </Layout>
