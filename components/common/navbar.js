@@ -11,7 +11,7 @@ import { authContext } from "../../context/authContext";
 const Navbar = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(authContext);
-  const [url, setUrl] = useState(true);
+  const [url, setUrl] = useState("");
 
   const handleLogout = () => {
     router.push("/login");

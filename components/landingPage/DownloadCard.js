@@ -9,11 +9,11 @@ import { authContext } from "../../context/authContext";
 const DownloadCard = () => {
   const router = useRouter();
   const { state } = useContext(authContext);
-  const [url, setUrl] = useState(true);
+  const [url, setUrl] = useState("");
 
   const handleLinkClick = (link) => {
     if (!state.user) {
-      window.my_modal_3.showModal();
+      window.DownloadModal.showModal();
       setUrl(link);
     } else {
       router.push(link);
