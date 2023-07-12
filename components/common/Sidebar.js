@@ -7,6 +7,7 @@ import { MdOutlinePolicy } from "react-icons/md";
 import { IoIosPeople } from "react-icons/io";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
+
 const routes = [
   {
     title: "Department",
@@ -45,7 +46,6 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     localStorage.clear("x-auth-token");
-    localStorage.clear("user");
     router.reload();
   };
 

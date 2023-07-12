@@ -37,7 +37,7 @@ const Upload = () => {
         form,
         {
           headers: {
-            "x-auth-token": localStorage.getItem("token"),
+            "x-auth-token": localStorage.getItem("x-auth-token"),
           },
         }
       );

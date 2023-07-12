@@ -9,24 +9,24 @@ import SingUpPopup from "../components/common/SingUpPopup";
 import { baseUrl } from "../api/api";
 import axios from "axios";
 import Swal from "sweetalert2";
+import UseGetUser from "../hooks/useGetUser";
 
 const Login = () => {
   const router = useRouter();
+  const { user, isLoading } = UseGetUser();
+  const [loading, setLoading] = useState(true);
   const { redirect } = router.query;
   const [employeeId, setEmployeeId] = useState("");
-  const [loading, setLoading] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [incorrectCredentials, setIncorrectCredentials] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem("user")) {
-      setLoading(false);
-      router.push("/login");
-    } else {
+    if (user.email) {
       router.push(redirect || "/");
     }
-  }, [redirect]);
+    setLoading(false);
+  }, [router, redirect, user.email, isLoading]);
 
   // Login API
   const handleLogin = async () => {
@@ -39,7 +39,6 @@ const Login = () => {
 
       setSubmitLoading(false);
       localStorage.setItem("x-auth-token", data.data.accessToken);
-      localStorage.setItem("user", JSON.stringify(data.data));
       router.push(redirect || "/");
     } catch ({ response }) {
       setSubmitLoading(false);
@@ -51,7 +50,19 @@ const Login = () => {
     }
   };
 
-  if (loading) {
+  if (loading || isLoading || submitLoading) {
+    return (
+      <Layout title="Loading">
+        <div className="w-full h-screen flex flex-col justify-center items-center">
+          <div className="flex justify-center relative">
+            <div className="custom-loader"></div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (user.email) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">
@@ -117,11 +128,6 @@ const Login = () => {
                     Your employee ID or password is incorrect
                   </span>
                 </div>
-                {loading == true && (
-                  <div className="flex justify-center relative mb-[20px]">
-                    <div className="custom-loader"></div>
-                  </div>
-                )}
                 <div className="w-full flex justify-center">
                   <div className="py-8 w-full flex justify-center">
                     {submitLoading ? (

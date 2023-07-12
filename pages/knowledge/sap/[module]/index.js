@@ -6,22 +6,18 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Video } from "cloudinary-react";
 import { baseUrl, getHeaders } from "../../../../api/api";
+import UseGetUser from "../../../../hooks/useGetUser";
 
 const Index = () => {
   const router = useRouter();
+  const { user, isLoading } = UseGetUser();
   const { module } = router.query;
   const [knowledge, setKnowledge] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
   const [url, setUrl] = useState("");
 
   useEffect(() => {
     setUrl(`/knowledge/get-all-knowledge?department=sap&category=${module}`);
-    const user = JSON.parse(localStorage.getItem("user"));
-    setUser(user);
-  }, [module]);
-
-  useEffect(() => {
     (async () => {
       try {
         const { data: data } = await axios.get(`${baseUrl}${url}`, {
@@ -33,9 +29,9 @@ const Index = () => {
         setLoading(false);
       }
     })();
-  }, [url]);
+  }, [url, module]);
 
-  if (loading || !user) {
+  if (loading || isLoading) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">
@@ -51,7 +47,7 @@ const Index = () => {
     !user ||
     (!user.isAdmin && !user?.knowledgeAccesses?.includes(module?.toLowerCase()))
   ) {
-    router.push("/unauthorized");
+    router.push("/");
   }
 
   return (

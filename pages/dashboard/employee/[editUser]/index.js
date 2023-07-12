@@ -42,7 +42,7 @@ const EditUser = () => {
     (async () => {
       try {
         const { data: data } = await axios.get(
-          `${baseUrl}/users/get-one-user/${email}`,
+          `${baseUrl}/users/get-user/${email}`,
           { headers: getHeaders() }
         );
         setUser(data.data);
@@ -55,7 +55,6 @@ const EditUser = () => {
 
   const handleUpdateUser = async (e) => {
     e.preventDefault();
-    // setLoading(true);
     const form = e.target;
     const name = form.name.value;
     const password = form.password.value;
@@ -80,12 +79,14 @@ const EditUser = () => {
       updateUser.knowledgeAccesses = knowledgeAccesses;
     }
 
+    setLoading(true);
     try {
-      const response = await axios.put(
+      await axios.put(
         `${baseUrl}/users/update-one-user/${user?._id}`,
         updateUser,
         { headers: getHeaders() }
       );
+
       setLoading(false);
       Swal.fire({
         icon: "success",

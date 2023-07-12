@@ -3,6 +3,7 @@ import "tailwindcss/tailwind.css";
 import Layout from "../components/common/Layout";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import UseGetUser from "../hooks/useGetUser";
 
 export default function MyApp({ Component, pageProps: { ...pageProps } }) {
   return (
@@ -19,17 +20,10 @@ export default function MyApp({ Component, pageProps: { ...pageProps } }) {
 }
 
 function Auth({ children, adminOnly }) {
+  const { user, isLoading, error } = UseGetUser();
   const router = useRouter();
-  const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    setUser(user);
-    setLoading(false);
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">
@@ -41,7 +35,7 @@ function Auth({ children, adminOnly }) {
     );
   }
 
-  if (!user?.accessToken) {
+  if (!user.email) {
     router.push("/");
   }
 

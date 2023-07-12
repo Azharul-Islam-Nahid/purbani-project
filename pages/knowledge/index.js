@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from "react";
 import styles from "../../styles/knowledge.module.css";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
 import { useRouter } from "next/router";
+
 const Knowledge = () => {
   const router = useRouter();
-  const [user, setUser] = useState()
-  useEffect(() =>{
-    const getUser = JSON.parse(localStorage.getItem('user'))
-    setUser(getUser)
-  },[])
-  console.log(user?.role)
+
   return (
     <Layout title={"Knowledge"}>
       <div className="flex flex-col  items-center h-screen overflow-y-auto">
@@ -32,5 +27,6 @@ const Knowledge = () => {
     </Layout>
   );
 };
+
 Knowledge.auth = true;
 export default Knowledge;

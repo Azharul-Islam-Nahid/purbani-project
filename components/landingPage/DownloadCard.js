@@ -1,25 +1,24 @@
 import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import Image from "next/image";
-import dynamic from "next/dynamic";
-import Link from "next/link";
 import DownloadPopUp from "../common/downloadPopUp";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Typewriter from "typewriter-effect";
+
 const DownloadCard = () => {
-  const [url, setUrl] = useState(true);
   const router = useRouter();
+  const [url, setUrl] = useState(true);
 
   const handleLinkClick = (link) => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (!user) {
+    const token = localStorage.getItem("x-auth-token");
+    if (!token) {
       window.my_modal_3.showModal();
       setUrl(link);
     } else {
       router.push(link);
     }
   };
-  
+
   return (
     <div className="flex w-full justify-center my-24 font-extrabold px-60 p-10">
       <div className="flex flex-col justify-between py-6 h-[379px] w-[681px] backdrop-blur-md bg-gray-100/10 rounded-3xl items-center">
@@ -28,10 +27,13 @@ const DownloadCard = () => {
         </div>
         <div className="text-2xl text-white font-extrabold w-64 text-center">
           OUR PURPOSE IS TO BUILD A
-          <div >
+          <div>
             <Typewriter
               options={{
-                strings: ['BETTER FUTURE TOGETHER', '<span style="color:rgba(163, 35, 141, 1);">SUSTAINABLE FUTURE TOGETHER</span>'],
+                strings: [
+                  "BETTER FUTURE TOGETHER",
+                  '<span style="color:rgba(163, 35, 141, 1);">SUSTAINABLE FUTURE TOGETHER</span>',
+                ],
                 autoStart: true,
                 loop: true,
               }}

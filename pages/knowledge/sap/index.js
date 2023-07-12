@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import Layout from "../../../components/common/Layout";
 import Navbar from "../../../components/common/navbar";
+import UseGetUser from "../../../hooks/useGetUser";
 
 // Reusable OptionCard component
 const OptionCard = ({ number, title, user }) => {
@@ -40,16 +41,9 @@ const OptionCard = ({ number, title, user }) => {
 };
 
 const KnowledgeMedia = () => {
-  const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(true);
+  const { user, isLoading } = UseGetUser();
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    setUser(user);
-    setLoading(false);
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">

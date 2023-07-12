@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import { baseUrl, getHeaders } from "../api/api";
 import axios from "axios";
 import { BsEye } from "react-icons/bs";
+import UseGetUser from "../hooks/useGetUser";
 
 const Notice = () => {
+  const { user, isLoading } = UseGetUser();
   const [notice, setNotice] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({});
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
     (async () => {
       try {
         const { data: data } = await axios.get(
@@ -25,10 +25,9 @@ const Notice = () => {
         setLoading(false);
       }
     })();
-    setUser(user);
   }, []);
 
-  if (loading) {
+  if (loading || isLoading) {
     return (
       <Layout title="Loading">
         <div className="w-full h-screen flex flex-col justify-center items-center">

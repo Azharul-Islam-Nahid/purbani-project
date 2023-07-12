@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -5,27 +6,21 @@ import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import dynamic from "next/dynamic";
 import { BsFillPersonFill } from "react-icons/bs";
 import PopUp from "./PopUp";
-import { useEffect, useState } from "react";
+import UseGetUser from "../../hooks/useGetUser";
 
 const Navbar = () => {
+  const { user } = UseGetUser();
   const router = useRouter();
   const [url, setUrl] = useState(true);
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
-    const user = JSON?.parse(localStorage?.getItem("user"));
-    setUser(user);
-  }, []);
 
   const handleLogout = () => {
     localStorage.clear("x-auth-token");
-    localStorage.clear("user");
     router.reload();
   };
 
   const handleLinkClick = (link) => {
-    const user = JSON?.parse(localStorage?.getItem("user"));
-    if (!user) {
+    const token = localStorage?.getItem("x-auth-token");
+    if (!token) {
       window.my_modal_3.showModal();
       setUrl(link);
     } else {
@@ -111,7 +106,7 @@ const Navbar = () => {
             router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""
           } `}
         >
-          {user ? (
+          {user.email ? (
             <div className="flex items-center gap-x-3">
               <BsFillPersonFill size={34} className="text-white" />
               <button
