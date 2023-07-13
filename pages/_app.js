@@ -6,9 +6,13 @@ import { AuthProvider, authContext } from "../context/authContext";
 import { useContext } from "react";
 
 export default function MyApp({ Component, pageProps: { ...pageProps } }) {
+  const bgUrl =
+    "bg-[url('https://res.cloudinary.com/dfhzvfeh4/image/upload/v1689253529/background-images/bg_primary_znk4if.png')]";
+  const bgStyles = "bg-no-repeat bg-cover h-screen";
+
   return (
     <AuthProvider>
-      <div className="bg-[url('https://i.ibb.co/8Ycnyqx/bg-primary.png')] bg-no-repeat bg-cover h-screen">
+      <section className={`${bgUrl} ${bgStyles}`}>
         {Component.auth ? (
           <Auth adminOnly={Component?.auth?.adminOnly}>
             <Component {...pageProps} />
@@ -16,7 +20,7 @@ export default function MyApp({ Component, pageProps: { ...pageProps } }) {
         ) : (
           <Component {...pageProps} />
         )}
-      </div>
+      </section>
     </AuthProvider>
   );
 }

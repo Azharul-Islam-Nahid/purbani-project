@@ -64,26 +64,39 @@ const Employees = () => {
 
   return (
     <DashboardLayout>
-      <div className="mt-5 bg-white text-black border-l-3 border-r-3 border-color_pink rounded-lg p-6">
-        <table className="min-w-[800px] text-center ">
+      <div className="mt-5 bg-white text-black border-l-3 border-r-3 border-color_pink rounded-lg p-10 max-w-[1000px] w-full">
+        <table className="w-full">
           <thead>
             <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Role</th>
-              <th>Knowledge</th>
-              <th>Action</th>
-              <th></th>
+              <th className="border border-color_brand">No</th>
+              <th className="border border-color_brand text-left pl-2">Name</th>
+              <th className="border border-color_brand text-left pl-2">Role</th>
+              <th className="border border-color_brand text-left px-2">
+                Knowledge
+              </th>
+              <th className="border border-color_brand text-left pl-2">Edit</th>
+              <th className="border border-color_brand text-left pl-2">
+                Delete
+              </th>
             </tr>
           </thead>
           <tbody>
             {filteredUsers &&
               filteredUsers.map((user, index) => (
-                <tr key={user?._id} className="hover">
-                  <th className="p-2">{index + 1}</th>
-                  <td className="p-2">{user?.name}</td>
-                  <td className="p-2">{user?.role}</td>
-                  <td className="p-2">
+                <tr
+                  key={user?._id}
+                  className="hover border border-t-0 border-color_brand"
+                >
+                  <th className="p-2 text-color_pink border border-t-0 border-color_brand ">
+                    {index + 1}.
+                  </th>
+                  <td className="p-2 border border-color_brand border-t-0">
+                    {user?.name}
+                  </td>
+                  <td className="p-2 border border-color_brand border-t-0 capitalize">
+                    {user?.role}
+                  </td>
+                  <td className="p-2 border border-color_brand border-t-0">
                     {user.knowledgeAccesses.length > 0 ? "Yes" : "No"}
                   </td>
 
@@ -91,9 +104,9 @@ const Employees = () => {
                     onClick={() => {
                       router.push(`/dashboard/employee/${user?.email}`);
                     }}
-                    className="cursor-pointer p-2 "
+                    className="cursor-pointer p-2 border border-color_brand border-t-0"
                   >
-                    <div className="flex items-center gap-x-2">
+                    <div className="flex items-center gap-x-2 hover:text-blue-500">
                       <AiFillEdit /> <span>Edit</span>
                     </div>
                   </td>

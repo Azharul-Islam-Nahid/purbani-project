@@ -1,12 +1,22 @@
+/* eslint-disable @next/next/no-img-element */
 import { useContext, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import dynamic from "next/dynamic";
 import { BsFillPersonFill } from "react-icons/bs";
 import PopUp from "./PopUp";
 import { authContext } from "../../context/authContext";
+
+const routes = [
+  { title: "mission", route: "/" },
+  { title: "vision", route: "/" },
+  { title: "values", route: "/" },
+  { title: "notice", route: "/login?redirect=/notice" },
+  { title: "policies", route: "/login?redirect=/policy" },
+  { title: "knowledge", route: "/login?redirect=/knowledge" },
+  { title: "dashboard", route: "/login?redirect=/dashboard" },
+];
 
 const Navbar = () => {
   const router = useRouter();
@@ -54,48 +64,26 @@ const Navbar = () => {
 
         {router.pathname == "/" && (
           <div>
-            <div className="text-lg flex gap-9 font-semibold">
-              <Link className="" href={"/"}>
-                <a className="text-color_white hover:text-color_brand transition-all duration-500">
-                  Mission
-                </a>
-              </Link>
-              <Link href={"/"}>
-                <a className="text-color_white hover:text-color_brand transition-all duration-500">
-                  Vision
-                </a>
-              </Link>
-              <Link href={"/"}>
-                <a className="text-color_white hover:text-color_brand transition-all duration-500">
-                  Values
-                </a>
-              </Link>
-              <button
-                onClick={() => handleLinkClick("/login?redirect=/notice")}
-                className="text-color_white hover:text-color_brand transition-all duration-500"
-              >
-                Notices
-              </button>
-              <button
-                onClick={() => handleLinkClick("/login?redirect=/policy")}
-                className="text-color_white hover:text-color_brand transition-all duration-500"
-              >
-                Policies
-              </button>
-              <button
-                onClick={() => handleLinkClick("/login?redirect=/knowledge")}
-                className="text-color_white hover:text-color_brand transition-all duration-500"
-              >
-                Knowledge
-              </button>
-              {state?.user?.isAdmin && (
-                <button
-                  onClick={() => handleLinkClick("/login?redirect=/dashboard")}
-                  className="text-color_white hover:text-color_brand transition-all duration-500"
-                >
-                  Dashboard
-                </button>
-              )}
+            <div className="text-lg flex gap-x-6 font-semibold">
+              {routes.map(({ title, route }) => {
+                return title.includes("dashboard") ? (
+                  state?.user?.isAdmin && (
+                    <button
+                      onClick={() => handleLinkClick(route)}
+                      className="text-color_white hover:text-color_brand transition-all duration-500 capitalize"
+                    >
+                      {title}
+                    </button>
+                  )
+                ) : (
+                  <button
+                    onClick={() => handleLinkClick(route)}
+                    className="text-color_white hover:text-color_brand transition-all duration-500 capitalize"
+                  >
+                    {title}
+                  </button>
+                );
+              })}
             </div>
           </div>
         )}
@@ -106,7 +94,17 @@ const Navbar = () => {
         >
           {state?.user ? (
             <div className="flex items-center gap-x-3">
-              <BsFillPersonFill size={34} className="text-white" />
+              {state?.user?.profileImage ? (
+                <div className="ml-3 w-[30px] h-[30px] rounded-full">
+                  <img
+                    className="w-[30px] h-[30px] rounded-full"
+                    src={state?.user?.profileImage}
+                    alt="profile"
+                  />
+                </div>
+              ) : (
+                <BsFillPersonFill size={34} className="text-white" />
+              )}
               <button
                 className="w-20 h-10 inline-flex justify-center items-center text-white px-2 capitalize font-semibold font-sans cursor-pointer  rounded-xl bg-color_brand hover:bg-color_white hover:text-color_brand transition-all duration-500"
                 onClick={handleLogout}

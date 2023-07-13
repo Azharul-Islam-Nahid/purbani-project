@@ -41,7 +41,7 @@ const Notice = () => {
 
   return (
     <Layout title="Notice">
-      <div className="flex flex-col justify-between items-center h-screen overflow-y-auto">
+      <div className="flex flex-col justify-between items-center overflow-y-auto">
         <Navbar />
 
         <div className="w-full flex items-center justify-center mt-10">

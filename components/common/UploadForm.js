@@ -14,6 +14,8 @@ const UploadForm = ({
   setSubDepartment,
   loading,
   setLoading,
+  setRefetch,
+  refetch,
 }) => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -46,7 +48,8 @@ const UploadForm = ({
 
       setLoading(false);
       if (data.statusCode === 201) {
-        Swal.fire({
+        setRefetch(!refetch);
+        return Swal.fire({
           icon: "success",
           title: "Your work has been saved",
           showConfirmButton: false,
@@ -55,7 +58,7 @@ const UploadForm = ({
       }
     } catch (error) {
       setLoading(false);
-      Swal.fire({
+      return Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Something went wrong!",
@@ -65,7 +68,7 @@ const UploadForm = ({
 
   return (
     <div className="w-full flex flex-col items-center bg- rounded-lg shadow-lg py-10 border-b-3 border-t-3 bg-white border-color_pink mt-3">
-      <div className="text-xl flex justify-start border-b w-full px-10 font-semibold text-color_pink uppercase text-left pb-1">
+      <div className="text-xl flex justify-start border-color_pink border-b w-full px-10 font-semibold text-color_pink uppercase text-left pb-1">
         {department}
       </div>
       <div className="px-10 w-full ">
