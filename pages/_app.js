@@ -3,7 +3,7 @@ import "tailwindcss/tailwind.css";
 import Layout from "../components/common/Layout";
 import { useRouter } from "next/router";
 import { AuthProvider, authContext } from "../context/authContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 
 export default function MyApp({ Component, pageProps: { ...pageProps } }) {
   return (
