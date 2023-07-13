@@ -102,7 +102,7 @@ const KnowledgeDashboard = () => {
                 <div className="text-xl flex justify-start border-color_pink border-b w-full px-10 font-semibold text-color_pink uppercase text-left pb-1">
                   {department} - List
                 </div>
-                <div className="py-5 text-black  w-full">
+                <div className="pt-5 text-black overflow-y-auto max-h-[450px] w-full">
                   {allPdf?.map((list, i) => (
                     <div key={list?._id} className="border-b p-3">
                       <div className="mx-auto w-4/5 flex justify-between">

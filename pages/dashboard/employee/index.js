@@ -64,7 +64,7 @@ const Employees = () => {
 
   return (
     <DashboardLayout>
-      <div className="mt-5 bg-white text-black border-l-3 border-r-3 border-color_pink rounded-lg p-10 max-w-[1000px] w-full">
+      <div className="mt-5 bg-white text-black border-l-3 border-r-3 border-color_pink rounded-lg p-10 max-w-[1280px] w-full max-h-[85vh] overflow-y-auto">
         <table className="w-full">
           <thead>
             <tr>

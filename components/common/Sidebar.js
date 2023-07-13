@@ -1,5 +1,5 @@
 import styles from "../../styles/Sidebar.module.css";
-import { AiOutlineLogout} from "react-icons/ai";
+import { AiOutlineLogout } from "react-icons/ai";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { authContext } from "../../context/authContext";
@@ -16,8 +16,8 @@ const Sidebar = () => {
   };
 
   return (
-    <aside>
-      <div className={styles.sidebar}>
+    <aside className="max-w-[259px] w-full">
+      <div className={`${styles.sidebar} h-screen`}>
         <div
           onClick={() => router.push("/dashboard")}
           className={`${styles.sidebarTop} text-color_white text-2xl cursor-pointer`}

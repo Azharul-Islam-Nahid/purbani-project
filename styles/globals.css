@@ -10,7 +10,24 @@ body {
   margin: 0;
   font-family: "IBM Plex Sans", sans-serif;
   -ms-overflow-style: none; /*Hide Scrollbar in IE and Edge */
-  scrollbar-width: none; /*Hide Scrollbar in Firefox */
+  /*Hide Scrollbar in Firefox */
+}
+
+/* For Webkit browsers (e.g., Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(163, 35, 141, 0.8);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #272727;
 }
 
 .bg-main-global {
