@@ -5,10 +5,11 @@ import { useRouter } from "next/router";
 import { AuthProvider, authContext } from "../context/authContext";
 import { useContext } from "react";
 
+const bgUrl =
+  "bg-[url('https://res.cloudinary.com/dfhzvfeh4/image/upload/v1689253529/background-images/bg_primary_znk4if.png')]";
+const bgStyles = "bg-no-repeat bg-cover h-screen";
+
 export default function MyApp({ Component, pageProps: { ...pageProps } }) {
-  const bgUrl =
-    "bg-[url('https://res.cloudinary.com/dfhzvfeh4/image/upload/v1689253529/background-images/bg_primary_znk4if.png')]";
-  const bgStyles = "bg-no-repeat bg-cover h-screen";
 
   return (
     <AuthProvider>
