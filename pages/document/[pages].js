@@ -55,18 +55,23 @@ const PageDetails = () => {
   }
 
   return (
-    <Layout title={pages}>
+    <Layout title={pages.toUpperCase()}>
       <div className="h-screen overflow-y-auto">
         <Navbar />
         {document?.length && (
           <div className="w-full flex items-center justify-center pt-28">
-            <div className="grid  grid-cols-1 bg-white rounded-lg w-[800px] py-20 px-10 h-full">
+            <div className="grid grid-cols-1 bg-white rounded-lg w-[800px] p-10 h-full">
               {document?.map((item, idx) => {
                 return (
-                  <div key={idx} className="flex justify-between flex-row mb-2">
+                  <div
+                    key={idx}
+                    className="flex justify-between flex-row mb-2 border-b border-color_secondary rounded p-2"
+                  >
                     <div className="text-lg font-bold px-4 flex gap-x-1 items-center">
-                      {idx + 1}. {item.title}
-                      <AiFillFilePdf className="text-color_brand" />
+                      <span>
+                        <AiFillFilePdf className="text-color_brand" />
+                      </span>{" "}
+                      {item.title}
                     </div>
                     <div className="flex gap-x-5">
                       <a

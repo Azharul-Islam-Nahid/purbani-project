@@ -63,22 +63,27 @@ const PageDetails = () => {
             <div className="grid  grid-cols-1 bg-white rounded-lg w-[800px] py-20 px-10 h-full">
               {policy?.map((item, idx) => {
                 return (
-                  <div key={idx} className="flex justify-between flex-row mb-2">
+                  <div
+                    key={idx}
+                    className="flex justify-between flex-row mb-2 border-b border-color_secondary rounded p-2"
+                  >
                     <div className="text-lg font-bold px-4 flex gap-x-1 items-center">
-                      {idx + 1}. {item.title}
-                      <AiFillFilePdf className="text-color_brand" />
+                      <span>
+                        <AiFillFilePdf className="text-color_brand" />
+                      </span>{" "}
+                      {item.title}
                     </div>
                     <div className="flex gap-x-5">
                       <a
                         target="_blank"
                         rel="noreferrer"
                         href={item?.readableLink}
-                        className="cursor-pointer text-2xl text-color_brand hover:text-color_dark transition-all duration-200"
+                        className="cursor-pointer text-2xl text-color_brand hover:text-black transition-all duration-200"
                       >
                         <BsEye />
                       </a>
                       <a
-                        className="text-2xl text-color_brand hover:text-color_dark transition-all duration-200"
+                        className="text-2xl text-color_brand hover:text-black transition-all duration-200"
                         href={item?.downloadableLink}
                         download
                       >

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import styles from "../../../styles/knowledge.module.css";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Swal from "sweetalert2";
 import Layout from "../../../components/common/Layout";
 import Navbar from "../../../components/common/navbar";
@@ -60,7 +60,7 @@ const KnowledgeMedia = () => {
       <div className="flex flex-col items-center h-screen overflow-y-auto">
         <Navbar />
         <div
-          className={`${styles.dashboardOptions} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center items-center my-5 mx-auto`}
+          className={`${styles.dashboardOptions} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-5 justify-items-center items-center my-5 mx-auto`}
         >
           <OptionCard number={1} title="BASIS" user={state.user} />
           <OptionCard number={2} title="ABAP" user={state.user} />

@@ -8,7 +8,7 @@ const Knowledge = () => {
 
   return (
     <Layout title={"Knowledge"}>
-      <div className="flex flex-col  items-center h-screen overflow-y-auto">
+      <div className="flex flex-col items-center h-screen overflow-y-auto">
         <Navbar />
         <div className="w-full flex items-center justify-center mt-10">
           <div
