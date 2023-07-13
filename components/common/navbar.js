@@ -39,11 +39,11 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-center w-full relative z-20 ">
+    <div className="flex justify-center w-full sticky top-0 z-20">
       <div
-        className={`flex items-center ${
+        className={`flex backdrop-blur  rounded-md px-2 items-center ${
           router.pathname == "/" ? "justify-between" : "justify-center"
-        } w-3/4  h-24 border-b border-gray-400`}
+        } w-3/4 h-24 border-b border-gray-400`}
       >
         <div
           className={`${
@@ -64,7 +64,7 @@ const Navbar = () => {
 
         {router.pathname == "/" && (
           <div>
-            <div className="text-lg flex gap-x-6 font-semibold">
+            <div className="text-lg flex gap-x-5 lg:gap-x-8 xl:lg:gap-x-10 font-semibold">
               {routes.map(({ title, route }) => {
                 return title.includes("dashboard") ? (
                   state?.user?.isAdmin && (
@@ -94,10 +94,16 @@ const Navbar = () => {
         >
           {state?.user ? (
             <div className="flex items-center gap-x-3">
+              <button
+                className="ml-5 w-20 h-10 inline-flex justify-center items-center text-white px-2 capitalize font-semibold font-sans cursor-pointer  rounded-xl bg-color_brand hover:bg-color_white hover:text-color_brand transition-all duration-500"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
               {state?.user?.profileImage ? (
-                <div className="ml-3 w-[30px] h-[30px] rounded-full">
+                <div className="w-[40px] h-[40px] rounded-full">
                   <img
-                    className="w-[30px] h-[30px] rounded-full"
+                    className="w-[40px] h-[40px] rounded-full"
                     src={state?.user?.profileImage}
                     alt="profile"
                   />
@@ -105,17 +111,11 @@ const Navbar = () => {
               ) : (
                 <BsFillPersonFill size={34} className="text-white" />
               )}
-              <button
-                className="w-20 h-10 inline-flex justify-center items-center text-white px-2 capitalize font-semibold font-sans cursor-pointer  rounded-xl bg-color_brand hover:bg-color_white hover:text-color_brand transition-all duration-500"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
             </div>
           ) : (
             <div>
               {router.pathname == "/" && (
-                <div className="flex gap-6">
+                <div className="flex">
                   <button
                     className="w-24 h-11 rounded-xl  text-color_white hover:text-color_brand transition-all duration-100"
                     onClick={() => {
