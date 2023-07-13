@@ -6,7 +6,6 @@ import { FcVlc } from "react-icons/fc";
 import ProgressBar from "react-progress-bar-plus";
 import "react-progress-bar-plus/lib/progress-bar.css";
 import { useState } from "react";
-import styles from "../../styles/CustomProgress.module.css";
 
 const UploadKnowledge = ({
   url,
