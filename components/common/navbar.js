@@ -93,13 +93,7 @@ const Navbar = () => {
           } `}
         >
           {state?.user ? (
-            <div className="flex items-center gap-x-3">
-              <button
-                className="ml-5 w-20 h-10 inline-flex justify-center items-center text-white px-2 capitalize font-semibold font-sans cursor-pointer  rounded-xl bg-color_brand hover:bg-color_white hover:text-color_brand transition-all duration-500"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
+            <div className="ml-5 flex items-center gap-x-3">
               {state?.user?.profileImage ? (
                 <div className="w-[40px] h-[40px] rounded-full">
                   <img
@@ -111,6 +105,12 @@ const Navbar = () => {
               ) : (
                 <BsFillPersonFill size={34} className="text-white" />
               )}
+              <button
+                className="w-20 h-10 inline-flex justify-center items-center text-white px-2 capitalize font-semibold font-sans cursor-pointer  rounded-xl bg-color_brand hover:bg-color_white hover:text-color_brand transition-all duration-500"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
             </div>
           ) : (
             <div>

@@ -48,7 +48,7 @@ const Index = () => {
     (!state?.user?.isAdmin &&
       !state?.user?.knowledgeAccesses?.includes(module?.toLowerCase()))
   ) {
-    router.push("/");
+    router.push("/unauthorized?message=Authorization Required");
   }
 
   return (
@@ -56,41 +56,41 @@ const Index = () => {
       <Layout>
         <Navbar />
         <div className="p-5">
-          <div className="rounded-md m-auto bg-white max-w-[1000px] h-[80vh] overflow-y-auto">
-            {knowledge?.map((media, i) => (
-              <div
-                key={media?._id}
-                className="w-full p-10 flex flex-col justify-center items-center"
-              >
-                <div className="flex gap-x-2 items-center mb-5">
-                  <div className="text-lg font-bold">
-                    {i + 1}. {media?.title}
-                  </div>
-                  <div>
-                    <a
-                      target="_blank"
-                      rel="noreferrer"
-                      href={media?.pdfLink}
-                      className="cursor-pointer text-2xl text-color_brand hover:text-color_dark transition-all duration-200"
-                    >
-                      <BsEye />
-                    </a>
+          <div className="mx-auto max-w-[1280px] h-[85vh] overflow-y-auto">
+            <div className="w-full flex flex-wrap gap-3 justify-center">
+              {knowledge?.map((media, i) => (
+                <div key={i} className="max-w-[400px] flex justify-center">
+                  <div className="rounded-lg shadow-lg max-w-sm bg-white">
+                    {media?.videoLink && (
+                      <Video
+                        cloudName="dfhzvfeh4"
+                        publicId={media?.cloudinaryVideoId}
+                        controls
+                        controlsList="nodownload"
+                        quality="auto:eco"
+                        className="w-[400px] rounded-t-lg"
+                      />
+                    )}
+                    <div className="p-6">
+                      <h5 className="text-gray-900 text-xl font-medium mb-2 border-b border-color_secondary pb-2">
+                        {media?.title}
+                      </h5>
+                      {media?.pdfLink && (
+                        <a
+                          target="_blank"
+                          rel="noreferrer"
+                          href={media?.pdfLink}
+                          className="w-fit cursor-pointer text-xl text-color_brand hover:text-color_dark transition-all duration-200 border border-color_secondary flex gap-x-2 items-center px-2 rounded"
+                        >
+                          <span className="text-lg">PDF</span>
+                          <BsEye />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
-                <div>
-                  {media?.videoLink && (
-                    <Video
-                      cloudName="dfhzvfeh4"
-                      publicId={media?.cloudinaryVideoId}
-                      controls
-                      controlsList="nodownload"
-                      quality="auto:eco"
-                      style={{ width: "400px" }}
-                    />
-                  )}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </Layout>
