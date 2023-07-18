@@ -9,8 +9,17 @@ body {
   padding: 0;
   margin: 0;
   font-family: "IBM Plex Sans", sans-serif;
-  -ms-overflow-style: none; /*Hide Scrollbar in IE and Edge */
+  -ms-overflow-style: none;
+  /*Hide Scrollbar in IE and Edge */
   /*Hide Scrollbar in Firefox */
+}
+
+#preloader {
+  background: #000 url(../public/assets/images/200w.gif) no-repeat center center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
 }
 
 /* For Webkit browsers (e.g., Chrome, Safari) */
@@ -31,12 +40,11 @@ body {
 }
 
 .bg-main-global {
-  background: url("../public/assets/images/bg_primary.png") no-repeat center
-    center/cover;
+  background: url("../public/assets/images/bg_primary.png") no-repeat center center/cover;
 }
+
 .bg-vision {
-  background: url("../public/assets/images/vision.png") no-repeat center
-    center/cover;
+  background: url("../public/assets/images/vision.png") no-repeat center center/cover;
 }
 
 .custom-loader {
@@ -48,6 +56,7 @@ body {
   border-color: #a3238d #0000;
   animation: s6 1s infinite linear;
 }
+
 .custom-loader::before,
 .custom-loader::after {
   content: "";
@@ -56,12 +65,14 @@ body {
   border: inherit;
   border-radius: 50%;
 }
+
 .custom-loader::before {
   border-color: #394867 #0000;
   animation: inherit;
   animation-duration: 0.5s;
   animation-direction: reverse;
 }
+
 .custom-loader::after {
   margin: 8px;
 }
