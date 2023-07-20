@@ -5,27 +5,27 @@ import MissionAndVision from "../components/landingPage/MissionAndVission";
 import OurValues from "../components/landingPage/OurValues";
 import Footer from "../components/landingPage/Footer";
 import Layout from "../components/common/Layout";
-import Preloader from "../components/preloader/preloader.js";
-import { useState } from "react";
+// import Preloader from "../components/preloader/preloader.js";
+// import { useState } from "react";
 
 export default function Home() {
 
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
 
-  setTimeout(() => {
+  // setTimeout(() => {
 
-    setLoading(false)
+  //   setLoading(false)
 
-  }, 2000);
+  // }, 2000);
 
-  if (loading) {
+  // if (loading) {
 
 
-    return (
-      <Preloader />
-    )
+  //   return (
+  //     <Preloader />
+  //   )
 
-  }
+  // }
 
 
 
