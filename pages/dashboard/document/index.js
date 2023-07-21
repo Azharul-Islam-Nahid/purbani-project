@@ -22,8 +22,8 @@ import Swal from "sweetalert2";
 
 const departments = [
   { name: "sustainability", logo: <MdLocalFlorist /> },
-  { name: "it", logo: <MdLaptopMac /> },
-  { name: "hr", logo: <RiAdminFill /> },
+  { name: "IT", logo: <MdLaptopMac /> },
+  { name: "HR", logo: <RiAdminFill /> },
   { name: "accounts", logo: <MdAccountBalance /> },
   { name: "procurement", logo: <TbPigMoney /> },
   { name: "export", logo: <TbPackageExport /> },

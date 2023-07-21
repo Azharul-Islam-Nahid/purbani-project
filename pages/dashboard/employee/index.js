@@ -70,6 +70,7 @@ const Employees = () => {
             <tr>
               <th className="border border-color_brand">No</th>
               <th className="border border-color_brand text-left pl-2">Name</th>
+              <th className="border border-color_brand text-left pl-2">Email</th>
               <th className="border border-color_brand text-left pl-2">Role</th>
               <th className="border border-color_brand text-left px-2">
                 Knowledge
@@ -92,6 +93,9 @@ const Employees = () => {
                   </th>
                   <td className="p-2 border border-color_brand border-t-0">
                     {user?.name}
+                  </td>
+                  <td className="p-2 border border-color_brand border-t-0">
+                    {user?.email}
                   </td>
                   <td className="p-2 border border-color_brand border-t-0 capitalize">
                     {user?.role}
