@@ -1,6 +1,7 @@
 import Sidebar from "./Sidebar";
 import DashboardHeader from "./DashboardHeader";
 import Layout from "./Layout";
+import Navbar from "./navbar";
 
 const DashboardLayout = ({ title, children }) => {
 

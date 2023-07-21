@@ -7,11 +7,12 @@ import dynamic from "next/dynamic";
 import { BsFillPersonFill } from "react-icons/bs";
 import PopUp from "./PopUp";
 import { authContext } from "../../context/authContext";
-
+import Link from "next/link";
+import styles from '../../styles/navbar.module.css'
+import { BiChevronDown } from 'react-icons/bi'
+import { useEffect } from "react";
 const routes = [
-  { title: "mission", route: "/" },
-  { title: "vision", route: "/" },
-  { title: "values", route: "/" },
+  { title: "home", route: "/", icon: <BiChevronDown size={22} />, subroutes: [{ title: "Mission", route: "/#mission" }, { title: "Vission", route: '/#vision' }, { title: "Values", route: "/#values" }] },
   { title: "notice", route: "/login?redirect=/notice" },
   { title: "policies", route: "/login?redirect=/policy" },
   { title: "knowledge", route: "/login?redirect=/knowledge" },
@@ -22,6 +23,7 @@ const Navbar = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(authContext);
   const [url, setUrl] = useState("");
+  const [navbar, setNavbar] = useState(false);
 
   const handleLogout = () => {
     router.push("/login");
@@ -38,17 +40,31 @@ const Navbar = () => {
     }
   };
 
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= 600) {
+        setNavbar(true);
+      }else{
+        setNavbar(false)
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      // Clean up the event listener when the component unmounts
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [navbar]);
+
   return (
     <div className="flex justify-center w-full sticky top-0 z-20">
       <div
-        className={`flex backdrop-blur  rounded-md px-2 items-center ${
-          router.pathname == "/" ? "justify-between" : "justify-center"
-        } w-3/4 h-24 border-b border-gray-400`}
+        className={`flex ${navbar ? "bg-[rgba(0,0,0,0.6)]" : ""}  rounded-md px-2 items-center justify-between  w-3/4 h-24 border-b border-gray-400`}
       >
         <div
-          className={`${
-            router.pathname != "/" ? "w-1/2 ml-32" : ""
-          } inline-flex justify-end `}
+          className={`inline-flex justify-end`}
         >
           <Image
             src={purbaniLogo}
@@ -61,38 +77,45 @@ const Navbar = () => {
             className="cursor-pointer"
           />
         </div>
-
-        {router.pathname == "/" && (
-          <div>
-            <div className="text-lg flex gap-x-5 lg:gap-x-8 xl:lg:gap-x-10 font-semibold">
-              {routes.map(({ title, route }) => {
-                return title.includes("dashboard") ? (
-                  state?.user?.isAdmin && (
-                    <button
-                    key={title}
-                      onClick={() => handleLinkClick(route)}
-                      className="text-color_white hover:text-color_brand transition-all duration-500 capitalize"
-                    >
-                      {title}
-                    </button>
-                  )
-                ) : (
+        <div>
+          <div className="text-lg flex gap-x-5 lg:gap-x-8 xl:lg:gap-x-10 font-semibold">
+            {routes.map(({ title, route, subroutes, icon }) => {
+              return title.includes("dashboard") ? (
+                state?.user?.isAdmin && (
                   <button
-                  key={title}
+                    key={title}
                     onClick={() => handleLinkClick(route)}
                     className="text-color_white hover:text-color_brand transition-all duration-500 capitalize"
                   >
                     {title}
                   </button>
-                );
-              })}
-            </div>
+                )
+              ) : (
+                <div className={styles.dropdown}>
+                  <button
+                    key={title}
+                    onClick={() => handleLinkClick(route)}
+                    className="flex gap-x-2 items-center text-color_white hover:text-color_brand transition-all duration-500 capitalize"
+                  >
+                    <span>{title}</span>
+                    {icon && <span>{icon}</span>}
+                  </button>
+                  {
+                    subroutes &&
+                    <div className={styles.dropdownMenu}>
+                      {
+                        subroutes.map(((subroute, index) => <Link key={index} href={subroute.route} >{subroute.title}</Link>))
+                      }
+                    </div>
+                  }
+                </div>
+              );
+            })}
           </div>
-        )}
+        </div>
+
         <div
-          className={`${
-            router.pathname != "/" ? "w-1/2 inline-flex justify-end" : ""
-          } `}
+          
         >
           {state?.user ? (
             <div className="ml-5 flex items-center gap-x-3">
@@ -140,4 +163,4 @@ const Navbar = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Navbar), { ssr: false });
+export default dynamic(() => Promise.resolve(Navbar), { ssr: false }); 

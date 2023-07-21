@@ -7,12 +7,23 @@ import Responsibility from "../../public/assets/Logos/Responsibility_Logo.png";
 import Safety from "../../public/assets/Logos/Safety_Logo.png";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import { useEffect } from "react";
 
 const OurValues = () => {
   const router = useRouter();
-
+  useEffect(() => {
+    const { scrollToSection } = router.query;
+    if (scrollToSection === 'true') {
+      const element = document.querySelector('#values');
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+        });
+      }
+    }
+  }, []);
   return (
-    <div className="w-full flex items-center justify-center px-90 p-10 bg-[url('https://i.ibb.co/jLCjNGH/vision.png')] bg-no-repeat bg-cover">
+    <div id="values" className="w-full flex items-center justify-center px-90 p-10 bg-[url('https://i.ibb.co/jLCjNGH/vision.png')] bg-no-repeat bg-cover">
       <div className="flex flex-col text-gray-50 rounded-xl w-[1100px] h-[480px] text-center">
         <div className="text-left">
           <div className="pt-8 font-black text-3xl">Our Values</div>
