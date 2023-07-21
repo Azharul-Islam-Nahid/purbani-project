@@ -32,10 +32,10 @@ const Dashboard = () => {
       <DashboardLayout>
         <>
           <div className={`${styles.dashboardWizard}`}>
-            {countWizards.map(({ title }, i) => {
+            {countWizards.map(({ title, count }) => {
               return (
                 <div key={title}>
-                  <div className="text-3xl font-semibold">{i + 1}</div>
+                  <div className="text-3xl font-semibold">{count}</div>
                   <div>{title}</div>
                 </div>
               );

@@ -39,9 +39,9 @@ export const dashboardRoutes = [
 ];
 
 export const countWizards = [
-  { title: "total department" },
-  { title: "total document" },
-  { title: "total policies" },
-  { title: "total notices" },
-  { title: "total knowledge" },
+  { title: "total department", count: 0o5 },
+  { title: "total document", count: 12 },
+  { title: "total policies", count: 15 },
+  { title: "total notices", count: 10 },
+  { title: "total knowledge", count: 8 },
 ];
