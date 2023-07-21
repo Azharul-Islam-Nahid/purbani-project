@@ -27,6 +27,8 @@ const Notice = () => {
     })();
   }, []);
 
+  console.log(notice)
+
   if (loading) {
     return (
       <Layout title="Loading">
@@ -43,17 +45,15 @@ const Notice = () => {
     <Layout title="Notice">
       <div className="flex flex-col justify-between items-center overflow-y-auto">
         <Navbar />
-
         <div className="w-full flex items-center justify-center mt-10">
-          <div className="grid grid-cols-3 gap-20">
+          <div className="grid xs-grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-5">
             {notice
-              ?.reverse()
               ?.slice(0, 6)
               ?.map((item, idx) => {
                 return (
                   <div
                     key={idx}
-                    className="flex flex-col bg-black/50 rounded-lg w-[280px] pt-2 px-10 h-full"
+                    className="max-w-[280px] w-full flex flex-col bg-black/50 rounded-lg pt-2 px-10 h-full"
                   >
                     <div className="text-color_brand text-5xl font-bold py-2 ">
                       {idx + 1}
