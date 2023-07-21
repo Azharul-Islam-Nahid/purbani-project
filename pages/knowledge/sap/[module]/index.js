@@ -57,14 +57,14 @@ const Index = () => {
         <Navbar />
         <div className="p-5">
           <div className="rounded-md m-auto bg-white max-w-[1000px] h-[80vh] overflow-y-auto">
-            {knowledge?.map((media) => (
+            {knowledge?.map((media, i) => (
               <div
                 key={media?._id}
                 className="w-full p-10 flex flex-col justify-center items-center"
               >
                 <div className="flex gap-x-2 items-center mb-5">
                   <div className="text-lg font-bold">
-                    {media?.title}
+                    {i += 1} {media?.title}
                   </div>
                   <div>
                     <a
