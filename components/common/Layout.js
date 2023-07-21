@@ -7,7 +7,7 @@ const Layout = ({ title, children }) => {
         <title>{title ? title + " | PURBANI" : "PURBANI"}</title>
         <meta
           name="description"
-          http-equiv="Content-Security-Policy"
+          httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
         <link rel="icon" href="/favicon.ico" />
