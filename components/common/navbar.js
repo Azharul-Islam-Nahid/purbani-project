@@ -69,6 +69,7 @@ const Navbar = () => {
                 return title.includes("dashboard") ? (
                   state?.user?.isAdmin && (
                     <button
+                    key={title}
                       onClick={() => handleLinkClick(route)}
                       className="text-color_white hover:text-color_brand transition-all duration-500 capitalize"
                     >
@@ -77,6 +78,7 @@ const Navbar = () => {
                   )
                 ) : (
                   <button
+                  key={title}
                     onClick={() => handleLinkClick(route)}
                     className="text-color_white hover:text-color_brand transition-all duration-500 capitalize"
                   >

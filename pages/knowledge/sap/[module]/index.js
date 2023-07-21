@@ -4,7 +4,7 @@ import Navbar from "../../../../components/common/navbar";
 import { BsEye } from "react-icons/bs";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Video } from "cloudinary-react";
+// import { Video } from "cloudinary-react";
 import { baseUrl, getHeaders } from "../../../../api/api";
 import { authContext } from "../../../../context/authContext";
 
@@ -62,13 +62,11 @@ const Index = () => {
                 <div key={i} className="max-w-[400px] flex justify-center">
                   <div className="rounded-lg shadow-lg max-w-sm bg-white">
                     {media?.videoLink && (
-                      <Video
-                        cloudName="dfhzvfeh4"
-                        publicId={media?.cloudinaryVideoId}
-                        controls
-                        controlsList="nodownload"
-                        quality="auto:eco"
-                        className="w-[400px] rounded-t-lg"
+                      <iframe
+                        src={media?.videoLink}
+                        width="380"
+                        height="200"
+                        allowFullScreen
                       />
                     )}
                     <div className="p-6">
