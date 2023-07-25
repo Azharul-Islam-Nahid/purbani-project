@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useContext, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import purbaniLogo from "../../public/assets/Logos/logo-purbani.png";
 import dynamic from "next/dynamic";
 import { BsFillPersonFill } from "react-icons/bs";
@@ -45,7 +45,7 @@ const Navbar = () => {
     const handleScroll = () => {
       if (window.scrollY >= 600) {
         setNavbar(true);
-      }else{
+      } else {
         setNavbar(false)
       }
     };
@@ -58,11 +58,22 @@ const Navbar = () => {
     };
   }, [navbar]);
 
+  const handleBackRoute = () => {
+    if (router.pathname == '/notice' || router.pathname == '/policy' || router.pathname == '/knowledge') {
+      router.push("/")
+    } else {
+      Router.back()
+    }
+  }
   return (
     <div className="flex justify-center w-full sticky top-0 z-20">
       <div
-        className={`flex ${navbar ? "bg-[rgba(0,0,0,0.6)]" : ""}  rounded-md px-2 items-center justify-between  w-3/4 h-24 border-b border-gray-400`}
+        className={`flex ${navbar ? "bg-[rgba(0,0,0,0.6)]" : ""} relative rounded-md px-2 items-center justify-between  w-3/4 h-24 border-b border-gray-400`}
       >
+        {
+          router.pathname != "/" &&
+          <span onClick={() => handleBackRoute()} className="text-white font-bold text-2xl cursor-pointer absolute top-[110%] left-0">&#x2b05;</span>
+        }
         <div
           className={`inline-flex justify-end`}
         >
@@ -115,7 +126,7 @@ const Navbar = () => {
         </div>
 
         <div
-          
+
         >
           {state?.user ? (
             <div className="ml-5 flex items-center gap-x-3">
