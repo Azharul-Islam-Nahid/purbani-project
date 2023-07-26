@@ -5,6 +5,14 @@ import Swal from "sweetalert2";
 import Layout from "../../../components/common/Layout";
 import Navbar from "../../../components/common/navbar";
 import { authContext } from "../../../context/authContext";
+import BASIS from "../../../public/assets/Logos/Basis.png"
+import ABAP from "../../../public/assets/Logos/ABAP.png"
+import FICO from "../../../public/assets/Logos/Fico.png"
+import HCM from "../../../public/assets/Logos/HCM.png"
+import MM from "../../../public/assets/Logos/mm.png"
+import PM from "../../../public/assets/Logos/PM.png"
+import SD from "../../../public/assets/Logos/SD.png"
+import Image from "next/image";
 
 
 const OptionCard = ({ number, title, user }) => {
@@ -31,7 +39,7 @@ const OptionCard = ({ number, title, user }) => {
       onClick={() => handleButtonClick(`sap/${title.toLowerCase()}`)}
     >
       <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
-        {number}
+        <Image className="w-full" alt="logo" width={50} height={50} src={number} />
       </div>
       <div className="text-xl font-semibold h-full flex justify-center items-center">
         {title}
@@ -62,13 +70,13 @@ const KnowledgeMedia = () => {
         <div
           className={`${styles.dashboardOptions} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-5 justify-items-center items-center my-5 mx-auto`}
         >
-          <OptionCard number={1} title="BASIS" user={state.user} />
-          <OptionCard number={2} title="ABAP" user={state.user} />
-          <OptionCard number={3} title="FICO" user={state.user} />
-          <OptionCard number={4} title="PM" user={state.user} />
-          <OptionCard number={5} title="HCM" user={state.user} />
-          <OptionCard number={6} title="SD" user={state.user} />
-          <OptionCard number={7} title="MM" user={state.user} />
+          <OptionCard number={BASIS} title="BASIS" user={state.user} />
+          <OptionCard number={ABAP} title="ABAP" user={state.user} />
+          <OptionCard number={FICO} title="FICO" user={state.user} />
+          <OptionCard number={PM} title="PM" user={state.user} />
+          <OptionCard number={HCM} title="HCM" user={state.user} />
+          <OptionCard number={SD} title="SD" user={state.user} />
+          <OptionCard number={MM} title="MM" user={state.user} />
         </div>
       </div>
     </Layout>

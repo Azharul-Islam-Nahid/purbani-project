@@ -1,7 +1,9 @@
 import styles from "../../styles/knowledge.module.css";
 import Layout from "../../components/common/Layout";
 import Navbar from "../../components/common/navbar";
+import SAP from "../../public/assets/Logos/sap.png"
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Knowledge = () => {
   const router = useRouter();
@@ -16,7 +18,7 @@ const Knowledge = () => {
             className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
           >
             <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
-              1
+              <Image className="w-full" alt="logo" width={50} height={50} src={SAP} />
             </div>
             <div className="text-xl font-semibold h-full flex justify-center items-center">
               SAP
