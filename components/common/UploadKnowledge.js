@@ -161,7 +161,7 @@ const UploadKnowledge = ({
             <div className="my-5 py-1">
               <div className="font-semibold text-black">Document Title</div>
               <input
-                className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md "
+                className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md focus:border-color_secondary"
                 placeholder="Title"
                 type="text"
                 required
@@ -173,7 +173,7 @@ const UploadKnowledge = ({
                 <div className="font-semibold text-black">Category</div>
                 <select
                   required
-                  className="appearance-none outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md bg-white cursor-pointer"
+                  className="appearance-none outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md bg-white cursor-pointer focus:border-color_secondary"
                   value={subDepartment}
                   // onChange={handleOptionChange}
                   onChange={(e) => setSubDepartment(e.target.value)}
