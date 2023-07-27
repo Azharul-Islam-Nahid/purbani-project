@@ -57,9 +57,13 @@ const EditUser = () => {
 
     setLoading(true);
     try {
-      await axios.put(`${baseUrl}/users/update-one-user/${user?._id}`, newUser, {
-        headers: getHeaders(),
-      });
+      await axios.put(
+        `${baseUrl}/users/update-one-user/${user?._id}`,
+        newUser,
+        {
+          headers: getHeaders(),
+        }
+      );
 
       setLoading(false);
       Swal.fire({
@@ -111,7 +115,7 @@ const EditUser = () => {
       </DashboardLayout>
     );
   }
-  
+
   return (
     <DashboardLayout>
       <div className="p-12 bg-white text-black rounded-lg border-l-3 border-r-3 border-color_pink max-w-[800px] w-full">
@@ -154,7 +158,9 @@ const EditUser = () => {
                 Department
               </label>
               <select
-                onChange={(e) => setUser({ ...user, department: e.target.value })}
+                onChange={(e) =>
+                  setUser({ ...user, department: e.target.value })
+                }
                 defaultValue={user?.department}
                 name="department"
                 className="w-full bg-white rounded border border-gray-300 focus:border-color_secondary text-base outline-none text-gray-700 p-2 leading-8 transition-colors uppercase duration-200 ease-in-out"
