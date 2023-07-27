@@ -1,0 +1,49 @@
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(240, 6, 240);
+    /* Change the background color to violet */
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.preloader.fadeOut {
+    opacity: 0;
+}
+
+.animationContainer {
+    position: relative;
+}
+
+.fallingText {
+    font-size: 70px;
+    font-weight: bold;
+    color: #ffffff;
+    opacity: 0;
+    display: inline-flex;
+    align-items: center;
+    animation: fallAnimation 4s linear;
+}
+
+@keyframes fallAnimation {
+    0% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.letter {
+    margin: 0 5px;
+}
