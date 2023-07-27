@@ -8,12 +8,21 @@ import { BsFillPersonFill } from "react-icons/bs";
 import PopUp from "./PopUp";
 import { authContext } from "../../context/authContext";
 import Link from "next/link";
-import styles from '../../styles/navbar.module.css'
-import { BiChevronDown } from 'react-icons/bi'
+import styles from "../../styles/navbar.module.css";
+import { BiChevronDown } from "react-icons/bi";
 import { useEffect } from "react";
-import { FaLongArrowAltLeft } from 'react-icons/fa'
+import { FaLongArrowAltLeft } from "react-icons/fa";
 const routes = [
-  { title: "home", route: "/", icon: <BiChevronDown size={22} />, subroutes: [{ title: "Mission", route: "/#mission" }, { title: "Vission", route: '/#vision' }, { title: "Values", route: "/#values" }] },
+  {
+    title: "home",
+    route: "/",
+    icon: <BiChevronDown size={22} />,
+    subroutes: [
+      { title: "Mission", route: "/#mission" },
+      { title: "Vission", route: "/#vision" },
+      { title: "Values", route: "/#values" },
+    ],
+  },
   { title: "notice", route: "/login?redirect=/notice" },
   { title: "policies", route: "/login?redirect=/policy" },
   { title: "knowledge", route: "/login?redirect=/knowledge" },
@@ -41,44 +50,47 @@ const Navbar = () => {
     }
   };
 
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 600) {
         setNavbar(true);
       } else {
-        setNavbar(false)
+        setNavbar(false);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [navbar]);
 
   const handleBackRoute = () => {
-    window.history.back()
-    Router.back()
-  } 
+    window.history.back();
+    Router.back();
+  };
   return (
     <div className="flex justify-center w-full sticky top-0 z-20">
       <div
-        className={`flex backdrop-blur-md bg-gray-100/10 relative rounded-md px-2 items-center justify-between  w-3/4 h-24 border-b border-gray-400`}
+        className={`flex bg-[#1717172e] backdrop-blur-lg relative rounded-md px-2 items-center justify-between w-3/4 h-20 border-b border-gray-400`}
       >
-        {
-          router.pathname != "/" &&
-          <div onClick={() => handleBackRoute()} className="cursor-pointer group absolute top-[110%] left-0 w-[3.5rem] h-[3.5rem] rounded-full bg-white hover:bg-color_brand text-center grid place-items-center">
+        {router.pathname != "/" && (
+          <div
+            onClick={() => handleBackRoute()}
+            className="cursor-pointer group absolute top-[110%] left-0 w-[2.5rem] h-[2.5rem] rounded-full bg-white hover:bg-color_brand text-center grid place-items-center duration-300"
+          >
             <div className="flex flex-col gap-0 items-center justify-center">
-              <span className="text-color_brand group-hover:text-white font-bold"><FaLongArrowAltLeft size={22} /></span>
-              <p className="text-color_brand group-hover:text-white font-bold mt-[-6px]">BACK</p>
+              <span className="text-color_brand group-hover:text-white font-bold">
+                <FaLongArrowAltLeft size={28} />
+              </span>
+              {/* <p className="text-color_brand group-hover:text-white font-bold mt-[-5px]">
+                BACK
+              </p> */}
             </div>
           </div>
-        }
-        <div
-          className={`inline-flex justify-end`}
-        >
+        )}
+        <div className={`inline-flex justify-end`}>
           <Image
             src={purbaniLogo}
             width={184}
@@ -98,7 +110,9 @@ const Navbar = () => {
                   <button
                     key={title}
                     onClick={() => handleLinkClick(route)}
-                    className={`${navbar ? "text-color_brand" : "text-color_white"} hover:text-color_brand transition-all duration-500 capitalize`}
+                    className={`${
+                      navbar ? "text-color_brand" : "text-color_white"
+                    } hover:text-color_brand transition-all duration-500 capitalize`}
                   >
                     {title}
                   </button>
@@ -108,28 +122,29 @@ const Navbar = () => {
                   <button
                     key={title}
                     onClick={() => handleLinkClick(route)}
-                    className={`flex gap-x-2 items-center ${navbar ? "text-color_brand" : "text-color_white"} hover:text-color_brand transition-all duration-500 capitalize`}
+                    className={`flex gap-x-2 items-center ${
+                      navbar ? "text-color_brand" : "text-color_white"
+                    } hover:text-color_brand transition-all duration-500 capitalize`}
                   >
                     <span>{title}</span>
                     {icon && <span>{icon}</span>}
                   </button>
-                  {
-                    subroutes &&
+                  {subroutes && (
                     <div className={`${styles.dropdownMenu}`}>
-                      {
-                        subroutes.map(((subroute, index) => <Link key={index} href={subroute.route} >{subroute.title}</Link>))
-                      }
+                      {subroutes.map((subroute, index) => (
+                        <Link key={index} href={subroute.route}>
+                          {subroute.title}
+                        </Link>
+                      ))}
                     </div>
-                  }
+                  )}
                 </div>
               );
             })}
           </div>
         </div>
 
-        <div
-
-        >
+        <div>
           {state?.user ? (
             <div className="ml-5 flex items-center gap-x-3">
               {state?.user?.profileImage ? (
@@ -176,4 +191,4 @@ const Navbar = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Navbar), { ssr: false }); 
+export default dynamic(() => Promise.resolve(Navbar), { ssr: false });
