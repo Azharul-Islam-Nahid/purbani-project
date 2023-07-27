@@ -11,6 +11,7 @@ import Link from "next/link";
 import styles from '../../styles/navbar.module.css'
 import { BiChevronDown } from 'react-icons/bi'
 import { useEffect } from "react";
+import { FaLongArrowAltLeft } from 'react-icons/fa'
 const routes = [
   { title: "home", route: "/", icon: <BiChevronDown size={22} />, subroutes: [{ title: "Mission", route: "/#mission" }, { title: "Vission", route: '/#vision' }, { title: "Values", route: "/#values" }] },
   { title: "notice", route: "/login?redirect=/notice" },
@@ -53,26 +54,27 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
 
     return () => {
-      // Clean up the event listener when the component unmounts
       window.removeEventListener('scroll', handleScroll);
     };
   }, [navbar]);
 
   const handleBackRoute = () => {
-    if (router.pathname == '/notice' || router.pathname == '/policy' || router.pathname == '/knowledge') {
-      router.push("/")
-    } else {
-      Router.back()
-    }
-  }
+    window.history.back()
+    Router.back()
+  } 
   return (
     <div className="flex justify-center w-full sticky top-0 z-20">
       <div
-        className={`flex ${navbar ? "bg-[rgba(0,0,0,0.6)]" : ""} relative rounded-md px-2 items-center justify-between  w-3/4 h-24 border-b border-gray-400`}
+        className={`flex backdrop-blur-md bg-gray-100/10 relative rounded-md px-2 items-center justify-between  w-3/4 h-24 border-b border-gray-400`}
       >
         {
           router.pathname != "/" &&
-          <span onClick={() => handleBackRoute()} className="text-white font-bold text-2xl cursor-pointer absolute top-[110%] left-0">&#x2b05;</span>
+          <div onClick={() => handleBackRoute()} className="cursor-pointer group absolute top-[110%] left-0 w-[3.5rem] h-[3.5rem] rounded-full bg-white hover:bg-color_brand text-center grid place-items-center">
+            <div className="flex flex-col gap-0 items-center justify-center">
+              <span className="text-color_brand group-hover:text-white font-bold"><FaLongArrowAltLeft size={22} /></span>
+              <p className="text-color_brand group-hover:text-white font-bold mt-[-6px]">BACK</p>
+            </div>
+          </div>
         }
         <div
           className={`inline-flex justify-end`}
@@ -96,7 +98,7 @@ const Navbar = () => {
                   <button
                     key={title}
                     onClick={() => handleLinkClick(route)}
-                    className="text-color_white hover:text-color_brand transition-all duration-500 capitalize"
+                    className={`${navbar ? "text-color_brand" : "text-color_white"} hover:text-color_brand transition-all duration-500 capitalize`}
                   >
                     {title}
                   </button>
@@ -106,14 +108,14 @@ const Navbar = () => {
                   <button
                     key={title}
                     onClick={() => handleLinkClick(route)}
-                    className="flex gap-x-2 items-center text-color_white hover:text-color_brand transition-all duration-500 capitalize"
+                    className={`flex gap-x-2 items-center ${navbar ? "text-color_brand" : "text-color_white"} hover:text-color_brand transition-all duration-500 capitalize`}
                   >
                     <span>{title}</span>
                     {icon && <span>{icon}</span>}
                   </button>
                   {
                     subroutes &&
-                    <div className={styles.dropdownMenu}>
+                    <div className={`${styles.dropdownMenu}`}>
                       {
                         subroutes.map(((subroute, index) => <Link key={index} href={subroute.route} >{subroute.title}</Link>))
                       }
