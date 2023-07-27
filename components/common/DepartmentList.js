@@ -27,7 +27,13 @@ const DepartmentList = ({
               }`}
             >
               <div
-                className={`font-bold text-xl capitalize group-hover:text-color_white duration-300 ${
+                className={`font-bold text-xl group-hover:text-color_white duration-300 ${
+                  item?.name === "it"
+                    ? "uppercase"
+                    : item?.name === "hr"
+                    ? "uppercase"
+                    : "capitalize"
+                } ${
                   selected === item.name
                     ? "text-color_white"
                     : "text-color_secondary"

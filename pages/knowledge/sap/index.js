@@ -5,15 +5,14 @@ import Swal from "sweetalert2";
 import Layout from "../../../components/common/Layout";
 import Navbar from "../../../components/common/navbar";
 import { authContext } from "../../../context/authContext";
-import BASIS from "../../../public/assets/Logos/Basis.png"
-import ABAP from "../../../public/assets/Logos/ABAP.png"
-import FICO from "../../../public/assets/Logos/Fico.png"
-import HCM from "../../../public/assets/Logos/HCM.png"
-import MM from "../../../public/assets/Logos/mm.png"
-import PM from "../../../public/assets/Logos/PM.png"
-import SD from "../../../public/assets/Logos/SD.png"
+import BASIS from "../../../public/assets/Logos/Basis.png";
+import ABAP from "../../../public/assets/Logos/ABAP.png";
+import FICO from "../../../public/assets/Logos/Fico.png";
+import HCM from "../../../public/assets/Logos/HCM.png";
+import MM from "../../../public/assets/Logos/mm.png";
+import PM from "../../../public/assets/Logos/PM.png";
+import SD from "../../../public/assets/Logos/SD.png";
 import Image from "next/image";
-
 
 const OptionCard = ({ number, title, user }) => {
   const router = useRouter();
@@ -35,11 +34,17 @@ const OptionCard = ({ number, title, user }) => {
 
   return (
     <button
-      className={`${styles.optionCard} max-w-[279px] h-[266px] w-full p-[20px] relative group hover:bg-color_brand duration-300 cursor-pointer`}
+      className="max-w-[249px] h-[236px] w-full p-[20px] relative bg-[#0e0e0e7d] backdrop-blur-md group hover:bg-color_brand duration-300 cursor-pointer rounded-md text-white"
       onClick={() => handleButtonClick(`sap/${title.toLowerCase()}`)}
     >
       <div className="text-5xl absolute text-color_pink group-hover:text-color_white duration-300">
-        <Image className="w-full" alt="logo" width={50} height={50} src={number} />
+        <Image
+          className="w-full"
+          alt="logo"
+          width={50}
+          height={50}
+          src={number}
+        />
       </div>
       <div className="text-xl font-semibold h-full flex justify-center items-center">
         {title}
@@ -68,7 +73,7 @@ const KnowledgeMedia = () => {
       <div className="flex flex-col items-center h-screen overflow-y-auto">
         <Navbar />
         <div
-          className={`${styles.dashboardOptions} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-5 justify-items-center items-center my-5 mx-auto`}
+          className={`${styles.dashboardOptions} max-w-[850px] w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center items-center my-5 mx-auto`}
         >
           <OptionCard number={BASIS} title="BASIS" user={state.user} />
           <OptionCard number={ABAP} title="ABAP" user={state.user} />
