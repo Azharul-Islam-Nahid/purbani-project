@@ -9,7 +9,7 @@ const Preloader = () => {
     useEffect(() => {
         const timeout = setTimeout(() => {
             setAnimationComplete(true);
-        }, 4000); // Set the time for the animation to complete (4 seconds in this case)
+        }, 3000); // Set the time for the animation to complete (4 seconds in this case)
 
         return () => clearTimeout(timeout);
     }, []);

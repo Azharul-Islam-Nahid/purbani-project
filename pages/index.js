@@ -22,8 +22,15 @@ export default function Home() {
         setLoading(false);
         // Mark the preloader as shown in localStorage
         localStorage.setItem("preloaderShown", "true");
-      }, 5000);
+      }, 4000);
     }
+  }, []);
+
+
+
+  // Attach the showPreloader function to the window.onload event
+  useEffect(() => {
+    window.onload = localStorage.removeItem("preloaderShown", "true");
   }, []);
 
   if (loading) {

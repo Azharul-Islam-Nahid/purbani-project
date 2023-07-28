@@ -29,7 +29,7 @@
     opacity: 0;
     display: inline-flex;
     align-items: center;
-    animation: fallAnimation 4s linear;
+    animation: fallAnimation 3s linear;
 }
 
 
