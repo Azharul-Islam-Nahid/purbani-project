@@ -7,25 +7,27 @@ import Footer from "../components/landingPage/Footer";
 import Layout from "../components/common/Layout";
 
 import Preloader from "../components/preloader/preloader.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
 
-  const [loading, setLoading] = useState(true)
-
-  setTimeout(() => {
-
-    setLoading(false)
-
-  }, 5000);
+  useEffect(() => {
+    // Check if the preloader has been shown before
+    const preloaderShownBefore = localStorage.getItem("preloaderShown");
+    if (preloaderShownBefore) {
+      setLoading(false);
+    } else {
+      setTimeout(() => {
+        setLoading(false);
+        // Mark the preloader as shown in localStorage
+        localStorage.setItem("preloaderShown", "true");
+      }, 5000);
+    }
+  }, []);
 
   if (loading) {
-
-
-    return (
-      <Preloader />
-    )
-
+    return <Preloader />;
   }
 
   return (

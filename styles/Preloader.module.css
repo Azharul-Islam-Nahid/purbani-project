@@ -14,7 +14,7 @@
     transition: opacity 1s ease;
 }
 
-.preloader.fadeOut {
+.fadeOut {
     opacity: 0;
 }
 
@@ -31,6 +31,12 @@
     align-items: center;
     animation: fallAnimation 4s linear;
 }
+
+
+.preloader-hidden {
+    display: none;
+}
+
 
 @keyframes fallAnimation {
     0% {
