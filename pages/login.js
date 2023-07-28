@@ -15,18 +15,18 @@ const Login = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(authContext);
   const [loading, setLoading] = useState(true);
-  const { redirect } = router.query;
   const [employeeId, setEmployeeId] = useState("");
   const [submitLoading, setSubmitLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [incorrectCredentials, setIncorrectCredentials] = useState(false);
-
-  useEffect(() => {
-    if (state.user) {
-      router.push(redirect || "/");
-    }
-    setLoading(false);
-  }, [router, redirect, state.user]);
+  
+  const { redirect } = router.query;
+  // useEffect(() => {
+  //   if (state.user) {
+  //     router.push(redirect || "/");
+  //   }
+  //   setLoading(false);
+  // }, [router, redirect, state.user]);
 
   // Login API
   const handleLogin = async () => {

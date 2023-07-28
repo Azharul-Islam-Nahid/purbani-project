@@ -42,11 +42,12 @@ const Navbar = () => {
   };
 
   const handleLinkClick = (link) => {
+    const shortLink = link.split("=")[1]
     if (!state.user) {
       window.my_modal_3.showModal();
       setUrl(link);
     } else {
-      router.push(link);
+      router.push(shortLink);
     }
   };
 
@@ -67,8 +68,7 @@ const Navbar = () => {
   }, [navbar]);
 
   const handleBackRoute = () => {
-    window.history.back();
-    Router.back();
+    router.back()
   };
   return (
     <div className="flex justify-center w-full sticky top-0 z-20">
