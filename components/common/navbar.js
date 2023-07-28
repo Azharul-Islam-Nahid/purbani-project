@@ -42,7 +42,12 @@ const Navbar = () => {
   };
 
   const handleLinkClick = (link) => {
-    const shortLink = link.split("=")[1]
+    let shortLink
+    if(link === '/'){
+      shortLink = '/'
+    }else{
+      shortLink = link.split("=")[1]
+    }
     if (!state.user) {
       window.my_modal_3.showModal();
       setUrl(link);
