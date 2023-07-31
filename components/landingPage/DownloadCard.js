@@ -56,7 +56,7 @@ const DownloadCard = () => {
     );
   }
 
-  const lastNotice = notice[1]
+  const lastNotice = notice[notice?.length - 1]
 
   return (
     <>
