@@ -8,6 +8,7 @@ import { authContext } from "../../context/authContext";
 import Layout from "../common/Layout";
 import { baseUrl, getHeaders } from "../../api/api";
 import axios from "axios";
+import Link from "next/link";
 
 const DownloadCard = () => {
 
@@ -59,10 +60,7 @@ const DownloadCard = () => {
 
   return (
     <>
-      <div className="flex justify-items-center">
-        <marquee className='text-center w-4/5 mt-2 font-semibold text-white m-auto'>{lastNotice?.title}</marquee>
-      </div>
-      <div className="flex w-full justify-center my-24 font-extrabold px-60 p-10">
+      <div className="flex flex-col w-full items-center justify-center my-24 font-extrabold px-60 p-10">
         <div className="flex flex-col justify-between py-6 h-[379px] w-[681px] backdrop-blur-md bg-gray-100/10 rounded-3xl items-center">
           <div>
             <Image src={purbaniLogo} alt="Logo" width={184} height={48} />
@@ -92,6 +90,11 @@ const DownloadCard = () => {
           </div>
         </div>
         <DownloadPopUp route={{ url, setUrl }} />
+        <div className="w-full flex justify-items-center">
+          <Link href={'/notice'}>
+            <marquee className='cursor-pointer mt-5 w-full text-center font-semibold text-white'>{lastNotice?.title}</marquee>
+          </Link>
+        </div>
       </div>
     </>
   );
