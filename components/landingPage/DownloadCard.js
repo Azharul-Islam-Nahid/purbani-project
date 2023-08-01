@@ -9,6 +9,7 @@ import Layout from "../common/Layout";
 import { baseUrl, getHeaders } from "../../api/api";
 import axios from "axios";
 import Link from "next/link";
+import { CgFileDocument } from 'react-icons/cg'
 
 const DownloadCard = () => {
 
@@ -59,8 +60,8 @@ const DownloadCard = () => {
   const lastNotice = notice[notice?.length - 1]
 
   return (
-    <>
-      <div className="flex flex-col w-full items-center justify-center my-24 font-extrabold px-60 p-10 pb-10">
+    <div>
+      <div className="flex flex-col w-full items-center justify-center mt-24 font-extrabold px-60 p-10 pb-10">
         <div className="flex flex-col justify-between py-6 h-[379px] w-[681px] backdrop-blur-md bg-gray-100/10 rounded-3xl items-center">
           <div>
             <Image src={purbaniLogo} alt="Logo" width={184} height={48} />
@@ -89,18 +90,22 @@ const DownloadCard = () => {
             </button>
           </div>
         </div>
-        <DownloadPopUp route={{ url, setUrl }} />
-        <div className="mt-28 w-full h-full absolute top-3/4 left-0 right-0 z-10">
-          <div className="w-full flex justify-items-center container">
-            <Link href="/notice">
-              <marquee className="z-10 mt-5 cursor-pointer w-full text-center font-semibold text-white">
+        <div className="cursor-pointer backdrop-blur-md bg-gray-100/10 rounded-3xl mt-5 text-white w-4/5 ">
+          <Link href="/notice">
+            <marquee>
+              <span className="flex justify-center items-center">
+                <span className="mr-2 text-color_brand"><CgFileDocument /></span>
                 {lastNotice?.title}
-              </marquee>
-            </Link>
-          </div>
+                <span className="ml-2 text-color_brand"><CgFileDocument /></span>
+              </span>
+            </marquee>
+          </Link>
+        </div>
+        <DownloadPopUp route={{ url, setUrl }} />
+        <div className="border border-black mt-28 max-w-[681px] h-full ">
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
