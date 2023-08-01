@@ -11,13 +11,11 @@ import axios from "axios";
 import Link from "next/link";
 
 const DownloadCard = () => {
-
   const router = useRouter();
   const { state } = useContext(authContext);
   const [notice, setNotice] = useState([]);
   const [loading, setLoading] = useState(true);
   const [url, setUrl] = useState("");
-
 
   const handleLinkClick = (link) => {
     if (!state.user) {
@@ -32,7 +30,7 @@ const DownloadCard = () => {
     (async () => {
       try {
         const { data: data } = await axios.get(
-          `${baseUrl}/notice/get-all-notice?sortOrder=asc`,
+          `${baseUrl}/notice/get-all-notice`,
           { headers: getHeaders() }
         );
         setLoading(false);
@@ -42,7 +40,6 @@ const DownloadCard = () => {
       }
     })();
   }, []);
-
 
   if (loading) {
     return (
@@ -55,8 +52,6 @@ const DownloadCard = () => {
       </Layout>
     );
   }
-
-  const lastNotice = notice[notice?.length - 1]
 
   return (
     <>
@@ -91,8 +86,10 @@ const DownloadCard = () => {
         </div>
         <DownloadPopUp route={{ url, setUrl }} />
         <div className="w-full flex justify-items-center">
-          <Link href={'/notice'}>
-            <marquee className='cursor-pointer mt-5 w-full text-center font-semibold text-white'>{lastNotice?.title}</marquee>
+          <Link href={"/notice"}>
+            <marquee className="cursor-pointer mt-5 w-full text-center font-semibold text-white">
+              {notice[0]?.title}
+            </marquee>
           </Link>
         </div>
       </div>
