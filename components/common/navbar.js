@@ -19,7 +19,7 @@ const routes = [
     icon: <BiChevronDown size={22} />,
     subroutes: [
       { title: "Mission", route: "/#mission" },
-      { title: "Vission", route: "/#vision" },
+      { title: "Vision", route: "/#vision" },
       { title: "Values", route: "/#values" },
     ],
   },
@@ -110,9 +110,8 @@ const Navbar = () => {
                   <button
                     key={title}
                     onClick={() => handleLinkClick(route)}
-                    className={`${
-                      navbar ? "text-color_brand" : "text-color_white"
-                    } hover:text-color_brand transition-all duration-500 capitalize`}
+                    className={`${navbar ? "text-color_brand" : "text-color_white"
+                      } hover:text-color_brand transition-all duration-500 capitalize`}
                   >
                     {title}
                   </button>
@@ -122,9 +121,8 @@ const Navbar = () => {
                   <button
                     key={title}
                     onClick={() => handleLinkClick(route)}
-                    className={`flex gap-x-2 items-center ${
-                      navbar ? "text-color_brand" : "text-color_white"
-                    } hover:text-color_brand transition-all duration-500 capitalize`}
+                    className={`flex gap-x-2 items-center ${navbar ? "text-color_brand" : "text-color_white"
+                      } hover:text-color_brand transition-all duration-500 capitalize`}
                   >
                     <span>{title}</span>
                     {icon && <span>{icon}</span>}

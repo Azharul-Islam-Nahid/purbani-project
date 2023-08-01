@@ -60,7 +60,7 @@ const DownloadCard = () => {
 
   return (
     <>
-      <div className="flex flex-col w-full items-center justify-center my-24 font-extrabold px-60 p-10">
+      <div className="flex flex-col w-full items-center justify-center my-24 font-extrabold px-60 p-10 pb-10">
         <div className="flex flex-col justify-between py-6 h-[379px] w-[681px] backdrop-blur-md bg-gray-100/10 rounded-3xl items-center">
           <div>
             <Image src={purbaniLogo} alt="Logo" width={184} height={48} />
@@ -90,10 +90,14 @@ const DownloadCard = () => {
           </div>
         </div>
         <DownloadPopUp route={{ url, setUrl }} />
-        <div className="w-full flex justify-items-center">
-          <Link href={'/notice'}>
-            <marquee className='cursor-pointer mt-5 w-full text-center font-semibold text-white'>{lastNotice?.title}</marquee>
-          </Link>
+        <div className="mt-28 w-full h-full absolute top-3/4 left-0 right-0 z-10">
+          <div className="w-full flex justify-items-center container">
+            <Link href="/notice">
+              <marquee className="z-10 mt-5 cursor-pointer w-full text-center font-semibold text-white">
+                {lastNotice?.title}
+              </marquee>
+            </Link>
+          </div>
         </div>
       </div>
     </>
