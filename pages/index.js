@@ -27,6 +27,20 @@ export default function Home() {
     }
   }, []);
 
+  useEffect(() => {
+    // Attach an event listener to the "beforeunload" event
+    const handleBeforeUnload = () => {
+      // Clear the preloader status when the user reloads the page
+      sessionStorage.removeItem("preloaderShown");
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   if (loading) {
     // Show the preloader
     return <Preloader />;
