@@ -21,12 +21,12 @@ const Login = () => {
   const [incorrectCredentials, setIncorrectCredentials] = useState(false);
   
   const { redirect } = router.query;
-  // useEffect(() => {
-  //   if (state.user) {
-  //     router.push(redirect || "/");
-  //   }
-  //   setLoading(false);
-  // }, [router, redirect, state.user]);
+  useEffect(() => {
+    if (state.user) {
+      router.push(redirect || "/");
+    }
+    setLoading(false);
+  }, [router, redirect, state.user]);
 
   // Login API
   const handleLogin = async () => {
