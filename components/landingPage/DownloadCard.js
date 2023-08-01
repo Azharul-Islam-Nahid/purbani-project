@@ -55,7 +55,7 @@ const DownloadCard = () => {
 
   return (
     <>
-      <div className="flex flex-col w-full items-center justify-center my-24 font-extrabold px-60 p-10">
+      <div className="flex flex-col w-full items-center justify-center my-24 font-extrabold px-60 p-10 pb-10">
         <div className="flex flex-col justify-between py-6 h-[379px] w-[681px] backdrop-blur-md bg-gray-100/10 rounded-3xl items-center">
           <div>
             <Image src={purbaniLogo} alt="Logo" width={184} height={48} />
