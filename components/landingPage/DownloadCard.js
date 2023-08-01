@@ -57,8 +57,6 @@ const DownloadCard = () => {
     );
   }
 
-  const lastNotice = notice[notice?.length - 1]
-
   return (
     <div>
       <div className="flex flex-col w-full items-center justify-center mt-24 font-extrabold px-60 p-10 pb-10">
@@ -95,7 +93,7 @@ const DownloadCard = () => {
             <marquee>
               <span className="flex justify-center items-center">
                 <span className="mr-2 text-color_brand"><CgFileDocument /></span>
-                {lastNotice?.title}
+                {notice[0]?.title}
                 <span className="ml-2 text-color_brand"><CgFileDocument /></span>
               </span>
             </marquee>
