@@ -9,17 +9,15 @@ import Layout from "../common/Layout";
 import { baseUrl, getHeaders } from "../../api/api";
 import axios from "axios";
 import Link from "next/link";
-import { CgFileDocument } from 'react-icons/cg'
+import { CgFileDocument } from "react-icons/cg";
 import Marquee from "react-fast-marquee";
 
 const DownloadCard = () => {
-
   const router = useRouter();
   const { state } = useContext(authContext);
   const [notice, setNotice] = useState([]);
   const [loading, setLoading] = useState(true);
   const [url, setUrl] = useState("");
-
 
   const handleLinkClick = (link) => {
     if (!state.user) {
@@ -44,7 +42,6 @@ const DownloadCard = () => {
       }
     })();
   }, []);
-
 
   if (loading) {
     return (
@@ -90,14 +87,18 @@ const DownloadCard = () => {
           </div>
         </div>
         {state?.user ? (
-          <div className='cursor-pointer backdrop-blur-md bg-gray-100/10 rounded-3xl mt-5 text-white w-4/5'>
-            <Marquee speed={130}>
+          <div className="cursor-pointer backdrop-blur-md bg-gray-100/10 rounded-3xl mt-3 mb-28 text-white w-[680px] py-1 px-4">
+            <Marquee speed={80}>
               <Link href="/notice">
-                <p className=''>
-                  <span className="flex justify-center items-center">
-                    <span className="mr-2 text-color_brand"><CgFileDocument /></span>
+                <p>
+                  <span className="flex justify-center items-center text-xs">
+                    <span className="mr-2 text-color_brand">
+                      <CgFileDocument />
+                    </span>
                     {notice[0]?.title}
-                    <span className="ml-2 text-color_brand"><CgFileDocument /></span>
+                    <span className="ml-2 text-color_brand">
+                      <CgFileDocument />
+                    </span>
                   </span>
                 </p>
               </Link>
@@ -105,8 +106,6 @@ const DownloadCard = () => {
           </div>
         ) : null}
         <DownloadPopUp route={{ url, setUrl }} />
-        <div className="border border-black mt-28 max-w-[681px] h-full ">
-        </div>
       </div>
     </div>
   );
