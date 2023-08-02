@@ -91,7 +91,7 @@ const DownloadCard = () => {
         </div>
         {state?.user ? (
           <div className='cursor-pointer backdrop-blur-md bg-gray-100/10 rounded-3xl mt-5 text-white w-4/5'>
-            <Marquee>
+            <Marquee speed={130}>
               <Link href="/notice">
                 <p className=''>
                   <span className="flex justify-center items-center">
