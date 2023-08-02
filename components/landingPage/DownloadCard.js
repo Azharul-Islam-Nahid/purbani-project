@@ -87,9 +87,14 @@ const DownloadCard = () => {
           </div>
         </div>
         {state?.user ? (
-          <div className="cursor-pointer backdrop-blur-md bg-gray-100/10 rounded-3xl mt-3 mb-28 text-white w-[680px] py-1 px-4">
-            <Marquee speed={80}>
-              <Link href="/notice">
+          <a
+            className="mt-3 mb-28"
+            target="_blank"
+            rel="noreferrer"
+            href={notice[0]?.readableLink}
+          >
+            <div className="cursor-pointer backdrop-blur-md bg-gray-100/10 rounded-3xl text-white w-[680px] py-1 px-4">
+              <Marquee speed={80}>
                 <p>
                   <span className="flex justify-center items-center text-xs">
                     <span className="mr-2 text-color_brand">
@@ -101,9 +106,9 @@ const DownloadCard = () => {
                     </span>
                   </span>
                 </p>
-              </Link>
-            </Marquee>
-          </div>
+              </Marquee>
+            </div>
+          </a>
         ) : null}
         <DownloadPopUp route={{ url, setUrl }} />
       </div>
