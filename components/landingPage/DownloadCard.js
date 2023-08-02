@@ -10,6 +10,7 @@ import { baseUrl, getHeaders } from "../../api/api";
 import axios from "axios";
 import Link from "next/link";
 import { CgFileDocument } from 'react-icons/cg'
+import Marquee from "react-fast-marquee";
 
 const DownloadCard = () => {
 
@@ -89,16 +90,18 @@ const DownloadCard = () => {
           </div>
         </div>
         {state?.user ? (
-          <div className="cursor-pointer backdrop-blur-md bg-gray-100/10 rounded-3xl mt-5 text-white w-4/5 ">
-            <Link href="/notice">
-              <marquee>
-                <span className="flex justify-center items-center">
-                  <span className="mr-2 text-color_brand"><CgFileDocument /></span>
-                  {notice[0]?.title}
-                  <span className="ml-2 text-color_brand"><CgFileDocument /></span>
-                </span>
-              </marquee>
-            </Link>
+          <div className='cursor-pointer backdrop-blur-md bg-gray-100/10 rounded-3xl mt-5 text-white w-4/5'>
+            <Marquee>
+              <Link href="/notice">
+                <p className=''>
+                  <span className="flex justify-center items-center">
+                    <span className="mr-2 text-color_brand"><CgFileDocument /></span>
+                    {notice[0]?.title}
+                    <span className="ml-2 text-color_brand"><CgFileDocument /></span>
+                  </span>
+                </p>
+              </Link>
+            </Marquee>
           </div>
         ) : null}
         <DownloadPopUp route={{ url, setUrl }} />
