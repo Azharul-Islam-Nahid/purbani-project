@@ -2,10 +2,8 @@ import axios from "axios";
 const pb = "production";
 export const baseUrl =
   pb === "production"
-    ? "https://purbani-dms-backend.vercel.app/api/v1"
+    ? "https://purbani-server.vercel.app/api/v1"
     : "http://localhost:5000/api/v1";
-
-// https://purbani-dms-backend.vercel.app/
 
 export const getHeaders = () => ({
   "Content-Type": "application/json",
