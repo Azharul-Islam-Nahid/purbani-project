@@ -63,7 +63,7 @@ const UploadKnowledge = ({
     if (formData.pdfFile) {
       try {
         pdfForm.append("file", formData.pdfFile);
-        pdfForm.append("upload_preset", "b97hu80x");
+        pdfForm.append("upload_preset", "apecsdkq");
         pdfForm.append("cloud_name", "doxfaleab");
         pdfForm.append("folder", "knowledge/pdf");
         const { data } = await axios.post(
@@ -91,11 +91,11 @@ const UploadKnowledge = ({
     if (formData.videoFile) {
       try {
         videoForm.append("file", formData.videoFile);
-        videoForm.append("upload_preset", "b97hu80x");
-        videoForm.append("cloud_name", "dfhzvfeh4");
+        videoForm.append("upload_preset", "apecsdkq");
+        videoForm.append("cloud_name", "doxfaleab");
         videoForm.append("folder", "knowledge/video");
         const { data } = await axios.post(
-          "https://api.cloudinary.com/v1_1/dfhzvfeh4/upload",
+          "https://api.cloudinary.com/v1_1/doxfaleab/upload",
           videoForm,
           {
             onUploadProgress: (progressEvent) => {
