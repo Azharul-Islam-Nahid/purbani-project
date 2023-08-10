@@ -57,7 +57,6 @@ const UploadKnowledge = ({
       department: department,
       category: subDepartment,
     };
-
     const pdfForm = new FormData();
     const videoForm = new FormData();
 
@@ -65,10 +64,10 @@ const UploadKnowledge = ({
       try {
         pdfForm.append("file", formData.pdfFile);
         pdfForm.append("upload_preset", "b97hu80x");
-        pdfForm.append("cloud_name", "dfhzvfeh4");
+        pdfForm.append("cloud_name", "doxfaleab");
         pdfForm.append("folder", "knowledge/pdf");
         const { data } = await axios.post(
-          "https://api.cloudinary.com/v1_1/dfhzvfeh4/upload",
+          "https://api.cloudinary.com/v1_1/doxfaleab/upload",
           pdfForm,
           {
             headers: {
